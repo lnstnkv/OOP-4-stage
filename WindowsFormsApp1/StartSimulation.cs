@@ -14,14 +14,16 @@ namespace WindowsFormsApp1
         public Random rnd;
         private List<Animal> animals;
         private List<Human> _humans;
+        private Form1 _form;
         private List<Plant> plants;
         private List<FruitingPlant> _fruitingPlants;
         private List<Fruit> fruits;
         private int index;
-        private int _mastingSize;
+        public int _mastingSize;
 
-        public StartSimulation(PictureBox picture)
+        public StartSimulation(PictureBox picture, Form1 form)
         {
+            _form = form;
             pictureSimulation = picture;
             rnd = new Random();
             _mastingSize = 5;
@@ -42,13 +44,6 @@ namespace WindowsFormsApp1
             {
                 plant.Start(rnd);
             }
-
-            /*foreach (var fruitingPlant in _fruitingPlants.ToList())
-            {
-                fruitingPlant.Start(rnd);
-            }
-            */
-
 
             foreach (var fruit in fruits)
             {
@@ -86,6 +81,7 @@ namespace WindowsFormsApp1
                 animal.Loop(x);
             }
 
+            _form.TrackObject();
             rendering.SimulationRender(pictureSimulation, animals, plants, fruits, _fruitingPlants, _humans,
                 map.isWinter, _mastingSize);
         }
@@ -111,6 +107,11 @@ namespace WindowsFormsApp1
         public void UnScale()
         {
             _mastingSize -= 5;
+        }
+
+        public Map GetMap()
+        {
+            return map;
         }
     }
 }

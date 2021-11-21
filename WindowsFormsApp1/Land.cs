@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
             isPlantHere = null;
             _isHere = IsHere.Empty;
         }
-
+        
         public IsHere GetIsHere()
         {
             return _isHere;

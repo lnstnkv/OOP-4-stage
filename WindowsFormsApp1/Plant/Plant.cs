@@ -25,7 +25,31 @@ namespace WindowsFormsApp1
             age = 0;
             _stage = Stage.Seed;
         }
-
+        public String InfoCoordinate()
+        {
+            return coordinatPlant.ToString();
+        }
+        public String ClassPlant()
+        {
+            if (this is FruitingPlant)
+            {
+                if (this.IsVirulence())
+                    return "Virulence Fruiting Plant";
+                else
+                {
+                    return "Fruiting Plant";
+                }
+            }
+            else
+            {
+                if (IsVirulence())
+                    return "Virulence Plant";
+                else
+                {
+                    return "Plant";
+                }
+            }
+        }
         public bool IsEat()
         {
             return _isEat;

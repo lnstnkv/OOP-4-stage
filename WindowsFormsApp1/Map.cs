@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
         {
             sproutsFruits = new List<Fruit>();
             sproutsPlants = new List<Plant>();
+            
             isWinter = false;
             sproutsFruitingPlants = new List<FruitingPlant>();
             int countAnimal = 1400;
@@ -137,6 +138,17 @@ namespace WindowsFormsApp1
             
         }
 
+        public Animal IsAnimal(Point coords)
+        {
+            return _land[coords.X, coords.Y].IsAnimalHere();
+        }
+        public Plant IsPlant(Point coords)
+        {
+            return _land[coords.X, coords.Y].IsPlantHere();
+        }
+      
+        
+
         public void AddPlant(Plant plant)
         {
             var position = plant.GetPoint();
@@ -150,23 +162,11 @@ namespace WindowsFormsApp1
                 sproutsPlants.Add(plant);
             }
         }
-
+        
         public int countPlant()
         {
             return plants.Count;
         }
-        /*    public bool IsSeason(Random x)
-            {
-                int probability = x.Next(0, 10000);
-                if (probability % 2 != 0)
-                {
-                    isWinter = false;
-                }
-    
-                return isWinter;
-            }
-            */
-
         public void AddFruit(Fruit fruit)
         {
             var position = fruit.GetPoint();

@@ -15,18 +15,23 @@ namespace WindowsFormsApp1
     {
         private StartSimulation startSimulation;
         private Random x;
+        private Animal animal;
+        private Plant _plant;
 
         public Form1()
         {
             InitializeComponent();
-            startSimulation = new StartSimulation(pictureBox);
+            startSimulation = new StartSimulation(pictureBox, this);
             x = new Random();
+            pictureBox.MouseClick += OnPictureBoxClicked;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
             if (timer1.Enabled)
+            {
                 timer1.Stop();
+            }
             else
             {
                 timer1.Start();
@@ -55,14 +60,36 @@ namespace WindowsFormsApp1
             pictureBox.Size = size;
         }
 
-        private void pictureBox_Click(object sender, EventArgs e)
-        {
-            pictureBox.MouseClick+= OnPictureBoxClicked;
-        }
         void OnPictureBoxClicked(object sender, MouseEventArgs args)
         {
             var location = args.Location;
-           
+            var map = startSimulation.GetMap();
+            location = new Point(location.X / startSimulation._mastingSize, location.Y / startSimulation._mastingSize);
+            label1.Text = "";
+            animal = map.IsAnimal(location);
+            _plant = map.IsPlant(location);
+        }
+
+        public void TrackObject()
+        {
+            label1.Text = "";
+            if (animal != null)
+            {
+                label1.Text += animal.InfoCoordinate();
+                label1.Text += "\nЗдоровье: \n";
+                label1.Text += animal.InfoHealth();
+                label1.Text += "\nСытость: \n";
+                label1.Text += animal.InfoSatietly();
+                label1.Text += "\nКласс: \n";
+                label1.Text += animal.ClassAnimal();
+            }
+
+            if (_plant != null)
+            {
+                label1.Text += _plant.InfoCoordinate();
+                label1.Text += "\nКласс: \n";
+                label1.Text += _plant.ClassPlant();
+            }
         }
     }
 }

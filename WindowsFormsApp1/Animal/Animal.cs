@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 
@@ -41,7 +42,7 @@ namespace WindowsFormsApp1
             return coordinat;
         }
 
-      
+
         public virtual void Loop(Random x)
         {
             Walk(x);
@@ -51,10 +52,49 @@ namespace WindowsFormsApp1
         {
             return _hibernationForm == HibernationForm.Sleep;
         }
-        public String Info()
+
+        public String InfoCoordinate()
+        {
+            return coordinat.ToString();
+        }
+
+        public String InfoHealth()
         {
             return health.ToString();
-        } 
+        }
+        public String InfoSatietly()
+        {
+            return satietly.ToString();
+        }
+        public String ClassAnimal()
+        {
+            switch (this)
+            {
+                case Horse _:
+                    return "Horse";
+                case Eagle _:
+                    return "Eagle";
+                case Rabbit _:
+                    return "Rabbit";
+                case Pig _:
+                    return "Pig";
+                case Squirrel _:
+                    return "Squirrel";
+                case Lynx _:
+                    return "Lynx";
+                case Elephant _:
+                    return "Elephant";
+                case Owl _ :
+                    return "Owl";
+                case Mouse _:
+                    return "Mouse";
+                case Human _:
+                    return "Human";
+                default:
+                    return "Привет!";
+            }
+        }
+
         protected abstract void FindDifferentEat(Random x);
         protected abstract void ChangeEat(Point coords);
 
@@ -76,8 +116,12 @@ namespace WindowsFormsApp1
         public void IsSummer(Random x)
         {
             satietly -= 1;
+            if (satietly == max_satietly)
+            {
+                coordinat = _freeMover.Move(coordinat, x);
+            }
 
-            if (satietly > max_satietly * 0.8) //рандомное движение 
+            if (satietly > max_satietly * 0.8)  
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
@@ -101,8 +145,12 @@ namespace WindowsFormsApp1
         public void IsWinter(Random x)
         {
             satietly -= 2;
+            if (satietly == max_satietly)
+            {
+                coordinat = _freeMover.Move(coordinat, x);
+            }
 
-            if (satietly > max_satietly * 0.7) //рандомное движение 
+            if (satietly > max_satietly * 0.7) 
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
@@ -149,7 +197,7 @@ namespace WindowsFormsApp1
         public void Die()
         {
             isDied = true;
-             _map.DeleteAnimal(this);
+            _map.DeleteAnimal(this);
         }
 
         public bool IsDied()
