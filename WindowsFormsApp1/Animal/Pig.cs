@@ -10,5 +10,16 @@ namespace WindowsFormsApp1
             _freeMover = new RandomFreeMover();
             _targetMover = new TargetMoverSavingDirection();
         }
+        public override void Loop(Random x)
+        {
+            if (_map.isWinter)
+            {
+                Walk(x);
+            }
+            else
+            {
+                //satietly НЕ ЗАБУДЬ! 
+            }
+        }
     }
 }

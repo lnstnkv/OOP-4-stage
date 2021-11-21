@@ -39,6 +39,7 @@ namespace WindowsFormsApp1
             return coordinat;
         }
 
+      
         public virtual void Loop(Random x)
         {
             Walk(x);
@@ -138,7 +139,7 @@ namespace WindowsFormsApp1
         public void Die()
         {
             isDied = true;
-            // _map.DeleteAnimal(this);
+             _map.DeleteAnimal(this);
         }
 
         public bool IsDied()

@@ -112,7 +112,7 @@ namespace WindowsFormsApp1
                 _land[originalCoordinateX, originalCoordinateY].SetHuman(_humans[i]);
             }
 
-            int countPlant = 100;
+            int countPlant = 300;
 
             plants = new List<Plant>();
             for (int i = 0; i < countPlant; i++)
@@ -151,17 +151,21 @@ namespace WindowsFormsApp1
             }
         }
 
-    /*    public bool IsSeason(Random x)
+        public int countPlant()
         {
-            int probability = x.Next(0, 10000);
-            if (probability % 2 != 0)
-            {
-                isWinter = false;
-            }
-
-            return isWinter;
+            return plants.Count;
         }
-        */
+        /*    public bool IsSeason(Random x)
+            {
+                int probability = x.Next(0, 10000);
+                if (probability % 2 != 0)
+                {
+                    isWinter = false;
+                }
+    
+                return isWinter;
+            }
+            */
 
         public void AddFruit(Fruit fruit)
         {
@@ -203,17 +207,21 @@ namespace WindowsFormsApp1
             {
                 _fruitingPlants.Remove((FruitingPlant) plant);
             }
+            else
+            {
+                plants.Remove(plant);
+            }
 
-            plants.Remove(plant);
+            
         }
 
-        /*public void DeleteAnimal(Animal animal)
+        public void DeleteAnimal(Animal animal)
          {
              var position = animal.GetPoint();
              _land[position.X, position.Y].DeleteAnimal();
              animals.Remove(animal);
          }
-         */
+         
 
 
         public void DeleteFruit(Fruit fruit)

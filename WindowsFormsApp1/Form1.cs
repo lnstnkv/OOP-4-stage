@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
     {
         private StartSimulation startSimulation;
         private Random x;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +33,25 @@ namespace WindowsFormsApp1
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        {   
+        {
             startSimulation.Start();
             startSimulation.Loop(x);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (pictureBox.Width + 5000 >= 20000 && pictureBox.Height + 5000 >= 20000) return;
+            var size = new Size(pictureBox.Width + 5000, pictureBox.Height + 5000);
+            startSimulation.Resize();
+            pictureBox.Size = size;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (pictureBox.Width - 5000 <= 0 && pictureBox.Height - 5000 <= 0) return;
+            var size = new Size(pictureBox.Width - 5000, pictureBox.Height - 5000);
+            startSimulation.UnResize();
+            pictureBox.Size = size;
         }
     }
 }

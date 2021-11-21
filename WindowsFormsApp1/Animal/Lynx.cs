@@ -10,5 +10,12 @@ namespace WindowsFormsApp1
             _freeMover = new NearBirthFreeMover(_birthPoint);
             _targetMover = new TargetMoverEucliden();
         }
+        public override void Loop(Random x)
+        {
+            if (_map.isWinter)
+            {
+                Walk(x);
+            }
+        }
     }
 }
