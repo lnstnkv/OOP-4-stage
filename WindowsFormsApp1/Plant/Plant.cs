@@ -46,6 +46,7 @@ namespace WindowsFormsApp1
 
         public virtual void Start(Random x)
         {
+           
             if (_stage == Stage.Increase)
             {
                 Grow(x);
@@ -56,6 +57,7 @@ namespace WindowsFormsApp1
 
         public void Grow(Random x)
         {
+            //if (!_map.isWinter) return;
             var probability = x.Next(100);
             if (probability > 0) return;
             var land = _map.FindNearbyLand(coordinatPlant);
@@ -82,12 +84,12 @@ namespace WindowsFormsApp1
             return false;
         }
 
-        public Stage IsStage()
+        private Stage IsStage()
         {
             if (age > 15)
             {
                 _stage = Stage.Died;
-                // Die();
+              //  Die();
             }
 
             if (age > 5)

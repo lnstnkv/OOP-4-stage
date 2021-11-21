@@ -17,10 +17,12 @@ namespace WindowsFormsApp1
         private List<FruitingPlant> _fruitingPlants;
         private List <Fruit> fruits;
         private int index;
+        private int mastingSize;
         public StartSimulation(PictureBox picture)
         {
             pictureSimulation = picture;
             rnd = new Random();
+            mastingSize = 5;
             map = new Map(rnd); 
             rendering = new Rendering(rnd);
             animals = map.GetAnimal();
