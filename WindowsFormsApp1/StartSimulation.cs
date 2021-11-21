@@ -40,10 +40,7 @@ namespace WindowsFormsApp1
                 map.isWinter, _mastingSize);
             foreach (var plant in plants)
             {
-            
-                    plant.Start(rnd);
-                
-                
+                plant.Start(rnd);
             }
 
             /*foreach (var fruitingPlant in _fruitingPlants.ToList())
@@ -51,7 +48,6 @@ namespace WindowsFormsApp1
                 fruitingPlant.Start(rnd);
             }
             */
-            
 
 
             foreach (var fruit in fruits)
@@ -61,7 +57,7 @@ namespace WindowsFormsApp1
 
             map.AddSprouts();
         }
-        
+
         public void Loop(Random x)
         {
             var animals = map.GetAnimal();
@@ -79,7 +75,7 @@ namespace WindowsFormsApp1
             {
                 index = 0;
             }
-            
+
             foreach (var animal in animals.ToList())
             {
                 if (animal.IsDied())
@@ -99,24 +95,22 @@ namespace WindowsFormsApp1
             Scale();
             rendering.ResizePictureBox(1000 * _mastingSize, 1000 * _mastingSize);
         }
+
         public void UnResize()
         {
             UnScale();
             rendering.ResizePictureBox(1000 * _mastingSize, 1000 * _mastingSize);
         }
 
-        public int GetSize()
-        {
-            return _mastingSize;
-        }
 
         public void Scale()
         {
-            _mastingSize +=5;
+            _mastingSize += 5;
         }
+
         public void UnScale()
         {
-            _mastingSize -=5;
+            _mastingSize -= 5;
         }
     }
 }

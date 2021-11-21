@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
         protected Point _birthPoint;
         protected FreeMover _freeMover;
         protected TargetMover _targetMover;
+        protected HibernationForm _hibernationForm;
 
         public Animal(int x, int y, Map map, Random rnd)
         {
@@ -27,6 +28,7 @@ namespace WindowsFormsApp1
             isDied = false;
             _plant = null;
             _gender = Gender.Female;
+            _hibernationForm = HibernationForm.Life;
             _birthPoint.X = coordinat.X;
             _birthPoint.Y = coordinat.Y;
             _freeMover = new RandomFreeMover();
@@ -45,6 +47,14 @@ namespace WindowsFormsApp1
             Walk(x);
         }
 
+        public bool IsSleep()
+        {
+            return _hibernationForm == HibernationForm.Sleep;
+        }
+        public String Info()
+        {
+            return health.ToString();
+        } 
         protected abstract void FindDifferentEat(Random x);
         protected abstract void ChangeEat(Point coords);
 

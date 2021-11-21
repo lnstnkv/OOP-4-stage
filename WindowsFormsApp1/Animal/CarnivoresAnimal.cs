@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
             if (_animal == null)
             {
                 _animal = _map.FindAnimal(this.GetPoint());
-                if (_animal is CarnivoresAnimal)
+                if (_animal is CarnivoresAnimal || _animal.IsSleep())
                 {
                     _animal = null;
                     
@@ -21,11 +21,7 @@ namespace WindowsFormsApp1
 
             if (_animal != null )
             {
-                if (_animal == null)
-                {
-                    throw new Exception("ЭТО ГОВНО ДА");
-                }
-
+                
                 FindWay(_animal.GetPoint());
                 
             }

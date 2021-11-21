@@ -18,7 +18,8 @@ namespace WindowsFormsApp1
             }
             else
             {
-                //satietly НЕ ЗАБУДЬ! 
+                satietly = 245;
+                _hibernationForm = HibernationForm.Sleep;
             }
         }
     }

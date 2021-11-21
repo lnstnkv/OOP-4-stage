@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
         protected bool _isVirulence;
         protected bool _isEat;
         protected Map _map;
+        protected bool isDied;
         protected Stage _stage;
 
         public Plant(int x, int y, Map map, bool isVirulence, bool isEat)
@@ -19,6 +20,7 @@ namespace WindowsFormsApp1
             coordinatPlant = new Point(x, y);
             _isVirulence = isVirulence;
             _isEat = isEat;
+            isDied = false;
             _map = map;
             age = 0;
             _stage = Stage.Seed;
@@ -34,6 +36,10 @@ namespace WindowsFormsApp1
             return _isVirulence;
         }
 
+        public bool IsDied()
+        {
+            return isDied;
+        }
         public Point GetPoint()
         {
             return coordinatPlant;
@@ -41,6 +47,7 @@ namespace WindowsFormsApp1
 
         public void Die()
         {
+            isDied = true;
             _map.DeletePlant(this);
         }
 
@@ -69,8 +76,11 @@ namespace WindowsFormsApp1
                 positionX = land[x.Next(land.Count)].X;
                 positionY = land[x.Next(land.Count)].Y;
             }
-        
-            _map.AddPlant(NewSproutsPlant(positionX, positionY, _map, _isVirulence, _isEat));
+
+            if (isDied == false)
+            {
+                _map.AddPlant(NewSproutsPlant(positionX, positionY, _map, _isVirulence, _isEat));
+            }
         }
 
         public virtual Plant NewSproutsPlant(int x, int y, Map map, bool _isVirulence, bool _isEat)
@@ -90,7 +100,8 @@ namespace WindowsFormsApp1
             if (age > 15)
             {
                 _stage = Stage.Died;
-                // Die();
+                isDied = true;
+                //Die();
             }
 
             if (age > 5)

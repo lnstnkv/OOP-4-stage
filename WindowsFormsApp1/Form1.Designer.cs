@@ -31,6 +31,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -51,6 +52,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
             this.splitContainer1.Panel1.Controls.Add(this.buttonStart);
@@ -63,13 +65,20 @@
             this.splitContainer1.SplitterDistance = 153;
             this.splitContainer1.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(15, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 137);
+            this.label1.TabIndex = 3;
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(80, 82);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 29);
+            this.button2.Size = new System.Drawing.Size(40, 40);
             this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
+            this.button2.Text = "-";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -77,9 +86,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(24, 82);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 24);
+            this.button1.Size = new System.Drawing.Size(40, 40);
             this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
+            this.button1.Text = "+";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -101,6 +110,7 @@
             this.pictureBox.Size = new System.Drawing.Size(5000, 5000);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // timer1
             // 
@@ -121,6 +131,8 @@
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label label1;
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,16 @@ namespace WindowsFormsApp1
             var size = new Size(pictureBox.Width - 5000, pictureBox.Height - 5000);
             startSimulation.UnResize();
             pictureBox.Size = size;
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            pictureBox.MouseClick+= OnPictureBoxClicked;
+        }
+        void OnPictureBoxClicked(object sender, MouseEventArgs args)
+        {
+            var location = args.Location;
+           
         }
     }
 }

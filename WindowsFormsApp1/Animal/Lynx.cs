@@ -16,6 +16,11 @@ namespace WindowsFormsApp1
             {
                 Walk(x);
             }
+            else
+            {
+                satietly = 250;
+                _hibernationForm = HibernationForm.Sleep;
+            }
         }
     }
 }

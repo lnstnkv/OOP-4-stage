@@ -221,7 +221,8 @@ namespace WindowsFormsApp1
              _land[position.X, position.Y].DeleteAnimal();
              animals.Remove(animal);
          }
-         
+
+       
 
 
         public void DeleteFruit(Fruit fruit)

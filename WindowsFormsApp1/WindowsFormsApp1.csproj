@@ -54,6 +54,7 @@
         <Compile Include="Animal\Elephant.cs" />
         <Compile Include="Animal\HerbivoresAnimal.cs" />
         <Compile Include="Animal\HerbivoresAnimalForm.cs" />
+        <Compile Include="Animal\HibernationForm.cs" />
         <Compile Include="Animal\Horse.cs" />
         <Compile Include="Animal\Human.cs" />
         <Compile Include="Animal\HumanGender.cs" />
