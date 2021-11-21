@@ -114,6 +114,7 @@ namespace WindowsFormsApp1
 
         public Enum IsGender()
         {
+            //gh
             if (_gender == Gender.Female)
                 return Gender.Female;
             return Gender.Male;
