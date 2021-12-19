@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
         public void Grow(Random x)
         {
             if (!_map.isWinter) return;
-            if(_map.countPlant()>500) return;
+            if(_map.countPlant()>800) return;
             var probability = x.Next(100);
             if (probability > 0) return;
             var land = _map.FindNearbyLand(coordinatPlant);

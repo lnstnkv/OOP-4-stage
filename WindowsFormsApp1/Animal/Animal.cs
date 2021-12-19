@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
@@ -8,8 +9,9 @@ namespace WindowsFormsApp1
     public abstract class Animal
     {
         protected int satietly;
-        private int age;
+        protected int age;
         protected int health;
+        protected Land[,] _land;
         protected Point coordinat;
         protected Map _map;
         protected Animal _animal;
@@ -19,23 +21,39 @@ namespace WindowsFormsApp1
         protected int max_satietly;
         protected Point _birthPoint;
         protected FreeMover _freeMover;
+        protected Animal couple;
         protected TargetMover _targetMover;
         protected HibernationForm _hibernationForm;
 
-        public Animal(int x, int y, Map map, Random rnd)
+        public Animal(int x, int y, Map map, Random rnd, Land[,] land)
         {
             coordinat = new Point(x, y);
             _map = map;
+            couple = null;
             isDied = false;
             _plant = null;
-            _gender = Gender.Female;
             _hibernationForm = HibernationForm.Life;
             _birthPoint.X = coordinat.X;
             _birthPoint.Y = coordinat.Y;
+            _land = land;
             _freeMover = new RandomFreeMover();
             _targetMover = new TargetMoverSavingDirection();
+            isGender(rnd);
         }
 
+        protected virtual void isGender(Random x)
+        {
+            var probability = x.Next(0, 500);
+            if (probability > 200)
+            {
+                _gender = Gender.Male;
+            }
+
+            else
+            {
+                _gender = Gender.Female;
+            }
+        }
 
         public Point GetPoint()
         {
@@ -62,10 +80,12 @@ namespace WindowsFormsApp1
         {
             return health.ToString();
         }
+
         public String InfoSatietly()
         {
             return satietly.ToString();
         }
+
         public String ClassAnimal()
         {
             switch (this)
@@ -84,7 +104,7 @@ namespace WindowsFormsApp1
                     return "Lynx";
                 case Elephant _:
                     return "Elephant";
-                case Owl _ :
+                case Owl _:
                     return "Owl";
                 case Mouse _:
                     return "Mouse";
@@ -96,10 +116,8 @@ namespace WindowsFormsApp1
         }
 
         protected abstract void FindDifferentEat(Random x);
+        protected abstract void Propagate(Random x);
         protected abstract void ChangeEat(Point coords);
-
-        //  protected abstract void FindEat(Point shift);
-        //protected abstract void Wander(Random x);
 
         public void Walk(Random x)
         {
@@ -119,14 +137,37 @@ namespace WindowsFormsApp1
             if (satietly == max_satietly)
             {
                 coordinat = _freeMover.Move(coordinat, x);
+                age += 1;
             }
 
-            if (satietly > max_satietly * 0.8)  
+            if (satietly > max_satietly * 0.85)
+            {
+                if (couple == null)
+                {
+                    FindAnimalCouple();
+                }
+
+                if (couple != null)
+                {
+                    couple.SetCouple(this);
+                    coordinat = _targetMover.TargetMove(coordinat, couple.GetPoint());
+                }
+
+
+                if (coordinat == couple?.GetPoint())
+                {
+                    Propagate(x);
+                    satietly -= 30;
+                }
+            }
+
+
+            if (satietly > max_satietly * 0.8 && satietly < max_satietly * 0.85)
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
 
-            if (health < 0 || age > 20)
+            if (health < 0 || age > 200)
             {
                 Die();
             }
@@ -142,6 +183,21 @@ namespace WindowsFormsApp1
             }
         }
 
+        protected virtual void FindAnimalCouple()
+        {
+            couple = _map.FindCouple(this);
+        }
+
+        protected  virtual void SetCouple(Animal animal)
+        {
+            couple = animal;
+        }
+
+        public Animal GetCouple()
+        {
+            return couple;
+        }
+
         public void IsWinter(Random x)
         {
             satietly -= 2;
@@ -150,7 +206,7 @@ namespace WindowsFormsApp1
                 coordinat = _freeMover.Move(coordinat, x);
             }
 
-            if (satietly > max_satietly * 0.7) 
+            if (satietly > max_satietly * 0.7)
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
@@ -171,18 +227,13 @@ namespace WindowsFormsApp1
             }
         }
 
-        public Enum IsGender()
+        public Gender IsGender()
         {
             if (_gender == Gender.Female)
                 return Gender.Female;
             return Gender.Male;
         }
 
-
-        public void IsMale()
-        {
-            _gender = Gender.Male;
-        }
 
         public bool IsMaleGender()
         {

@@ -3,11 +3,11 @@ using System.Drawing;
 
 namespace WindowsFormsApp1
 {
-    public class Human:OmnivoresAnimal
+    public abstract class Human : HerbivoresAnimal
     {
-        public Human(int x, int y, Map map, Random rnd) : base(x, y, map, rnd)
+        public Human(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
         {
-            satietly = 300;
+           
         }
     }
 }

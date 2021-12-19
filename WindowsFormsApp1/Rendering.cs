@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
         Image Elephant = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/elephant.png");
         Image Owl = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/owl.png");
         Image Human = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/human.png");
+        Image Female = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/female.png");
         Image blue = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/blue.png");
         Image red = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/red.png");
         Image orange = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/orange.png");
@@ -43,7 +44,7 @@ namespace WindowsFormsApp1
         Image diedPlant = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/died.png");
 
         public void SimulationRender(PictureBox pictureSimulation, List<Animal> animals, List<Plant> plants,
-            List<Fruit> fruits, List<FruitingPlant> fruitingPlants, List<Human> humans, bool isSeason, int mastingSize)
+            List<Fruit> fruits, List<FruitingPlant> fruitingPlants, List<Human> humans, bool isSeason, int mastingSize, List<House> houses)
         {
             index++;
             Graphics graph = Graphics.FromImage(bmp);
@@ -126,39 +127,45 @@ namespace WindowsFormsApp1
                     }
                 }
 
-                if (animal is Human)
+                if (animal is Male)
                 {
                     graph.DrawImage(Human,
                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize, mastingSize));
                 }
-            }
 
+                if (animal is Female)
+                {
+                    graph.DrawImage(Female,
+                        new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize, mastingSize));
+                }
+            }
+            
             foreach (var plant in plants)
             {
                 var position = plant.GetPoint();
-               /* if (plant.IsDied())
-                {
-                    graph.DrawImage(diedPlant,
-                        new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize, mastingSize));
-                }
-                else
-                {*/
-                    if (plant.IsVirulence() && plant.IsEat()) // ядовитое съедобное 
-                        graph.DrawImage(pink,
-                            new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
-                                mastingSize));
-                    if (!plant.IsVirulence() && plant.IsEat()) // неядовитое съедобное
-                        graph.DrawImage(blue,
-                            new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
-                                mastingSize));
-                    if (plant.IsVirulence() && !plant.IsEat()) // ядовитое несъедобное
-                        graph.DrawImage(orange,
-                            new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
-                                mastingSize));
-                    if (!plant.IsVirulence() && !plant.IsEat()) // неядовитое несъедобное
-                        graph.DrawImage(red,
-                            new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
-                                mastingSize));
+                /* if (plant.IsDied())
+                 {
+                     graph.DrawImage(diedPlant,
+                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize, mastingSize));
+                 }
+                 else
+                 {*/
+                if (plant.IsVirulence() && plant.IsEat()) // ядовитое съедобное 
+                    graph.DrawImage(pink,
+                        new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
+                            mastingSize));
+                if (!plant.IsVirulence() && plant.IsEat()) // неядовитое съедобное
+                    graph.DrawImage(blue,
+                        new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
+                            mastingSize));
+                if (plant.IsVirulence() && !plant.IsEat()) // ядовитое несъедобное
+                    graph.DrawImage(orange,
+                        new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
+                            mastingSize));
+                if (!plant.IsVirulence() && !plant.IsEat()) // неядовитое несъедобное
+                    graph.DrawImage(red,
+                        new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
+                            mastingSize));
                 //}
             }
 
@@ -166,6 +173,12 @@ namespace WindowsFormsApp1
             {
                 var position = fruit.GetPoint();
                 graph.FillRectangle(Brushes.DarkBlue,
+                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
+            }
+            foreach (var house in houses)
+            {
+                var position = house.GetPoint();
+                graph.FillRectangle(Brushes.Black,
                     new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
             }
 

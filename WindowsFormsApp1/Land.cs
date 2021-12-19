@@ -7,12 +7,14 @@ namespace WindowsFormsApp1
         private Animal isAnimalHere;
         private Plant isPlantHere;
         private Fruit isFruitHere;
-        private Human isHumanHere;
+        private Animal isHumanHere;
         protected IsHere _isHere;
+        private bool _isHouse;
         private FruitingPlant isFruitingPlantHere;
 
         public Land()
         {
+            _isHouse = false;
             isAnimalHere = null;
             isPlantHere = null;
             isFruitHere = null;
@@ -31,15 +33,24 @@ namespace WindowsFormsApp1
             isPlantHere = plant;
             _isHere = IsHere.Plant;
         }
+       
 
-        public Human IsHumanHere()
+        public void SetHouse()
+        {
+            _isHouse = true;
+            _isHere = IsHere.House;
+        }
+
+        public Animal IsHumanHere()
         {
             return isHumanHere;
         }
+
         public Plant IsPlantHere()
         {
             return isPlantHere;
         }
+
         public Animal IsAnimalHere()
         {
             return isAnimalHere;
@@ -50,12 +61,18 @@ namespace WindowsFormsApp1
             isFruitHere = fruit;
             _isHere = IsHere.Fruit;
         }
-        public void SetHuman(Human human)
+
+        public void SetMale(Animal human)
         {
-            isHumanHere = human;
-            _isHere = IsHere.Human;
+            isAnimalHere = human;
+            _isHere = IsHere.Male;
         }
 
+        public void SetFemale(Animal human)
+        {
+            isAnimalHere = human;
+            _isHere = IsHere.Female;
+        }
 
         public bool IsEmpty()
         {
@@ -69,11 +86,12 @@ namespace WindowsFormsApp1
             isPlantHere = null;
             _isHere = IsHere.Empty;
         }
-        
+
         public IsHere GetIsHere()
         {
             return _isHere;
         }
+
         public void DeleteFruit()
         {
             isFruitHere = null;
@@ -85,22 +103,28 @@ namespace WindowsFormsApp1
             isAnimalHere = null;
             _isHere = IsHere.Empty;
         }
+
         public Plant GetPlant()
         {
             return isPlantHere;
         }
+
         public Fruit GetFruit()
         {
             return isFruitHere;
         }
-        
-    }  public enum IsHere
-             {
-                 Animal,
-                 Plant,
-                 Fruit,
-                 Human,
-                 Empty
-             }
-    
+
+       
+    }
+
+    public enum IsHere
+    {
+        Animal,
+        Plant,
+        Fruit,
+        Male,
+        Female,
+        House,
+        Empty
+    }
 }

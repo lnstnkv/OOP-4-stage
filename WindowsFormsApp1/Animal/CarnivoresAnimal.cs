@@ -4,9 +4,10 @@ using System.Linq.Expressions;
 
 namespace WindowsFormsApp1
 {
-    public class CarnivoresAnimal : Animal
+    public  abstract class CarnivoresAnimal : Animal
     {
    
+        protected abstract CarnivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land);
         protected override void FindDifferentEat(Random x)
         {
             if (_animal == null)
@@ -29,6 +30,11 @@ namespace WindowsFormsApp1
            
         }
 
+        protected override void Propagate(Random x)
+        {
+            _map.AddAnimal(NewAnimal(coordinat.X, coordinat.Y, _map, x, _land));
+        }
+        
         private void FindWay(Point coords)
         {
             coordinat = _targetMover.TargetMove(coordinat, _animal.GetPoint());
@@ -61,10 +67,8 @@ namespace WindowsFormsApp1
         }
 
 
-        public CarnivoresAnimal(int x, int y, Map map, Random rnd) : base(x, y, map, rnd)
+        public CarnivoresAnimal(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
         {
-            max_satietly = 250;
-            satietly = 250;
             health = 5;
         }
     }

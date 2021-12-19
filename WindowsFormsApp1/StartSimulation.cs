@@ -20,6 +20,7 @@ namespace WindowsFormsApp1
         private List<Fruit> fruits;
         private int index;
         public int _mastingSize;
+        private List<House> _houses;
 
         public StartSimulation(PictureBox picture, Form1 form)
         {
@@ -28,8 +29,10 @@ namespace WindowsFormsApp1
             rnd = new Random();
             _mastingSize = 5;
             map = new Map(rnd);
+            _houses = new List<House>();
             rendering = new Rendering(rnd);
             animals = map.GetAnimal();
+            _houses = map.GetHouse();
             _humans = map.GetHumans();
             _fruitingPlants = map.GetFruitingPlants();
             plants = map.GetPlant();
@@ -39,7 +42,7 @@ namespace WindowsFormsApp1
         public void Start()
         {
             rendering.SimulationRender(pictureSimulation, animals, plants, fruits, _fruitingPlants, _humans,
-                map.isWinter, _mastingSize);
+                map.isWinter, _mastingSize,_houses);
             foreach (var plant in plants)
             {
                 plant.Start(rnd);
@@ -57,7 +60,7 @@ namespace WindowsFormsApp1
         {
             var animals = map.GetAnimal();
             index++;
-            if (index < 50)
+            if (index < 20)
             {
                 map.isWinter = false;
             }
@@ -66,7 +69,7 @@ namespace WindowsFormsApp1
                 map.isWinter = true;
             }
 
-            if (index > 100)
+            if (index > 500)
             {
                 index = 0;
             }
@@ -83,7 +86,7 @@ namespace WindowsFormsApp1
 
             _form.TrackObject();
             rendering.SimulationRender(pictureSimulation, animals, plants, fruits, _fruitingPlants, _humans,
-                map.isWinter, _mastingSize);
+                map.isWinter, _mastingSize,_houses);
         }
 
         public void Resize()

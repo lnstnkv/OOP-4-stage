@@ -52,13 +52,16 @@
         <Compile Include="Animal\CarnivoresAnimalForm.cs" />
         <Compile Include="Animal\Eagle.cs" />
         <Compile Include="Animal\Elephant.cs" />
+        <Compile Include="Animal\Female.cs" />
         <Compile Include="Animal\HerbivoresAnimal.cs" />
         <Compile Include="Animal\HerbivoresAnimalForm.cs" />
         <Compile Include="Animal\HibernationForm.cs" />
         <Compile Include="Animal\Horse.cs" />
+        <Compile Include="Animal\House.cs" />
         <Compile Include="Animal\Human.cs" />
-        <Compile Include="Animal\HumanGender.cs" />
+        <Compile Include="Animal\AnimalGender.cs" />
         <Compile Include="Animal\Lynx.cs" />
+        <Compile Include="Animal\Male.cs" />
         <Compile Include="Animal\Mouse.cs" />
         <Compile Include="Animal\OmnivoresAnimal.cs" />
         <Compile Include="Animal\OmnivoresAnimalForm.cs" />

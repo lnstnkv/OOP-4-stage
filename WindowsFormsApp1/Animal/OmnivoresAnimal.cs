@@ -3,9 +3,9 @@ using System.Drawing;
 
 namespace WindowsFormsApp1
 {
-    public class OmnivoresAnimal : HerbivoresAnimal
+    public abstract class OmnivoresAnimal : HerbivoresAnimal
     {
-       
+     
         protected override void FindDifferentEat(Random x)
         {
             base.FindDifferentEat(x);
@@ -17,6 +17,13 @@ namespace WindowsFormsApp1
                 FindWay();
             }
         }
+
+        protected override void Propagate(Random x)
+        {
+            _map.AddAnimal(NewAnimal(coordinat.X, coordinat.Y, _map, x, _land));
+
+        }
+        
 
         protected void FindWay()
         {
@@ -39,10 +46,8 @@ namespace WindowsFormsApp1
         }
 
 
-        public OmnivoresAnimal(int x, int y, Map map, Random rnd) : base(x, y, map, rnd)
+        public OmnivoresAnimal(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
         {
-            max_satietly = 250;
-            satietly = 250;
             health = 5;
             
         }
