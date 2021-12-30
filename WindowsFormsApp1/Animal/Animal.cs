@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
         public Plant _plant;
         private bool isDied;
         protected Gender _gender;
-        protected int max_satietly;
+        public int max_satietly;
         protected Point _birthPoint;
         protected FreeMover _freeMover;
         protected Animal couple;

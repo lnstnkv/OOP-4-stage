@@ -73,12 +73,12 @@ namespace WindowsFormsApp1
             var giftHiman = _presents[rnd];
             if (giftHiman.IsGift() == Gift.Sweet)
             {
-                human.satietly += 50;
+                human.satietly = human.max_satietly;
             }
 
             if (giftHiman.IsGift() == Gift.Cap)
             {
-                human.capacity += 1;
+                human.satietly += 20;
             }
 
             if (giftHiman.IsGift() == Gift.Bag)
