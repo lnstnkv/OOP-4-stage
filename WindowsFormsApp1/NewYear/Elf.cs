@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         private Human _human;
         private Factory _factory;
         private int index;
+        private int countGift;
 
         public Elf(int x, int y, Random rnd, Map map)
         {
@@ -27,7 +28,7 @@ namespace WindowsFormsApp1
         public virtual void Loop(Random x)
         {
             index++;
-            if (index > 20 && index<250)
+            if (index > 20 && index < 250)
             {
                 if (_human == null)
                 {
@@ -38,7 +39,7 @@ namespace WindowsFormsApp1
                 {
                     var position = _human.GetPoint();
                     coordinat = _targetMover.TargetMove(coordinat, position);
-                    if (coordinat.X==position.X && coordinat.Y==position.Y)
+                    if (coordinat.X == position.X && coordinat.Y == position.Y)
                     {
                         GiveGift(_human, x);
                     }
@@ -48,16 +49,21 @@ namespace WindowsFormsApp1
             }
             else
             {
-                if (_factory == null)
-                {
-                    _factory = _map.FindFactory(coordinat);
-                }
+                GoFactory(x);
+            }
+        }
 
-                if (_factory != null)
-                {
-                    coordinat = _targetMover.TargetMove(coordinat, _factory.GetPoint());
-                    MakeGifts(x);
-                }
+        private void GoFactory(Random x)
+        {
+            if (_factory == null)
+            {
+                _factory = _map.FindFactory(coordinat);
+            }
+
+            if (_factory != null)
+            {
+                coordinat = _targetMover.TargetMove(coordinat, _factory.GetPoint());
+                MakeGifts(x);
             }
         }
 
@@ -74,7 +80,7 @@ namespace WindowsFormsApp1
             {
                 human.capacity += 1;
             }
-            
+
             if (giftHiman.IsGift() == Gift.Bag)
             {
                 human.capacity += 1;
@@ -82,16 +88,21 @@ namespace WindowsFormsApp1
 
             if (giftHiman.IsGift() == Gift.Eat)
             {
-                human._plant = new Plant(coordinat.X+1, coordinat.Y+1, _map, false, true);
+                human._plant = new Plant(coordinat.X + 1, coordinat.Y + 1, _map, false, true);
             }
 
             if (giftHiman.IsGift() == Gift.Empty)
             {
-                GiveGift(human,x);
+                GiveGift(human, x);
+                countGift++;
             }
-            _presents[rnd].GetEmpty();
-            
 
+            _presents[rnd].GetEmpty();
+
+            if (countGift == _presents.Count)
+            {
+                GoFactory(x);
+            }
         }
 
         private void MakeGifts(Random x)
