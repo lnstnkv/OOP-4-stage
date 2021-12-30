@@ -69,6 +69,7 @@
         <Compile Include="Animal\Pig.cs" />
         <Compile Include="Animal\Rabbit.cs" />
         <Compile Include="Animal\Squirrel.cs" />
+        <Compile Include="Animal\Tool.cs" />
         <Compile Include="Form1.cs">
             <SubType>Form</SubType>
         </Compile>

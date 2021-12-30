@@ -13,20 +13,23 @@ namespace WindowsFormsApp1
 
         private void isGifts(Random random)
         {
-            var x = random.Next(0, 4);
+            var x = random.Next(0, 5);
             switch (x)
             {
                 case 0:
-                    _gift = Gift.Eat;
+                    _gift = Gift.Bag;
                     break;
                 case 1:
-                    _gift = Gift.Eat;
+                    _gift = Gift.Sweet;
                     break;
                 case 2:
-                    _gift = Gift.Eat;
+                    _gift = Gift.Cap;
                     break;
                 case 3:
                     _gift = Gift.Eat;
+                    break;
+                case 4:
+                    _gift = Gift.Tool;
                     break;
             }
         }
@@ -45,6 +48,10 @@ namespace WindowsFormsApp1
             if (_gift == Gift.Eat)
             {
                 return Gift.Eat;
+            }
+            if (_gift == Gift.Tool)
+            {
+                return Gift.Tool;
             }
             else
             {

@@ -85,7 +85,10 @@ namespace WindowsFormsApp1
             {
                 human.capacity += 1;
             }
-
+            if (giftHiman.IsGift() == Gift.Tool)
+            {
+                human._tools.Add(new Tool());
+            }
             if (giftHiman.IsGift() == Gift.Eat)
             {
                 human._plant = new Plant(coordinat.X + 1, coordinat.Y + 1, _map, false, true);

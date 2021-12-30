@@ -6,6 +6,7 @@
         Bag,
         Cap,
         Empty,
-        Eat
+        Eat,
+        Tool
     }
 }
