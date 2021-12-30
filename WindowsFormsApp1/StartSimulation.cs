@@ -68,6 +68,7 @@ namespace WindowsFormsApp1
         public void Loop(Random x)
         {
             var animals = map.GetAnimal();
+            List<Elf> elves = null;
             index++;
             if (index < 250)
             {
@@ -75,7 +76,8 @@ namespace WindowsFormsApp1
                 if (index == 1)
                 {
                     map.BuildFactory(x);
-                }
+                } 
+                elves= map.GetElf();
             }
             else
             {
@@ -83,12 +85,14 @@ namespace WindowsFormsApp1
                 map.DeleteFactory();
                
             }
-            foreach (var elf in _factoriesElves.ToList())
-            {
-                elf.Loop(x);
-            }
 
-         
+            if (elves != null)
+                foreach (var elf in elves.ToList())
+                {
+                    elf.Loop(x);
+                }
+
+
             if (index > 500)
             {
                 index = 0;

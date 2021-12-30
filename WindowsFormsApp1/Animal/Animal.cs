@@ -156,7 +156,7 @@ namespace WindowsFormsApp1
 
                 if (coordinat == couple?.GetPoint())
                 {
-                    Propagate(x);
+                    //Propagate(x);
                     satietly -= 30;
                 }
             }

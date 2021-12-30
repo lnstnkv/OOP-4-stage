@@ -21,13 +21,9 @@ namespace WindowsFormsApp1
         }
         public virtual void Start(Random x)
         {
-            MakeGifts(x);
+          
 
         }
-
-        private void MakeGifts(Random x)
-        {
-           
-        }
+        
     }
 }
