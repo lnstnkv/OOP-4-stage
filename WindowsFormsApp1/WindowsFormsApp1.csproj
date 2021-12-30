@@ -82,6 +82,10 @@
         <Compile Include="FreeMover\Stand.cs" />
         <Compile Include="Land.cs" />
         <Compile Include="Map.cs" />
+        <Compile Include="NewYear\Elf.cs" />
+        <Compile Include="NewYear\Factory.cs" />
+        <Compile Include="NewYear\Gift.cs" />
+        <Compile Include="NewYear\Present.cs" />
         <Compile Include="Plant\EdibleFood.cs" />
         <Compile Include="Plant\EdiblePlant.cs" />
         <Compile Include="Plant\Fruit.cs" />

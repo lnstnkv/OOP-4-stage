@@ -8,7 +8,7 @@ namespace WindowsFormsApp1
 {
     public abstract class Animal
     {
-        protected int satietly;
+        public int satietly;
         protected int age;
         protected int health;
         protected Land[,] _land;

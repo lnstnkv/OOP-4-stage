@@ -7,6 +7,7 @@ namespace WindowsFormsApp1
         private Animal isAnimalHere;
         private Plant isPlantHere;
         private Fruit isFruitHere;
+        private Factory isFactoryHere;
         private Animal isHumanHere;
         protected IsHere _isHere;
         private bool _isHouse;
@@ -18,6 +19,7 @@ namespace WindowsFormsApp1
             isAnimalHere = null;
             isPlantHere = null;
             isFruitHere = null;
+            isFactoryHere = null;
             isHumanHere = null;
             _isHere = IsHere.Empty;
         }
@@ -68,6 +70,11 @@ namespace WindowsFormsApp1
             _isHere = IsHere.Male;
         }
 
+        public void SetFactory(Factory factory)
+        {
+            isFactoryHere = factory;
+            _isHere = IsHere.Factory;
+        }
         public void SetFemale(Animal human)
         {
             isAnimalHere = human;
@@ -103,6 +110,11 @@ namespace WindowsFormsApp1
             isAnimalHere = null;
             _isHere = IsHere.Empty;
         }
+        public void DeleteFactory()
+        {
+            isFactoryHere = null;
+            _isHere = IsHere.Empty;
+        }
 
         public Plant GetPlant()
         {
@@ -125,6 +137,7 @@ namespace WindowsFormsApp1
         Male,
         Female,
         House,
+        Factory,
         Empty
     }
 }

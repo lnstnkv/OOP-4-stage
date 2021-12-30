@@ -14,6 +14,8 @@ namespace WindowsFormsApp1
         public Random rnd;
         private List<Animal> animals;
         private List<Human> _humans;
+        private List<Factory> _factories;
+        private List<Elf> _factoriesElves;
         private Form1 _form;
         private List<Plant> plants;
         private List<FruitingPlant> _fruitingPlants;
@@ -37,12 +39,14 @@ namespace WindowsFormsApp1
             _fruitingPlants = map.GetFruitingPlants();
             plants = map.GetPlant();
             fruits = map.GetFruits();
+            _factories = map.GetFactory();
+            _factoriesElves = map.GetElf();
         }
 
         public void Start()
         {
             rendering.SimulationRender(pictureSimulation, animals, plants, fruits, _fruitingPlants, _humans,
-                map.isWinter, _mastingSize,_houses);
+                map.isWinter, _mastingSize, _houses, _factories, _factoriesElves);
             foreach (var plant in plants)
             {
                 plant.Start(rnd);
@@ -52,6 +56,11 @@ namespace WindowsFormsApp1
             {
                 fruit.IsKind();
             }
+            foreach (var factory in _factories.ToList())
+            {
+                factory.Start(rnd);
+            }
+
 
             map.AddSprouts();
         }
@@ -60,19 +69,33 @@ namespace WindowsFormsApp1
         {
             var animals = map.GetAnimal();
             index++;
-            if (index < 20)
+            if (index < 250)
             {
                 map.isWinter = false;
+                if (index == 1)
+                {
+                    map.BuildFactory(x);
+                }
+
+              
             }
             else
             {
                 map.isWinter = true;
+                map.DeleteFactory();
+               
+            }
+            foreach (var elf in _factoriesElves.ToList())
+            {
+                elf.Loop(x);
             }
 
+         
             if (index > 500)
             {
                 index = 0;
             }
+
 
             foreach (var animal in animals.ToList())
             {
@@ -86,7 +109,7 @@ namespace WindowsFormsApp1
 
             _form.TrackObject();
             rendering.SimulationRender(pictureSimulation, animals, plants, fruits, _fruitingPlants, _humans,
-                map.isWinter, _mastingSize,_houses);
+                map.isWinter, _mastingSize, _houses, _factories, _factoriesElves);
         }
 
         public void Resize()

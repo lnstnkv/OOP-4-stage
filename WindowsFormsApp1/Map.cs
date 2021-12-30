@@ -17,6 +17,8 @@ namespace WindowsFormsApp1
         private List<FruitingPlant> sproutsFruitingPlants;
         private List<Fruit> fruits;
         private Land[,] _land;
+        private List<Factory> _factories;
+        private List<Elf> _elves;
         public bool isWinter;
 
         public Map(Random x)
@@ -24,7 +26,8 @@ namespace WindowsFormsApp1
             houses = new List<House>();
             sproutsFruits = new List<Fruit>();
             sproutsPlants = new List<Plant>();
-
+            _factories = new List<Factory>();
+            _elves = new List<Elf>();
             isWinter = false;
             sproutsFruitingPlants = new List<FruitingPlant>();
             int countAnimal = 1500;
@@ -151,6 +154,29 @@ namespace WindowsFormsApp1
             fruits = new List<Fruit>();
         }
 
+        public void BuildFactory(Random x)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                var originalCoordinateX = x.Next(0, 1000);
+                var originalCoordinateY = x.Next(0, 1000);
+                _factories.Add(new Factory(originalCoordinateX, originalCoordinateY, this));
+                _elves.Add(new Elf(originalCoordinateX + 1, originalCoordinateY + 1, x, this));
+                _land[originalCoordinateX, originalCoordinateY].SetFactory(_factories[i]);
+            }
+        }
+
+        public void DeleteFactory()
+        {
+            _factories.Clear();
+            DeleteElf();
+        }
+
+        private void DeleteElf()
+        {
+            _elves.Clear();
+        }
+
         public Animal IsAnimal(Point coords)
         {
             return _land[coords.X, coords.Y].IsAnimalHere();
@@ -182,6 +208,7 @@ namespace WindowsFormsApp1
             _land[position.X, position.Y].SetAnimal(human);
             animals.Add(human);
         }
+
         public void AddHouse(House house)
         {
             var position = house.GetPoint();
@@ -205,6 +232,17 @@ namespace WindowsFormsApp1
         {
             return animals;
         }
+
+        public List<Factory> GetFactory()
+        {
+            return _factories;
+        }
+
+        public List<Elf> GetElf()
+        {
+            return _elves;
+        }
+
         public List<House> GetHouse()
         {
             return houses;
@@ -334,6 +372,40 @@ namespace WindowsFormsApp1
             }
         }
 
+        public Human FindHuman(Point coords)
+        {
+            int min = Int32.MaxValue;
+            Human ward = null;
+            foreach (var animal in animals)
+            {
+                var position = animal.GetPoint();
+
+                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < min && animal is Human)
+                {
+                    min = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
+                    ward = (Human) animal;
+                }
+            }
+
+            return ward;
+        }
+        public Factory FindFactory(Point coords)
+        {
+            int min = Int32.MaxValue;
+            Factory factoryNear = null;
+            foreach (var factory in _factories)
+            {
+                var position = factory.GetPoint();
+
+                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < min)
+                {
+                    min = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
+                    factoryNear = factory;
+                }
+            }
+
+            return factoryNear;
+        }
         public Animal FindCouple(Animal animalAlone)
         {
             var coor = animalAlone.GetPoint();
@@ -349,7 +421,8 @@ namespace WindowsFormsApp1
                 else
                 {
                     if (Math.Abs(coor.X - position.X) + Math.Abs(coor.Y - position.Y) < min &&
-                        animal.GetCouple() == null && ((animal is Human && animalAlone is Human) || animal.GetType() == animalAlone.GetType()))
+                        animal.GetCouple() == null && ((animal is Human && animalAlone is Human) ||
+                                                       animal.GetType() == animalAlone.GetType()))
                     {
                         min = Math.Abs(coor.X - position.X) + Math.Abs(coor.Y - position.Y);
                         animalCouple = animal;

@@ -53,8 +53,8 @@ namespace WindowsFormsApp1
             base.SetCouple(animal);
             if (_houses.Count < 1)
             {
-                BuildHouse();
-                FindVillage();
+               BuildHouse();
+               FindVillage();
             }
         }
 
@@ -63,8 +63,8 @@ namespace WindowsFormsApp1
          base.FindAnimalCouple();
          if (_houses.Count < 1)
          {
-             BuildHouse();
-             FindVillage();
+            BuildHouse();
+            FindVillage();
          }
         }
     }

@@ -44,7 +44,8 @@ namespace WindowsFormsApp1
         Image diedPlant = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/died.png");
 
         public void SimulationRender(PictureBox pictureSimulation, List<Animal> animals, List<Plant> plants,
-            List<Fruit> fruits, List<FruitingPlant> fruitingPlants, List<Human> humans, bool isSeason, int mastingSize, List<House> houses)
+            List<Fruit> fruits, List<FruitingPlant> fruitingPlants, List<Human> humans, bool isSeason, int mastingSize,
+            List<House> houses, List<Factory> _factories, List<Elf> _elves)
         {
             index++;
             Graphics graph = Graphics.FromImage(bmp);
@@ -139,7 +140,7 @@ namespace WindowsFormsApp1
                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize, mastingSize));
                 }
             }
-            
+
             foreach (var plant in plants)
             {
                 var position = plant.GetPoint();
@@ -175,6 +176,22 @@ namespace WindowsFormsApp1
                 graph.FillRectangle(Brushes.DarkBlue,
                     new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
             }
+
+            foreach (var factory in _factories)
+            {
+                var position = factory.GetPoint();
+                graph.FillRectangle(Brushes.Green,
+                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
+            }
+
+            foreach (var elf in _elves)
+            {
+                var position = elf.GetPoint();
+                graph.FillRectangle(Brushes.Purple,
+                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
+            }
+
+
             foreach (var house in houses)
             {
                 var position = house.GetPoint();
