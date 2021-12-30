@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         protected Point coordinat;
         protected Map _map;
         protected Animal _animal;
-        protected Plant _plant;
+        public Plant _plant;
         private bool isDied;
         protected Gender _gender;
         protected int max_satietly;

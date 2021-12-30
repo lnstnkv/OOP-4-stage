@@ -46,16 +46,7 @@ namespace WindowsFormsApp1
             {
                 var originalCoordinateX = x.Next(0, size);
                 var originalCoordinateY = x.Next(0, size);
-                /* if (i == 0)
-                 {
-                     animals.Add(new Male(originalCoordinateX, originalCoordinateY, this, x, _land));
-                     _land[originalCoordinateX, originalCoordinateY].SetMale(animals[i]);
-                 }
-                 else
-                 {
-                     animals.Add(new Female(originalCoordinateX, originalCoordinateY, this, x, _land));
-                     _land[originalCoordinateX, originalCoordinateY].SetFemale(animals[i]);
-                 }*/
+               
                 if (i < 1200)
                 {
                     if (i <= 400)

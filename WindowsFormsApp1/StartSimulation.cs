@@ -76,8 +76,6 @@ namespace WindowsFormsApp1
                 {
                     map.BuildFactory(x);
                 }
-
-              
             }
             else
             {

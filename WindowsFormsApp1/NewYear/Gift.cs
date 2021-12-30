@@ -5,6 +5,7 @@
         Sweet,
         Bag,
         Cap,
-        Empty
+        Empty,
+        Eat
     }
 }

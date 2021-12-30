@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         public virtual void Loop(Random x)
         {
             index++;
-            if (index > 10 && index<100)
+            if (index > 20 && index<250)
             {
                 if (_human == null)
                 {
@@ -78,6 +78,11 @@ namespace WindowsFormsApp1
             if (giftHiman.IsGift() == Gift.Bag)
             {
                 human.capacity += 1;
+            }
+
+            if (giftHiman.IsGift() == Gift.Eat)
+            {
+                human._plant = new Plant(coordinat.X+1, coordinat.Y+1, _map, false, true);
             }
 
             if (giftHiman.IsGift() == Gift.Empty)

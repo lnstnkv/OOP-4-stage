@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -24,24 +25,26 @@ namespace WindowsFormsApp1
             _winter = new Winter();
         }
 
-        Image Pig = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/pig.png");
-        Image Mouse = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/mouse.png");
-        Image Squirrel = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/squirrel.png");
-        Image Eagle = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/eagle.png");
-        Image Lynx = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/lynx.png");
-        Image Horse = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/horse.png");
-        Image Rabbit = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/rabbit.png");
-        Image Elephant = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/elephant.png");
-        Image Owl = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/owl.png");
-        Image Human = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/human.png");
-        Image Female = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/female.png");
-        Image blue = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/blue.png");
-        Image red = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/red.png");
-        Image orange = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/orange.png");
-        Image pink = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/pink.png");
-        Image berry = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/blueBerry.png");
-        Image virBerry = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/berry.png");
-        Image diedPlant = Image.FromFile("F:\\RiderProjects/WindowsFormsApp1/WindowsFormsApp1/died.png");
+        Image Pig = Image.FromFile("..\\..\\pig.png");
+        Image Mouse = Image.FromFile("..\\..\\mouse.png");
+        Image Squirrel = Image.FromFile("..\\..\\squirrel.png");
+        Image Eagle = Image.FromFile("..\\..\\eagle.png");
+        Image Lynx = Image.FromFile("..\\..\\lynx.png");
+        Image Horse = Image.FromFile("..\\..\\horse.png");
+        Image Rabbit = Image.FromFile("..\\..\\rabbit.png");
+        Image Elephant = Image.FromFile("..\\..\\elephant.png");
+        Image Owl = Image.FromFile("..\\..\\owl.png");
+        Image Human = Image.FromFile("..\\..\\human.png");
+        Image Female = Image.FromFile("..\\..\\female.png");
+        Image blue = Image.FromFile("..\\..\\blue.png");
+        Image red = Image.FromFile("..\\..\\red.png");
+        Image orange = Image.FromFile("..\\..\\orange.png");
+        Image pink = Image.FromFile("..\\..\\pink.png");
+        Image berry = Image.FromFile("..\\..\\blueBerry.png");
+        Image virBerry = Image.FromFile("..\\..\\berry.png");
+        Image elfImage = Image.FromFile("..\\..\\elf.png");
+        Image diedPlant = Image.FromFile("..\\..\\died.png");
+        Image factoryImage = Image.FromFile("..\\..\\factory.png");
 
         public void SimulationRender(PictureBox pictureSimulation, List<Animal> animals, List<Plant> plants,
             List<Fruit> fruits, List<FruitingPlant> fruitingPlants, List<Human> humans, bool isSeason, int mastingSize,
@@ -180,15 +183,15 @@ namespace WindowsFormsApp1
             foreach (var factory in _factories)
             {
                 var position = factory.GetPoint();
-                graph.FillRectangle(Brushes.Green,
-                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
+                graph.DrawImage(factoryImage,
+                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, mastingSize, mastingSize));
             }
 
             foreach (var elf in _elves)
             {
                 var position = elf.GetPoint();
-                graph.FillRectangle(Brushes.Purple,
-                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, 3, 3));
+                graph.DrawImage(elfImage,
+                    new Rectangle(position.X + 1 * mastingSize, position.Y + 1 * mastingSize, mastingSize, mastingSize));
             }
 
 
