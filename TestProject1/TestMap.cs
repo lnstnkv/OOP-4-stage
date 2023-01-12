@@ -273,6 +273,7 @@ namespace TestProject1
             Assert.AreEqual(expected, actual.GetType());
         }
 
+        
         // Класс хороших данных
         [Test]
         public void FindAnimalCouple_ForMale_ReturnFemale()
