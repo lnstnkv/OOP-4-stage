@@ -400,6 +400,10 @@ namespace WindowsFormsApp1
         public Animal FindCouple(Animal animalAlone)
         {
             var coor = animalAlone.GetPoint();
+            if (coor.X < 0 || coor.X > 999 || coor.Y<0 ||coor.Y>999 )
+            {
+                return null;
+            }
             int min = Int32.MaxValue;
             Animal animalCouple = null;
             foreach (var animal in animals)
@@ -411,6 +415,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
+                  
                     if (Math.Abs(coor.X - position.X) + Math.Abs(coor.Y - position.Y) < min &&
                         animal.GetCouple() == null && ((animal is Human && animalAlone is Human) ||
                                                        animal.GetType() == animalAlone.GetType()))
@@ -420,7 +425,6 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-
             return animalCouple;
         }
 

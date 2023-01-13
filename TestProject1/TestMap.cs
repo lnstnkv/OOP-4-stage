@@ -19,7 +19,6 @@ namespace TestProject1
         [SetUp]
         public void Setup()
         {
-            
             random = new Random();
             var sizeLand = 1000;
             _land = new Land[sizeLand, sizeLand];
@@ -164,7 +163,7 @@ namespace TestProject1
 
             Assert.AreEqual(expected, actual.GetType());
         }
-        
+
         // Класс хороших данных
         [Test]
         public void FindAnimalCouple_ForMouse_ReturnMouse()
@@ -273,7 +272,7 @@ namespace TestProject1
             Assert.AreEqual(expected, actual.GetType());
         }
 
-        
+
         // Класс хороших данных
         [Test]
         public void FindAnimalCouple_ForMale_ReturnFemale()
@@ -282,10 +281,67 @@ namespace TestProject1
             var expected = typeof(Female);
 
             var actual = _map.FindCouple(male);
-            
+
             Assert.AreEqual(expected, actual.GetType());
         }
-     
+
+        // Класс плохих данных
+        [Test]
+        public void FindAnimalCouple_OutOfMapAndFromTwoDirection_ReturnNull()
+        {
+            var male = new Male(-1, -1, _map, random, _land);
+
+            var actual = _map.FindCouple(male);
+
+            Assert.IsNull(actual);
+        }
+
+        // Класс плохих данных
+        [Test]
+        public void FindAnimalCouple_OutOfMapAndFromXAxesAndNegativeDirection_ReturnNull()
+        {
+            var male = new Male(-1, 500, _map, random, _land);
+
+            var actual = _map.FindCouple(male);
+
+            Assert.IsNull(actual);
+        }
+
+        // Класс плохих данных
+        [Test]
+        public void FindAnimalCouple_OutOfMapAndFromYAxesAndNegativeDirection_ReturnNull()
+        {
+            var male = new Male(500, -1000, _map, random, _land);
+
+            var actual = _map.FindCouple(male);
+
+            Assert.IsNull(actual);
+        }
         
+        // Класс плохих данных
+        [Test]
+        public void FindAnimalCouple_OutOfMapAndFromXAxesAndPositiveDirection_ReturnNull()
+        {
+            var male = new Male(10000, 500, _map, random, _land);
+          
+            var actual = _map.FindCouple(male);
+            
+            Assert.IsNull(actual);
+
+
+        }
+        
+        // Класс плохих данных
+        [Test]
+        public void FindAnimalCouple_OutOfMapAndFromYAxesAndPositiveDirection_ReturnNull()
+        {
+            var male = new Male(500, 1000, _map, random, _land);
+          
+            var actual = _map.FindCouple(male);
+            
+            Assert.IsNull(actual);
+
+
+        }
     }
 }
