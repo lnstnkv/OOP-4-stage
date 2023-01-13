@@ -151,6 +151,66 @@ namespace TestProject1
 
             Assert.AreEqual(expected, actual.GetType());
         }
+        
+        // Класс плохих данных
+        [Test]
+        public void FindAnimal_OutOfMapAndFromTwoDirection_ReturnNull()
+        {
+            var point = new Point(-1, -1);
+
+            var actual = _map.FindAnimal(point);
+
+            Assert.IsNull(actual);
+        }
+
+        // Класс плохих данных
+        [Test]
+        public void FindAnimal_OutOfMapAndFromXAxesAndNegativeDirection_ReturnNull()
+        {
+            var point = new Point(-1, 500);
+
+            var actual = _map.FindAnimal(point);
+
+            Assert.IsNull(actual);
+        }
+
+        // Класс плохих данных
+        [Test]
+        public void FindAnimal_OutOfMapAndFromYAxesAndNegativeDirection_ReturnNull()
+        {
+            var point = new Point(500, -1000);
+
+            var actual = _map.FindAnimal(point);
+
+            Assert.IsNull(actual);
+        }
+        
+        // Класс плохих данных
+        [Test]
+        public void FindAnimal_OutOfMapAndFromXAxesAndPositiveDirection_ReturnNull()
+        {
+            var point = new Point(10000, 500);
+          
+            var actual = _map.FindAnimal(point);
+            
+            Assert.IsNull(actual);
+
+
+        }
+        
+        // Класс плохих данных
+        [Test]
+        public void FindAnimal_OutOfMapAndFromYAxesAndPositiveDirection_ReturnNull()
+        {
+
+            var point = new Point(500, 1000);
+            
+            var actual = _map.FindAnimal(point);
+            
+            Assert.IsNull(actual);
+
+
+        }
 
         // Класс хороших данных
         [Test]

@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
             {
                 var originalCoordinateX = x.Next(0, size);
                 var originalCoordinateY = x.Next(0, size);
-               
+
                 if (i < 1200)
                 {
                     if (i <= 400)
@@ -347,6 +347,10 @@ namespace WindowsFormsApp1
         public Animal FindAnimal(Point coor)
         {
             var radius = 1;
+            if (coor.X < 0 || coor.X > 999 || coor.Y < 0 || coor.Y > 999)
+            {
+                return null;
+            }
             while (true)
             {
                 for (var i = coor.X - radius; i <= coor.X + radius; i++)
@@ -380,6 +384,7 @@ namespace WindowsFormsApp1
 
             return ward;
         }
+
         public Factory FindFactory(Point coords)
         {
             int min = Int32.MaxValue;
@@ -397,13 +402,15 @@ namespace WindowsFormsApp1
 
             return factoryNear;
         }
+
         public Animal FindCouple(Animal animalAlone)
         {
             var coor = animalAlone.GetPoint();
-            if (coor.X < 0 || coor.X > 999 || coor.Y<0 ||coor.Y>999 )
+            if (coor.X < 0 || coor.X > 999 || coor.Y < 0 || coor.Y > 999)
             {
                 return null;
             }
+
             int min = Int32.MaxValue;
             Animal animalCouple = null;
             foreach (var animal in animals)
@@ -415,7 +422,6 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                  
                     if (Math.Abs(coor.X - position.X) + Math.Abs(coor.Y - position.Y) < min &&
                         animal.GetCouple() == null && ((animal is Human && animalAlone is Human) ||
                                                        animal.GetType() == animalAlone.GetType()))
@@ -425,6 +431,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+
             return animalCouple;
         }
 
