@@ -58,8 +58,9 @@ namespace TestProject1
         public void FindAnimal_NearEagle_ReturnEagle()
         {
             var expected = typeof(Eagle);
+            var eagleCoordinates = new Point(1, 1);
 
-            var actual = _map.FindAnimal(new Point(1, 1));
+            var actual = _map.FindAnimal(eagleCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -69,8 +70,9 @@ namespace TestProject1
         public void FindAnimal_NearOwl_ReturnOwl()
         {
             var expected = typeof(Owl);
+            var owlCoordinates = new Point(8, 2);
 
-            var actual = _map.FindAnimal(new Point(8, 2));
+            var actual = _map.FindAnimal(owlCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -80,8 +82,9 @@ namespace TestProject1
         public void FindAnimal_NearRabbit_ReturnRabbit()
         {
             var expected = typeof(Rabbit);
+            var rabbitCoordinates = new Point(9, 3);
 
-            var actual = _map.FindAnimal(new Point(9, 3));
+            var actual = _map.FindAnimal(rabbitCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -91,8 +94,9 @@ namespace TestProject1
         public void FindAnimal_NearSquirrel_ReturnSquirrel()
         {
             var expected = typeof(Squirrel);
+            var squirrelCoordinates = new Point(25, 25);
 
-            var actual = _map.FindAnimal(new Point(25, 25));
+            var actual = _map.FindAnimal(squirrelCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -102,8 +106,9 @@ namespace TestProject1
         public void FindAnimal_NearElephant_ReturnElephant()
         {
             var expected = typeof(Elephant);
+            var elephantCoordinates = new Point(100, 100);
 
-            var actual = _map.FindAnimal(new Point(100, 100));
+            var actual = _map.FindAnimal(elephantCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -113,8 +118,9 @@ namespace TestProject1
         public void FindAnimal_NearLynx_ReturnLynx()
         {
             var expected = typeof(Lynx);
+            var lynxCoordinates = new Point(967, 215);
 
-            var actual = _map.FindAnimal(new Point(967, 215));
+            var actual = _map.FindAnimal(lynxCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -124,8 +130,9 @@ namespace TestProject1
         public void FindAnimal_NearHorse_ReturnHorse()
         {
             var expected = typeof(Horse);
+            var horseCoordinates = new Point(4, 250);
 
-            var actual = _map.FindAnimal(new Point(4, 250));
+            var actual = _map.FindAnimal(horseCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -135,8 +142,9 @@ namespace TestProject1
         public void FindAnimal_NearMouse_ReturnMouse()
         {
             var expected = typeof(Mouse);
+            var mouseCoordinates = new Point(96, 250);
 
-            var actual = _map.FindAnimal(new Point(96, 250));
+            var actual = _map.FindAnimal(mouseCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }
@@ -146,8 +154,9 @@ namespace TestProject1
         public void FindAnimal_NearPig_ReturnPig()
         {
             var expected = typeof(Pig);
+            var pigCoordinates = new Point(93, 250);
 
-            var actual = _map.FindAnimal(new Point(93, 250));
+            var actual = _map.FindAnimal(pigCoordinates);
 
             Assert.AreEqual(expected, actual.GetType());
         }

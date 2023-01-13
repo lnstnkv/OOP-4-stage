@@ -35,6 +35,29 @@ namespace TestProject1
         
         // Класс хороших данных
         [Test]
+        public void MoveTargetEuclid_ToTwoDirection_ReturnPoint()
+        {
+            var targetMover = new TargetMoverEucliden();
+            var expected = new Point(5, 2);
+
+            var actual = targetMover.TargetMove(new Point(5, 1), new Point(6, 2));
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        [Test]
+        public void MoveTargetEuclid_ToTwoNegativeDirection_ReturnPoint()
+        {
+            var targetMover = new TargetMoverSavingDirection();
+            var expected = new Point(5, 2);
+
+            var actual = targetMover.TargetMove(new Point(6, 2), new Point(5, 1));
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        // Класс хороших данных
+        [Test]
         public void MoveTargetEuclid_OnePlace_ReturnPoint()
         {
             var targetMover = new TargetMoverEucliden();
@@ -163,6 +186,29 @@ namespace TestProject1
             var expected = new Point(1, 1);
 
             var actual = targetMover.TargetMove(new Point(1, 1), new Point(1, 1));
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        // Класс хороших данных
+        [Test]
+        public void MoveTargetSavingDirection_ToTwoPositiveDirection_ReturnPoint()
+        {
+            var targetMover = new TargetMoverSavingDirection();
+            var expected = new Point(6, 1);
+
+            var actual = targetMover.TargetMove(new Point(5, 1), new Point(6, 2));
+
+            Assert.AreEqual(expected, actual);
+        }
+        
+        [Test]
+        public void MoveTargetSavingDirection_ToTwoNegativeDirection_ReturnPoint()
+        {
+            var targetMover = new TargetMoverSavingDirection();
+            var expected = new Point(5, 2);
+
+            var actual = targetMover.TargetMove(new Point(6, 2), new Point(5, 1));
 
             Assert.AreEqual(expected, actual);
         }
