@@ -41,7 +41,7 @@ namespace WindowsFormsApp1
         private const double MaxSatietyPercentageForWinter = 0.75;
         private const double MediumSatietyPercentageForWinter = 0.7;
         private const int LeftRangePercentage = 0;
-        private const int IntRightRangePercentage = 500;
+        private const int RightRangePercentage = 500;
 
 
         public Animal(int x, int y, Map map, Random rnd, Land[,] land)
@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
 
         protected virtual void isGender(Random x)
         {
-            var probability = x.Next(LeftRangePercentage, IntRightRangePercentage);
+            var probability = x.Next(LeftRangePercentage, RightRangePercentage);
             if (probability > ProbabilityMaleGender)
             {
                 _gender = Gender.Male;

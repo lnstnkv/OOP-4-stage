@@ -14,6 +14,14 @@ namespace WindowsFormsApp1
         private Factory _factory;
         private int index;
         private int countGift;
+        private const int AdditionParameter = 1;
+        private const int AdditionSatiety = 20;
+        private const int Shift = 1;
+        private const int MaximumIndexForGivePresent = 250;
+        private const int MinimalGift = 10;
+        private const int MinimumIndexForGivePresent = 20;
+        private const int LeftRangePercentage = 0;
+
 
         public Elf(int x, int y, Random rnd, Map map)
         {
@@ -28,7 +36,7 @@ namespace WindowsFormsApp1
         public virtual void Loop(Random x)
         {
             index++;
-            if (index > 20 && index < 250)
+            if (index > MinimumIndexForGivePresent && index < MaximumIndexForGivePresent)
             {
                 if (_human == null)
                 {
@@ -69,7 +77,7 @@ namespace WindowsFormsApp1
 
         private void GiveGift(Human human, Random x)
         {
-            var rnd = x.Next(0, _presents.Count);
+            var rnd = x.Next(LeftRangePercentage, _presents.Count);
             var giftHiman = _presents[rnd];
             if (giftHiman.IsGift() == Gift.Sweet)
             {
@@ -78,20 +86,22 @@ namespace WindowsFormsApp1
 
             if (giftHiman.IsGift() == Gift.Cap)
             {
-                human.satietly += 20;
+                human.satietly += AdditionSatiety;
             }
 
             if (giftHiman.IsGift() == Gift.Bag)
             {
-                human.capacity += 1;
+                human.capacity += AdditionParameter;
             }
+
             if (giftHiman.IsGift() == Gift.Tool)
             {
                 human._tools.Add(new Tool());
             }
+
             if (giftHiman.IsGift() == Gift.Eat)
             {
-                human._plant = new Plant(coordinat.X + 1, coordinat.Y + 1, _map, false, true);
+                human._plant = new Plant(coordinat.X + Shift, coordinat.Y + Shift, _map, false, true);
             }
 
             if (giftHiman.IsGift() == Gift.Empty)
@@ -110,7 +120,7 @@ namespace WindowsFormsApp1
 
         private void MakeGifts(Random x)
         {
-            if (_presents.Count < 10)
+            if (_presents.Count < MinimalGift)
             {
                 _presents.Add(new Present(x));
             }

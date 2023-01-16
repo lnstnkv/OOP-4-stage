@@ -351,6 +351,7 @@ namespace WindowsFormsApp1
             {
                 return null;
             }
+
             while (true)
             {
                 for (var i = coor.X - radius; i <= coor.X + radius; i++)

@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
             isPlantHere = plant;
             _isHere = IsHere.Plant;
         }
-       
+
 
         public void SetHouse()
         {
@@ -75,6 +75,7 @@ namespace WindowsFormsApp1
             isFactoryHere = factory;
             _isHere = IsHere.Factory;
         }
+
         public void SetFemale(Animal human)
         {
             isAnimalHere = human;
@@ -110,6 +111,7 @@ namespace WindowsFormsApp1
             isAnimalHere = null;
             _isHere = IsHere.Empty;
         }
+
         public void DeleteFactory()
         {
             isFactoryHere = null;
@@ -125,8 +127,6 @@ namespace WindowsFormsApp1
         {
             return isFruitHere;
         }
-
-       
     }
 
     public enum IsHere

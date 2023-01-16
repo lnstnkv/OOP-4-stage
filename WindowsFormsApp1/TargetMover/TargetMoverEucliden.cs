@@ -5,6 +5,7 @@ namespace WindowsFormsApp1
 {
     public class TargetMoverEucliden : TargetMover
     {
+        private const int Shift = 1;
         public override Point TargetMove(Point coordinate, Point coords)
         {
             var diffx = coords.X - coordinate.X;
@@ -16,10 +17,10 @@ namespace WindowsFormsApp1
 
             if (diffx > 0)
             {
-                var x = coordinate.X + 1;
+                var x = coordinate.X + Shift;
                 if (diffy > 0)
                 {
-                    var y = coordinate.Y + 1;
+                    var y = coordinate.Y + Shift;
                     if (Math.Sqrt(Math.Pow(coords.X - x, 2) + Math.Pow(coords.Y - coordinate.Y, 2)) <
                         Math.Sqrt(Math.Pow(coords.Y - y, 2) + Math.Pow(coords.X - coordinate.X, 2)))
                     {
@@ -32,7 +33,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    var y = coordinate.Y - 1;
+                    var y = coordinate.Y - Shift;
                     if (Math.Sqrt(Math.Pow(coords.X - x, 2) + Math.Pow(coords.Y - coordinate.Y, 2)) <
                         Math.Sqrt(Math.Pow(coords.Y - y, 2) + Math.Pow(coords.X - coordinate.X, 2)))
                     {
@@ -46,10 +47,10 @@ namespace WindowsFormsApp1
             }
             else
             {
-                var x = coordinate.X - 1;
+                var x = coordinate.X - Shift;
                 if (diffy > 0)
                 {
-                    var y = coordinate.Y + 1;
+                    var y = coordinate.Y + Shift;
                     if (Math.Sqrt(Math.Pow(coords.X - x, 2) + Math.Pow(coords.Y - coordinate.Y, 2)) <
                         Math.Sqrt(Math.Pow(coords.Y - y, 2) + Math.Pow(coords.X - coordinate.X, 2)))
                     {
@@ -62,7 +63,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    var y = coordinate.Y - 1;
+                    var y = coordinate.Y - Shift;
                     if (Math.Sqrt(Math.Pow(coords.X - x, 2) + Math.Pow(coords.Y - coordinate.Y, 2)) <
                         Math.Sqrt(Math.Pow(coords.Y - y, 2) + Math.Pow(coords.X - coordinate.X, 2)))
                     {
