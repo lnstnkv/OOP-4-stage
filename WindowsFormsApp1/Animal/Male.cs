@@ -8,6 +8,8 @@ namespace WindowsFormsApp1
     {
         public List<House> _houses;
         private isVillage _village;
+        private const int MinimumHouseNearby = 5;
+        private const int MinimumHouse = 1;
 
         public Male(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
         {
@@ -36,7 +38,7 @@ namespace WindowsFormsApp1
         {
             List<Point> land;
             land=_map.FindNearHouse(coordinat);
-            if (land.Count > 5)
+            if (land.Count > MinimumHouseNearby)
             {
                 _village = isVillage.Yes;
             }
@@ -51,7 +53,7 @@ namespace WindowsFormsApp1
         protected override void SetCouple(Animal animal)
         {
             base.SetCouple(animal);
-            if (_houses.Count < 1)
+            if (_houses.Count < MinimumHouse)
             {
                BuildHouse();
                FindVillage();
@@ -61,7 +63,7 @@ namespace WindowsFormsApp1
         protected override void FindAnimalCouple()
         {
          base.FindAnimalCouple();
-         if (_houses.Count < 1)
+         if (_houses.Count < MinimumHouse)
          {
             BuildHouse();
             FindVillage();

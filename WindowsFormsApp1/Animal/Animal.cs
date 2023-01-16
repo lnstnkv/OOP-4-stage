@@ -24,6 +24,25 @@ namespace WindowsFormsApp1
         protected Animal couple;
         protected TargetMover _targetMover;
         protected HibernationForm _hibernationForm;
+        private const int ProbabilityMaleGender = 200;
+        private const int AdditionParameter = 1;
+        private const int ReductionParameter = 1;
+        private const int ReductionSatiety = 30;
+        private const int ReductionSatietyForSummer = 1;
+        private const int ReductionSatietyForWinter = 2;
+        private const int MinimalHealth = 0;
+        private const int MaximumAgeForSummer = 200;
+        private const int MaximumAgeForWinter = 20;
+        private const double LowSatietyPercentageForSummer = 0.1;
+        private const double MaxSatietyPercentageForSummer = 0.85;
+        private const double AboveAverageSatietyPercentageForSummer = 0.8;
+        private const double MediumSatietyPercentageForSummer = 0.75;
+        private const double LowSatietyPercentageForWinter = 0.2;
+        private const double MaxSatietyPercentageForWinter = 0.75;
+        private const double MediumSatietyPercentageForWinter = 0.7;
+        private const int LeftRangePercentage = 0;
+        private const int IntRightRangePercentage = 500;
+
 
         public Animal(int x, int y, Map map, Random rnd, Land[,] land)
         {
@@ -43,8 +62,8 @@ namespace WindowsFormsApp1
 
         protected virtual void isGender(Random x)
         {
-            var probability = x.Next(0, 500);
-            if (probability > 200)
+            var probability = x.Next(LeftRangePercentage, IntRightRangePercentage);
+            if (probability > ProbabilityMaleGender)
             {
                 _gender = Gender.Male;
             }
@@ -133,14 +152,14 @@ namespace WindowsFormsApp1
 
         public void IsSummer(Random x)
         {
-            satietly -= 1;
+            satietly -= ReductionSatietyForSummer;
             if (satietly == max_satietly)
             {
                 coordinat = _freeMover.Move(coordinat, x);
-                age += 1;
+                age += AdditionParameter;
             }
 
-            if (satietly > max_satietly * 0.85)
+            if (satietly > max_satietly * MaxSatietyPercentageForSummer)
             {
                 if (couple == null)
                 {
@@ -157,27 +176,27 @@ namespace WindowsFormsApp1
                 if (coordinat == couple?.GetPoint())
                 {
                     //Propagate(x);
-                    satietly -= 30;
+                    satietly -= ReductionSatiety;
                 }
             }
 
 
-            if (satietly > max_satietly * 0.8 && satietly < max_satietly * 0.85)
+            if (satietly > max_satietly * AboveAverageSatietyPercentageForSummer&& satietly < max_satietly * MaxSatietyPercentageForSummer)
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
 
-            if (health < 0 || age > 200)
+            if (health < MinimalHealth || age > MaximumAgeForSummer)
             {
                 Die();
             }
 
-            if (satietly < max_satietly * 0.1)
+            if (satietly < max_satietly * LowSatietyPercentageForSummer)
             {
-                health -= 1;
+                health -= ReductionParameter;
             }
 
-            if (satietly < max_satietly * 0.75)
+            if (satietly < max_satietly * MediumSatietyPercentageForSummer)
             {
                 FindDifferentEat(x);
             }
@@ -188,7 +207,7 @@ namespace WindowsFormsApp1
             couple = _map.FindCouple(this);
         }
 
-        protected  virtual void SetCouple(Animal animal)
+        protected virtual void SetCouple(Animal animal)
         {
             couple = animal;
         }
@@ -200,28 +219,28 @@ namespace WindowsFormsApp1
 
         public void IsWinter(Random x)
         {
-            satietly -= 2;
+            satietly -= ReductionSatietyForWinter;
             if (satietly == max_satietly)
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
 
-            if (satietly > max_satietly * 0.7)
+            if (satietly > max_satietly * MediumSatietyPercentageForWinter)
             {
                 coordinat = _freeMover.Move(coordinat, x);
             }
 
-            if (health < 0 || age > 20)
+            if (health < MinimalHealth || age > MaximumAgeForWinter)
             {
                 Die();
             }
 
-            if (satietly < max_satietly * 0.2)
+            if (satietly < max_satietly * LowSatietyPercentageForWinter)
             {
-                health -= 1;
+                health -= ReductionParameter;
             }
 
-            if (satietly < max_satietly * 0.75)
+            if (satietly < max_satietly * MaxSatietyPercentageForWinter)
             {
                 FindDifferentEat(x);
             }

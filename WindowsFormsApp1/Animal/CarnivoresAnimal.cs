@@ -4,10 +4,13 @@ using System.Linq.Expressions;
 
 namespace WindowsFormsApp1
 {
-    public  abstract class CarnivoresAnimal : Animal
+    public abstract class CarnivoresAnimal : Animal
     {
-   
+        private const int MaximumHealth = 5;
+        private const int AdditionSatiety = 5;
+
         protected abstract CarnivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land);
+
         protected override void FindDifferentEat(Random x)
         {
             if (_animal == null)
@@ -16,25 +19,20 @@ namespace WindowsFormsApp1
                 if (_animal is CarnivoresAnimal || _animal.IsSleep())
                 {
                     _animal = null;
-                    
                 }
             }
 
-            if (_animal != null )
+            if (_animal != null)
             {
-                
                 FindWay(_animal.GetPoint());
-                
             }
-
-           
         }
 
         protected override void Propagate(Random x)
         {
             _map.AddAnimal(NewAnimal(coordinat.X, coordinat.Y, _map, x, _land));
         }
-        
+
         private void FindWay(Point coords)
         {
             coordinat = _targetMover.TargetMove(coordinat, _animal.GetPoint());
@@ -50,7 +48,7 @@ namespace WindowsFormsApp1
             _animal = null;
         }
 
-   
+
         private void Eat()
         {
             if (_animal is CarnivoresAnimal)
@@ -59,17 +57,16 @@ namespace WindowsFormsApp1
             }
             else
             {
-                satietly += 5;
+                satietly += AdditionSatiety;
                 _animal.Die();
                 _animal = null;
-                
             }
         }
 
 
-        public CarnivoresAnimal(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public CarnivoresAnimal(int x, int y, Map map, Random rnd, Land[,] land) : base(x, y, map, rnd, land)
         {
-            health = 5;
+            health = MaximumHealth;
         }
     }
 }
