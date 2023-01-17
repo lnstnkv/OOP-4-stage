@@ -25,7 +25,6 @@ namespace WindowsFormsApp1
     {
         base.Start(x);
         if(_stage!= Stage.Increase) return;
-        //GiveFruit(x,_map,coordinatPlant,_isVirulence);
     }
     public override Plant NewSproutsPlant(int x, int y, Map map, bool isVirulence, bool isEat)
         {

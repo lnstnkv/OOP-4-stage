@@ -148,30 +148,23 @@ namespace WindowsFormsApp1
             foreach (var plant in plants)
             {
                 var position = plant.GetPoint();
-                /* if (plant.IsDied())
-                 {
-                     graph.DrawImage(diedPlant,
-                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize, mastingSize));
-                 }
-                 else
-                 {*/
-                if (plant.IsVirulence() && plant.IsEat()) // ядовитое съедобное 
+               
+                if (plant.IsVirulence() && plant.IsEat())
                     graph.DrawImage(pink,
                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
                             mastingSize));
-                if (!plant.IsVirulence() && plant.IsEat()) // неядовитое съедобное
+                if (!plant.IsVirulence() && plant.IsEat()) 
                     graph.DrawImage(blue,
                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
                             mastingSize));
-                if (plant.IsVirulence() && !plant.IsEat()) // ядовитое несъедобное
+                if (plant.IsVirulence() && !plant.IsEat())
                     graph.DrawImage(orange,
                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
                             mastingSize));
-                if (!plant.IsVirulence() && !plant.IsEat()) // неядовитое несъедобное
+                if (!plant.IsVirulence() && !plant.IsEat())
                     graph.DrawImage(red,
                         new Rectangle(position.X * mastingSize, position.Y * mastingSize, mastingSize,
                             mastingSize));
-                //}
             }
 
             foreach (var fruit in fruits)

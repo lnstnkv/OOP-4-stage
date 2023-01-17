@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         }
 
         protected abstract HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land);
-       // protected abstract void Propagate(Random x);
+        
         protected override void FindDifferentEat(Random x)
         {
             if (_plant == null)
