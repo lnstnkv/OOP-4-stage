@@ -7,12 +7,12 @@ namespace WindowsFormsApp1
 {
     public class Plant
     {
-        protected Point CoordinatPlant;
+        private Point _coordinatePlant;
         private int _age;
         public bool _isVirulence { get; }
         public bool _isEat { get; }
         protected Map _map;
-        protected bool isDied;
+        private bool isDied;
         protected Stage Stage;
         private const int MinimumAge = 0;
         private const int MaxAge = 15;
@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
 
         public Plant(int x, int y, Map map, bool isVirulence, bool isEat)
         {
-            CoordinatPlant = new Point(x, y);
+            _coordinatePlant = new Point(x, y);
             _isVirulence = isVirulence;
             _isEat = isEat;
             isDied = false;
@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
 
         public string GetCoordinateInformation()
         {
-            return CoordinatPlant.ToString();
+            return _coordinatePlant.ToString();
         }
 
         public string GetClassInformation()
@@ -66,7 +66,7 @@ namespace WindowsFormsApp1
 
         public Point GetPoint()
         {
-            return CoordinatPlant;
+            return _coordinatePlant;
         }
 
         public void Die()
@@ -85,13 +85,13 @@ namespace WindowsFormsApp1
             SetStage();
         }
 
-        public void Grow(Random random)
+        private void Grow(Random random)
         {
             if (!_map.isWinter) return;
             if (_map.CountPlant() > MaxCountPlant) return;
             var probability = random.Next(MaxValueProbability);
             if (probability > 0) return;
-            var land = _map.FindNearbyLand(CoordinatPlant);
+            var land = _map.FindNearbyLand(_coordinatePlant);
             var positionX = 0;
             var positionY = 0;
             if (land.Count > 0)
@@ -106,7 +106,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public virtual Plant NewSproutsPlant(int x, int y, Map map, bool _isVirulence, bool _isEat)
+        protected virtual Plant NewSproutsPlant(int x, int y, Map map, bool _isVirulence, bool _isEat)
         {
             return new Plant(x, y, _map, _isVirulence, _isEat);
         }

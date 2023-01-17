@@ -9,7 +9,7 @@ namespace WindowsFormsApp1
         private const int MaximumHealth = 10;
         private const int AdditionSatiety = 5;
 
-        public HerbivoresAnimal(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
+        protected HerbivoresAnimal(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
         {
             Health = MaximumHealth;
         }
@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
             _map.AddAnimal(NewAnimal(Coordinate.X, Coordinate.Y, _map, x, _land));
         }
 
-        protected void EatPlant(Point coordinate)
+        private void EatPlant(Point coordinate)
         {
             Coordinate = TargetMover.TargetMove(Coordinate, _plant.GetPoint());
             FindEat();
@@ -59,7 +59,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        protected void Eat()
+        private void Eat()
         {
             if (_plant._isVirulence)
             {

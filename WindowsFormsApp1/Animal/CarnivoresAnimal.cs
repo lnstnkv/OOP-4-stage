@@ -64,7 +64,7 @@ namespace WindowsFormsApp1
         }
 
 
-        public CarnivoresAnimal(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
+        protected CarnivoresAnimal(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
         {
             Health = MaximumHealth;
         }

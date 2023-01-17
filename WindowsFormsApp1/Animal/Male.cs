@@ -6,7 +6,7 @@ namespace WindowsFormsApp1
 {
     public class Male : Human
     {
-        public List<House> _houses;
+        private List<House> _houses;
         private isVillage _village;
         private const int MinimumHouseNearby = 5;
         private const int MinimumHouse = 1;
@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
             return _houses;
         }
 
-        public void FindVillage()
+        private void FindVillage()
         {
             List<Point> land;
             land = _map.FindNearHouse(Coordinate);
@@ -44,7 +44,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void BuildHouse()
+        private void BuildHouse()
         {
             var house = new House(Coordinate.X, Coordinate.Y);
             _houses.Add(house);
