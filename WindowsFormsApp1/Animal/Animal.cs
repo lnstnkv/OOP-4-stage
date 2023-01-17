@@ -90,22 +90,22 @@ namespace WindowsFormsApp1
             return HibernationForm == HibernationForm.Sleep;
         }
 
-        public String InfoCoordinate()
+        public string GetCoordinateInformation()
         {
             return Coordinate.ToString();
         }
 
-        public String InfoHealth()
+        public string GetHealthInformation()
         {
             return Health.ToString();
         }
 
-        public String InfoSatietly()
+        public string GetSatietyInformation()
         {
             return Satiety.ToString();
         }
 
-        public String ClassAnimal()
+        public string GetClassInformation()
         {
             switch (this)
             {

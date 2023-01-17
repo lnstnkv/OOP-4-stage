@@ -80,13 +80,13 @@ namespace WindowsFormsApp1
             label1.Text = "";
             if (animal != null)
             {
-                label1.Text += animal.InfoCoordinate();
+                label1.Text += animal.GetCoordinateInformation();
                 label1.Text += "\nЗдоровье: \n";
-                label1.Text += animal.InfoHealth();
+                label1.Text += animal.GetHealthInformation();
                 label1.Text += "\nСытость: \n";
-                label1.Text += animal.InfoSatietly();
+                label1.Text += animal.GetSatietyInformation();
                 label1.Text += "\nКласс: \n";
-                label1.Text += animal.ClassAnimal();
+                label1.Text += animal.GetClassInformation();
             }
 
             if (_plant != null)
