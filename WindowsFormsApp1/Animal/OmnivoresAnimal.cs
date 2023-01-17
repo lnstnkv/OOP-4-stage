@@ -5,7 +5,9 @@ namespace WindowsFormsApp1
 {
     public abstract class OmnivoresAnimal : HerbivoresAnimal
     {
-     
+        private const int MaximumHealth = 5;
+        private const int AdditionSatiety = 5;
+        
         protected override void FindDifferentEat(Random x)
         {
             base.FindDifferentEat(x);
@@ -40,7 +42,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                satietly += 5;
+                satietly += AdditionSatiety;
                 eat.Die();
             }
         }
@@ -48,7 +50,7 @@ namespace WindowsFormsApp1
 
         public OmnivoresAnimal(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
         {
-            health = 5;
+            health = MaximumHealth;
             
         }
     }

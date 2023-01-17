@@ -5,31 +5,37 @@ namespace WindowsFormsApp1
 {
     public class ProbabilityFreeMover : FreeMover
     {
+        private const int Shift = 1;
+        private const double SatietyPercentage = 0.7;
+        private const int LeftRangePercentage = 0;
+        private const int IntRightRangePercentage = 100;
+        private const double DoubleRightRangePercentage = 100.0;
+        
         public override Point Move(Point coordinate, Random x)
         {
-            var probability = Convert.ToDouble(x.Next(0, 100) / 100.0);
-            if (probability > 0.7)
+            var probability = Convert.ToDouble(x.Next(LeftRangePercentage, IntRightRangePercentage) / DoubleRightRangePercentage);
+            if (probability >SatietyPercentage)
             {
-                if (GoOutside(coordinate.X + 1))
+                if (GoOutside(coordinate.X + Shift))
                 {
-                    coordinate.X += 1;
+                    coordinate.X += Shift;
                 }
 
-                if (GoOutside(coordinate.Y + 1))
+                if (GoOutside(coordinate.Y + Shift))
                 {
-                    coordinate.Y += 1;
+                    coordinate.Y += Shift;
                 }
             }
             else
             {
-                if (GoOutside(coordinate.X - 1))
+                if (GoOutside(coordinate.X - Shift))
                 {
-                    coordinate.X -= 1;
+                    coordinate.X -= Shift;
                 }
 
-                if (GoOutside(coordinate.Y - 1))
+                if (GoOutside(coordinate.Y - Shift))
                 {
-                    coordinate.Y -= 1;
+                    coordinate.Y -= Shift;
                 }
             }
             return coordinate;

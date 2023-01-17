@@ -23,13 +23,15 @@ namespace WindowsFormsApp1
         private int index;
         public int _mastingSize;
         private List<House> _houses;
+        private const int LensSize = 5;
+        private const int ParameterForResize = 1000;
 
         public StartSimulation(PictureBox picture, Form1 form)
         {
             _form = form;
             pictureSimulation = picture;
             rnd = new Random();
-            _mastingSize = 5;
+            _mastingSize = LensSize;
             map = new Map(rnd);
             _houses = new List<House>();
             rendering = new Rendering(rnd);
@@ -56,6 +58,7 @@ namespace WindowsFormsApp1
             {
                 fruit.IsKind();
             }
+
             foreach (var factory in _factories.ToList())
             {
                 factory.Start(rnd);
@@ -76,14 +79,14 @@ namespace WindowsFormsApp1
                 if (index == 1)
                 {
                     map.BuildFactory(x);
-                } 
-                elves= map.GetElf();
+                }
+
+                elves = map.GetElf();
             }
             else
             {
                 map.isWinter = true;
                 map.DeleteFactory();
-               
             }
 
             if (elves != null)
@@ -117,24 +120,24 @@ namespace WindowsFormsApp1
         public void Resize()
         {
             Scale();
-            rendering.ResizePictureBox(1000 * _mastingSize, 1000 * _mastingSize);
+            rendering.ResizePictureBox(ParameterForResize * _mastingSize, ParameterForResize * _mastingSize);
         }
 
         public void UnResize()
         {
             UnScale();
-            rendering.ResizePictureBox(1000 * _mastingSize, 1000 * _mastingSize);
+            rendering.ResizePictureBox(ParameterForResize * _mastingSize, ParameterForResize * _mastingSize);
         }
 
 
         public void Scale()
         {
-            _mastingSize += 5;
+            _mastingSize += LensSize;
         }
 
         public void UnScale()
         {
-            _mastingSize -= 5;
+            _mastingSize -= LensSize;
         }
 
         public Map GetMap()

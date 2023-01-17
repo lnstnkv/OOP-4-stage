@@ -5,7 +5,8 @@ namespace WindowsFormsApp1
     public class Present
     {
         private Gift _gift;
-
+        private const int LeftRangePercentage = 0;
+        private const int RightRangePercentage = 5;
         public Present(Random x)
         {
             isGifts(x);
@@ -13,7 +14,7 @@ namespace WindowsFormsApp1
 
         private void isGifts(Random random)
         {
-            var x = random.Next(0, 5);
+            var x = random.Next(LeftRangePercentage, RightRangePercentage);
             switch (x)
             {
                 case 0:

@@ -11,12 +11,14 @@ namespace WindowsFormsApp1
         private Map _map;
         private bool _isVirulence;
         private List<FruitingPlant> _fruitingPlants;
-
+        private const int FloweringAge = 5;
+        private const int MatureAge = 10;
+        private const int MinimumAge = 0;
         private Kind _form;
         public Fruit(int x, int y, Map map, bool isVirulence)
         {
             coordinatFruit = new Point(x, y);
-            age = 0;
+            age = MinimumAge;
             _isVirulence = isVirulence;
             _form = Kind.Fetus;
             _map = map;
@@ -40,12 +42,12 @@ namespace WindowsFormsApp1
 
         public Kind IsKind()
         {
-            if (age > 5)
+            if (age > FloweringAge)
             {
                 _form = Kind.Flower;
             }
 
-            if (age > 10)
+            if (age > MatureAge)
             {
                 _form = Kind.Mature;
             }

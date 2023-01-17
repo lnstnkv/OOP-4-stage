@@ -6,10 +6,11 @@ namespace WindowsFormsApp1
     public abstract class HerbivoresAnimal : Animal
     {
         public HerbivoresAnimalForm _herbAnimalForm;
-
+        private const int MaximumHealth = 10;
+        private const int AdditionSatiety = 5;
         public HerbivoresAnimal(int x, int y, Map map, Random rnd, Land[,] land) : base(x, y, map, rnd, land)
         {
-            health = 10;
+            health = MaximumHealth;
          
         }
 
@@ -68,7 +69,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                satietly += 5;
+                satietly += AdditionSatiety;
                 _plant.Die();
             }
         }

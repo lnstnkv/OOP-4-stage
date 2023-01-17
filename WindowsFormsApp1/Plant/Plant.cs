@@ -14,6 +14,12 @@ namespace WindowsFormsApp1
         protected Map _map;
         protected bool isDied;
         protected Stage _stage;
+        private const int MinimumAge = 0;
+        private const int MaxAge = 15;
+        private const int MediumAge = 10;
+        private const int LandingAge = 5;
+        private const int MaxValueProbability = 500;
+        private const int MaxCountPlant = 800;
 
         public Plant(int x, int y, Map map, bool isVirulence, bool isEat)
         {
@@ -22,13 +28,15 @@ namespace WindowsFormsApp1
             _isEat = isEat;
             isDied = false;
             _map = map;
-            age = 0;
+            age = MinimumAge;
             _stage = Stage.Seed;
         }
+
         public String InfoCoordinate()
         {
             return coordinatPlant.ToString();
         }
+
         public String ClassPlant()
         {
             if (this is FruitingPlant)
@@ -50,6 +58,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         public bool IsEat()
         {
             return _isEat;
@@ -64,6 +73,7 @@ namespace WindowsFormsApp1
         {
             return isDied;
         }
+
         public Point GetPoint()
         {
             return coordinatPlant;
@@ -77,7 +87,6 @@ namespace WindowsFormsApp1
 
         public virtual void Start(Random x)
         {
-           
             if (_stage == Stage.Increase)
             {
                 Grow(x);
@@ -89,8 +98,8 @@ namespace WindowsFormsApp1
         public void Grow(Random x)
         {
             if (!_map.isWinter) return;
-            if(_map.countPlant()>800) return;
-            var probability = x.Next(100);
+            if (_map.countPlant() > MaxCountPlant) return;
+            var probability = x.Next(MaxValueProbability);
             if (probability > 0) return;
             var land = _map.FindNearbyLand(coordinatPlant);
             var positionX = 0;
@@ -121,19 +130,19 @@ namespace WindowsFormsApp1
 
         private Stage IsStage()
         {
-            if (age > 15)
+            if (age > MaxAge)
             {
                 _stage = Stage.Died;
                 isDied = true;
                 //Die();
             }
 
-            if (age > 5)
+            if (age > LandingAge)
             {
                 _stage = Stage.Sprout;
             }
 
-            if (age > 10)
+            if (age > MediumAge)
             {
                 _stage = Stage.Increase;
             }

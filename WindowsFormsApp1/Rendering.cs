@@ -16,10 +16,11 @@ namespace WindowsFormsApp1
         private Summer _summer;
         private Winter _winter;
         private int index;
+        private const int SizeBitmap = 5000;
 
         public Rendering(Random rnd)
         {
-            bmp = new Bitmap(5000, 5000);
+            bmp = new Bitmap(SizeBitmap, SizeBitmap);
             x = rnd;
             _summer = new Summer();
             _winter = new Winter();

@@ -4,6 +4,7 @@ namespace WindowsFormsApp1
 {
     public class Horse : HerbivoresAnimal
     {
+        private const int MaximumSatiety = 150;
         public Horse(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
         {
             satietly = 150;
@@ -20,7 +21,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                satietly = 150;
+                satietly = MaximumSatiety;
                 _hibernationForm = HibernationForm.Sleep;
             }
         }

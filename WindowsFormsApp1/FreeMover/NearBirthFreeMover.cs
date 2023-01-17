@@ -3,9 +3,12 @@ using System.Drawing;
 
 namespace WindowsFormsApp1
 {
-    public class NearBirthFreeMover:FreeMover
+    public class NearBirthFreeMover : FreeMover
     {
         private Point _birthPoint;
+        private const int LeftRangeShift = -1;
+        private const int RightRangeShift = 2;
+        private const int CellsNearBirthPoint = 5;
 
         public NearBirthFreeMover(Point birthPoint)
         {
@@ -14,26 +17,24 @@ namespace WindowsFormsApp1
 
         public override Point Move(Point coordinate, Random x)
         {
-            var shift = x.Next(-1, 2);
-            if (GoOutside(coordinate.X + shift) && MoveAwayFromX((coordinate.X + shift),_birthPoint))
+            var shift = x.Next(LeftRangeShift, RightRangeShift);
+            if (GoOutside(coordinate.X + shift) && MoveAwayFromX((coordinate.X + shift), _birthPoint))
                 coordinate.X += shift;
- 
-            shift = x.Next(-1, 2);
-            if (GoOutside(coordinate.Y + shift) && MoveAwayFromY((coordinate.Y + shift),_birthPoint))
+
+            shift = x.Next(LeftRangeShift, RightRangeShift);
+            if (GoOutside(coordinate.Y + shift) && MoveAwayFromY((coordinate.Y + shift), _birthPoint))
                 coordinate.Y += shift;
             return coordinate;
         }
 
-        private bool MoveAwayFromX(int x,Point birthPoint)
+        private bool MoveAwayFromX(int x, Point birthPoint)
         {
-            var n = 5;
-            return (x >= birthPoint.X - n && x <= birthPoint.X + n);
+            return (x >= birthPoint.X - CellsNearBirthPoint && x <= birthPoint.X + CellsNearBirthPoint);
         }
 
-        private bool MoveAwayFromY(int y,Point birthPoint)
+        private bool MoveAwayFromY(int y, Point birthPoint)
         {
-            var n = 5;
-            return (y >= birthPoint.Y - n && y <= birthPoint.Y + n);
+            return (y >= birthPoint.Y - CellsNearBirthPoint && y <= birthPoint.Y + CellsNearBirthPoint);
         }
     }
 }
