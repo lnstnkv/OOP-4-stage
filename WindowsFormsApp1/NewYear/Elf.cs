@@ -6,10 +6,10 @@ namespace WindowsFormsApp1
 {
     public class Elf
     {
-        protected TargetMover _targetMover;
+        private TargetMover _targetMover;
         private List<Present> _presents;
-        protected Map _map;
-        protected Point coordinat;
+        private Map _map;
+        private Point coordinat;
         private Human _human;
         private Factory _factory;
         private int index;

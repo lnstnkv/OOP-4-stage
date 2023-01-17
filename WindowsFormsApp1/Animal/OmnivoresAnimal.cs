@@ -25,9 +25,9 @@ namespace WindowsFormsApp1
             _map.AddAnimal(NewAnimal(Coordinate.X, Coordinate.Y, _map, x, _land));
 
         }
-        
 
-        protected void FindAnimal()
+
+        private void FindAnimal()
         {
             Coordinate = TargetMover.TargetMove(Coordinate, _animal.GetPoint());
             FindEat();
@@ -48,7 +48,7 @@ namespace WindowsFormsApp1
         }
 
 
-        public OmnivoresAnimal(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
+        protected OmnivoresAnimal(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
             Health = MaximumHealth;
             

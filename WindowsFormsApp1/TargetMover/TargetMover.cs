@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
             return startCoordinate;
         }
 
-        protected bool GoOutside(int x)
+        private bool GoOutside(int x)
         {
             return x >= 0 && x < 1000;
         }

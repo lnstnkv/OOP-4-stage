@@ -9,7 +9,7 @@ namespace WindowsFormsApp1
         private Fruit _isFruitHere;
         private Factory _isFactoryHere;
         private Animal _isHumanHere;
-        protected IsHere IsHere;
+        private IsHere IsHere;
         private bool _isHouse;
         private FruitingPlant _isFruitingPlantHere;
 

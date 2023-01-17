@@ -11,7 +11,7 @@ namespace WindowsFormsApp1
         private Rendering _rendering;
         private PictureBox _pictureBox;
         private Map _map;
-        public Random Random;
+        private Random Random;
         private List<Animal> _animals;
         private List<Human> _humans;
         private List<Factory> _factories;
@@ -126,12 +126,12 @@ namespace WindowsFormsApp1
             _rendering.ResizePictureBox(ParameterForResize * MaskingSize, ParameterForResize * MaskingSize);
         }
 
-        public void Scale()
+        private void Scale()
         {
             MaskingSize += LensSize;
         }
 
-        public void UnScale()
+        private void UnScale()
         {
             MaskingSize -= LensSize;
         }

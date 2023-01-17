@@ -26,7 +26,8 @@ namespace WindowsFormsApp1
         base.Start(x);
         if(Stage!= Stage.Increase) return;
     }
-    public override Plant NewSproutsPlant(int x, int y, Map map, bool isVirulence, bool isEat)
+
+    protected override Plant NewSproutsPlant(int x, int y, Map map, bool isVirulence, bool isEat)
         {
             return new FruitingPlant(x, y, _map, isVirulence, isEat);
         }

@@ -6,8 +6,8 @@ namespace WindowsFormsApp1
 {
     public class Factory
     {
-        protected Point coordinat;
-        protected Map _map;
+        private Point coordinat;
+        private Map _map;
         private List<Gift> _gifts;
         public Factory( int x, int y, Map map)
         {

@@ -9,7 +9,7 @@ namespace WindowsFormsApp1
     public abstract class Animal
     {
         public int Satiety;
-        protected int _age;
+        private int _age;
         protected int Health;
         protected Land[,] _land;
         protected Point Coordinate;
@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         public int MaxSatiety;
         protected Point BirthPoint;
         protected FreeMover FreeMover;
-        protected Animal CoupleFoAnimal;
+        private Animal CoupleFoAnimal;
         protected TargetMover TargetMover;
         protected HibernationForm HibernationForm;
         private const int ProbabilityMaleGender = 200;
@@ -44,7 +44,7 @@ namespace WindowsFormsApp1
         private const int RightRangePercentage = 500;
 
 
-        public Animal(int x, int y, Map map, Random random, Land[,] land)
+        protected Animal(int x, int y, Map map, Random random, Land[,] land)
         {
             Coordinate = new Point(x, y);
             _map = map;
