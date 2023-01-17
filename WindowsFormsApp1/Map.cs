@@ -20,6 +20,10 @@ namespace WindowsFormsApp1
         private List<Factory> _factories;
         private List<Elf> _elves;
         public bool isWinter;
+        private const int CountAnimal = 1500;
+        private const int Size = 1000;
+        private const int MinimumCoordinate = 0;
+        private const int MaximumCoordinate = 1000;
 
         public Map(Random x)
         {
@@ -30,22 +34,20 @@ namespace WindowsFormsApp1
             _elves = new List<Elf>();
             isWinter = false;
             sproutsFruitingPlants = new List<FruitingPlant>();
-            int countAnimal = 1500;
             animals = new List<Animal>();
             _humans = new List<Human>();
-            const int size = 1000;
-            _land = new Land[size, size];
-            for (var i = 0; i < size; i++)
-            for (var j = 0; j < size; j++)
+            _land = new Land[Size, Size];
+            for (var i = 0; i < Size; i++)
+            for (var j = 0; j < Size; j++)
             {
                 _land[i, j] = new Land();
             }
 
 
-            for (int i = 0; i < countAnimal; i++)
+            for (int i = 0; i < CountAnimal; i++)
             {
-                var originalCoordinateX = x.Next(0, size);
-                var originalCoordinateY = x.Next(0, size);
+                var originalCoordinateX = x.Next(0, Size);
+                var originalCoordinateY = x.Next(0, Size);
 
                 if (i < 1200)
                 {
@@ -126,8 +128,8 @@ namespace WindowsFormsApp1
             plants = new List<Plant>();
             for (int i = 0; i < countPlant; i++)
             {
-                var originalCoordinateX = x.Next(0, 1000);
-                var originalCoordinateY = x.Next(0, 1000);
+                var originalCoordinateX = x.Next(0, Size);
+                var originalCoordinateY = x.Next(0, Size);
                 plants.Add(new Plant(originalCoordinateX, originalCoordinateY, this, i < 250, i > 50 && i < 400));
                 _land[originalCoordinateX, originalCoordinateY].SetPlant(plants[i]);
             }
@@ -136,8 +138,8 @@ namespace WindowsFormsApp1
             _fruitingPlants = new List<FruitingPlant>();
             for (int i = 0; i < countPlant; i++)
             {
-                var originalCoordinateX = x.Next(0, 1000);
-                var originalCoordinateY = x.Next(0, 1000);
+                var originalCoordinateX = x.Next(0, Size);
+                var originalCoordinateY = x.Next(0, Size);
                 _fruitingPlants.Add(new FruitingPlant(originalCoordinateX, originalCoordinateY, this, i < 100, i > 0));
                 _land[originalCoordinateX, originalCoordinateY].SetPlant(_fruitingPlants[i]);
             }
@@ -149,8 +151,8 @@ namespace WindowsFormsApp1
         {
             for (int i = 0; i < 50; i++)
             {
-                var originalCoordinateX = x.Next(0, 1000);
-                var originalCoordinateY = x.Next(0, 1000);
+                var originalCoordinateX = x.Next(0, Size);
+                var originalCoordinateY = x.Next(0, Size);
                 _factories.Add(new Factory(originalCoordinateX, originalCoordinateY, this));
                 _elves.Add(new Elf(originalCoordinateX + 1, originalCoordinateY + 1, x, this));
                 _land[originalCoordinateX, originalCoordinateY].SetFactory(_factories[i]);
@@ -306,7 +308,7 @@ namespace WindowsFormsApp1
 
         private bool GoOutside(int i, int j, int x, int y)
         {
-            if (x + i >= 0 && x + i < 1000 && y + j >= 0 && y + j < 1000)
+            if (x + i >= MinimumCoordinate && x + i < MaximumCoordinate && y + j >= MinimumCoordinate && y + j < MaximumCoordinate)
                 return true;
             return false;
         }

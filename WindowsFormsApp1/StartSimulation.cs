@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
         public int _mastingSize;
         private List<House> _houses;
         private const int LensSize = 5;
+        private const int ParameterForResize = 1000;
 
         public StartSimulation(PictureBox picture, Form1 form)
         {
@@ -119,13 +120,13 @@ namespace WindowsFormsApp1
         public void Resize()
         {
             Scale();
-            rendering.ResizePictureBox(1000 * _mastingSize, 1000 * _mastingSize);
+            rendering.ResizePictureBox(ParameterForResize * _mastingSize, ParameterForResize * _mastingSize);
         }
 
         public void UnResize()
         {
             UnScale();
-            rendering.ResizePictureBox(1000 * _mastingSize, 1000 * _mastingSize);
+            rendering.ResizePictureBox(ParameterForResize * _mastingSize, ParameterForResize * _mastingSize);
         }
 
 

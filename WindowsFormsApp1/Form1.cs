@@ -17,6 +17,11 @@ namespace WindowsFormsApp1
         private Random x;
         private Animal animal;
         private Plant _plant;
+        private const int Approximation = 5000;
+        private const int Distancing = 5000;
+        private const int MaxSizeBitmap = 20000;
+        private const int MinSizeBitmap = 0;
+        
 
         public Form1()
         {
@@ -46,16 +51,16 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pictureBox.Width + 5000 >= 20000 && pictureBox.Height + 5000 >= 20000) return;
-            var size = new Size(pictureBox.Width + 5000, pictureBox.Height + 5000);
+            if (pictureBox.Width + Approximation >= MaxSizeBitmap && pictureBox.Height + Approximation >= MaxSizeBitmap) return;
+            var size = new Size(pictureBox.Width + Approximation, pictureBox.Height + Approximation);
             startSimulation.Resize();
             pictureBox.Size = size;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (pictureBox.Width - 5000 <= 0 && pictureBox.Height - 5000 <= 0) return;
-            var size = new Size(pictureBox.Width - 5000, pictureBox.Height - 5000);
+            if (pictureBox.Width - Distancing <= MinSizeBitmap && pictureBox.Height - Distancing <= MinSizeBitmap) return;
+            var size = new Size(pictureBox.Width - Distancing, pictureBox.Height - Distancing);
             startSimulation.UnResize();
             pictureBox.Size = size;
         }
