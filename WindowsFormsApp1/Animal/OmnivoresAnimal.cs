@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
             if (_animal == null)
             {
                 _animal = _map.FindAnimal(this.GetPoint());
-                FindWay();
+                FindAnimal();
             }
         }
 
@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         }
         
 
-        protected void FindWay()
+        protected void FindAnimal()
         {
             Coordinate = TargetMover.TargetMove(Coordinate, _animal.GetPoint());
             FindEat();
