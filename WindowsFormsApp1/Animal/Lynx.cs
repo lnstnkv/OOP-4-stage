@@ -4,29 +4,29 @@ namespace WindowsFormsApp1
 {
     public class Lynx:CarnivoresAnimal
     {
-        public Lynx(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public Lynx(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
-            satietly = 250;
-            max_satietly = 250;
-            _freeMover = new NearBirthFreeMover(_birthPoint);
-            _targetMover = new TargetMoverEucliden();
+            Satiety = 250;
+            MaxSatiety = 250;
+            FreeMover = new NearBirthFreeMover(BirthPoint);
+            TargetMover = new TargetMoverEuclidean();
         }
-        public override void Loop(Random x)
+        public override void Update(Random random)
         {
             if (_map.isWinter)
             {
-                Walk(x);
+                SetLifecycle(random);
             }
             else
             {
-                satietly = 250;
-                _hibernationForm = HibernationForm.Sleep;
+                Satiety = 250;
+                HibernationForm = HibernationForm.Sleep;
             }
         }
 
-        protected override CarnivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override CarnivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Lynx(x, y, _map, rnd, land);
+            return new Lynx(x, y, _map, random, land);
         }
     }
 }

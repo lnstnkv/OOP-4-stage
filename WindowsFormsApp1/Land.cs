@@ -4,128 +4,122 @@ namespace WindowsFormsApp1
 {
     public class Land
     {
-        private Animal isAnimalHere;
-        private Plant isPlantHere;
-        private Fruit isFruitHere;
-        private Factory isFactoryHere;
-        private Animal isHumanHere;
-        protected IsHere _isHere;
+        private Animal _isAnimalHere;
+        private Plant _isPlantHere;
+        private Fruit _isFruitHere;
+        private Factory _isFactoryHere;
+        private Animal _isHumanHere;
+        protected IsHere IsHere;
         private bool _isHouse;
-        private FruitingPlant isFruitingPlantHere;
+        private FruitingPlant _isFruitingPlantHere;
 
         public Land()
         {
             _isHouse = false;
-            isAnimalHere = null;
-            isPlantHere = null;
-            isFruitHere = null;
-            isFactoryHere = null;
-            isHumanHere = null;
-            _isHere = IsHere.Empty;
+            _isAnimalHere = null;
+            _isPlantHere = null;
+            _isFruitHere = null;
+            _isFactoryHere = null;
+            _isHumanHere = null;
+            IsHere = IsHere.Empty;
         }
 
         public void SetAnimal(Animal animal)
         {
-            isAnimalHere = animal;
-            _isHere = IsHere.Animal;
+            _isAnimalHere = animal;
+            IsHere = IsHere.Animal;
         }
 
         public void SetPlant(Plant plant)
         {
-            isPlantHere = plant;
-            _isHere = IsHere.Plant;
+            _isPlantHere = plant;
+            IsHere = IsHere.Plant;
         }
 
 
         public void SetHouse()
         {
             _isHouse = true;
-            _isHere = IsHere.House;
+            IsHere = IsHere.House;
         }
 
         public Animal IsHumanHere()
         {
-            return isHumanHere;
+            return _isHumanHere;
         }
 
-        public Plant IsPlantHere()
+        public Plant GetPlant()
         {
-            return isPlantHere;
+            return _isPlantHere;
         }
 
-        public Animal IsAnimalHere()
+        public Animal GetAnimal()
         {
-            return isAnimalHere;
+            return _isAnimalHere;
         }
 
         public void SetFruit(Fruit fruit)
         {
-            isFruitHere = fruit;
-            _isHere = IsHere.Fruit;
+            _isFruitHere = fruit;
+            IsHere = IsHere.Fruit;
         }
 
         public void SetMale(Animal human)
         {
-            isAnimalHere = human;
-            _isHere = IsHere.Male;
+            _isAnimalHere = human;
+            IsHere = IsHere.Male;
         }
 
         public void SetFactory(Factory factory)
         {
-            isFactoryHere = factory;
-            _isHere = IsHere.Factory;
+            _isFactoryHere = factory;
+            IsHere = IsHere.Factory;
         }
 
         public void SetFemale(Animal human)
         {
-            isAnimalHere = human;
-            _isHere = IsHere.Female;
+            _isAnimalHere = human;
+            IsHere = IsHere.Female;
         }
 
         public bool IsEmpty()
         {
-            if (_isHere == IsHere.Empty)
+            if (IsHere == IsHere.Empty)
                 return true;
             return false;
         }
 
         public void DeletePlant()
         {
-            isPlantHere = null;
-            _isHere = IsHere.Empty;
+            _isPlantHere = null;
+            IsHere = IsHere.Empty;
         }
 
         public IsHere GetIsHere()
         {
-            return _isHere;
+            return IsHere;
         }
 
         public void DeleteFruit()
         {
-            isFruitHere = null;
-            _isHere = IsHere.Empty;
+            _isFruitHere = null;
+            IsHere = IsHere.Empty;
         }
 
         public void DeleteAnimal()
         {
-            isAnimalHere = null;
-            _isHere = IsHere.Empty;
+            _isAnimalHere = null;
+            IsHere = IsHere.Empty;
         }
 
         public void DeleteFactory()
         {
-            isFactoryHere = null;
-            _isHere = IsHere.Empty;
+            _isFactoryHere = null;
+            IsHere = IsHere.Empty;
         }
-
-        public Plant GetPlant()
-        {
-            return isPlantHere;
-        }
-
         public Fruit GetFruit()
         {
-            return isFruitHere;
+            return _isFruitHere;
         }
     }
 

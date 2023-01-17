@@ -7,15 +7,15 @@ namespace WindowsFormsApp1
 {
     public class Map
     {
-        private List<Animal> animals;
-        private List<Plant> plants;
-        private List<House> houses;
-        private List<Plant> sproutsPlants;
-        private List<Fruit> sproutsFruits;
+        private List<Animal> _animals;
+        private List<Plant> _plants;
+        private List<House> _houses;
+        private List<Plant> _sproutsPlants;
+        private List<Fruit> _sproutsFruits;
         private List<Human> _humans;
         private List<FruitingPlant> _fruitingPlants;
-        private List<FruitingPlant> sproutsFruitingPlants;
-        private List<Fruit> fruits;
+        private List<FruitingPlant> _sproutsFruitingPlants;
+        private List<Fruit> _fruits;
         private Land[,] _land;
         private List<Factory> _factories;
         private List<Elf> _elves;
@@ -27,14 +27,14 @@ namespace WindowsFormsApp1
 
         public Map(Random x)
         {
-            houses = new List<House>();
-            sproutsFruits = new List<Fruit>();
-            sproutsPlants = new List<Plant>();
+            _houses = new List<House>();
+            _sproutsFruits = new List<Fruit>();
+            _sproutsPlants = new List<Plant>();
             _factories = new List<Factory>();
             _elves = new List<Elf>();
             isWinter = false;
-            sproutsFruitingPlants = new List<FruitingPlant>();
-            animals = new List<Animal>();
+            _sproutsFruitingPlants = new List<FruitingPlant>();
+            _animals = new List<Animal>();
             _humans = new List<Human>();
             _land = new Land[Size, Size];
             for (var i = 0; i < Size; i++)
@@ -42,7 +42,6 @@ namespace WindowsFormsApp1
             {
                 _land[i, j] = new Land();
             }
-
 
             for (int i = 0; i < CountAnimal; i++)
             {
@@ -55,18 +54,17 @@ namespace WindowsFormsApp1
                     {
                         if (i <= 130)
                         {
-                            animals.Add(new Horse(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Horse(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
-
 
                         if (i > 130 && i <= 263)
                         {
-                            animals.Add(new Elephant(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Elephant(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
 
                         if (i > 263 && i <= 400)
                         {
-                            animals.Add(new Rabbit(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Rabbit(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
                     }
 
@@ -74,17 +72,17 @@ namespace WindowsFormsApp1
                     {
                         if (i <= 530)
                         {
-                            animals.Add(new Eagle(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Eagle(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
 
                         if (i > 530 && i <= 633)
                         {
-                            animals.Add(new Lynx(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Lynx(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
 
                         if (i > 633 && i <= 800)
                         {
-                            animals.Add(new Owl(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Owl(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
                     }
 
@@ -92,48 +90,45 @@ namespace WindowsFormsApp1
                     {
                         if (i <= 930)
                         {
-                            animals.Add(new Squirrel(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Squirrel(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
 
                         if (i > 930 && i <= 1065)
                         {
-                            animals.Add(new Pig(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Pig(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
 
                         if (i > 1065 && i <= 1200)
                         {
-                            animals.Add(new Mouse(originalCoordinateX, originalCoordinateY, this, x, _land));
+                            _animals.Add(new Mouse(originalCoordinateX, originalCoordinateY, this, x, _land));
                         }
                     }
 
-                    _land[originalCoordinateX, originalCoordinateY].SetAnimal(animals[i]);
+                    _land[originalCoordinateX, originalCoordinateY].SetAnimal(_animals[i]);
                 }
-
 
                 if (i >= 1200 && i <= 1350)
                 {
-                    animals.Add(new Male(originalCoordinateX, originalCoordinateY, this, x, _land));
-                    _land[originalCoordinateX, originalCoordinateY].SetMale(animals[i]);
+                    _animals.Add(new Male(originalCoordinateX, originalCoordinateY, this, x, _land));
+                    _land[originalCoordinateX, originalCoordinateY].SetMale(_animals[i]);
                 }
 
                 if (i > 1350)
                 {
-                    animals.Add(new Female(originalCoordinateX, originalCoordinateY, this, x, _land));
-                    _land[originalCoordinateX, originalCoordinateY].SetFemale(animals[i]);
+                    _animals.Add(new Female(originalCoordinateX, originalCoordinateY, this, x, _land));
+                    _land[originalCoordinateX, originalCoordinateY].SetFemale(_animals[i]);
                 }
             }
 
             int countPlant = 700;
-
-            plants = new List<Plant>();
+            _plants = new List<Plant>();
             for (int i = 0; i < countPlant; i++)
             {
                 var originalCoordinateX = x.Next(0, Size);
                 var originalCoordinateY = x.Next(0, Size);
-                plants.Add(new Plant(originalCoordinateX, originalCoordinateY, this, i < 250, i > 50 && i < 400));
-                _land[originalCoordinateX, originalCoordinateY].SetPlant(plants[i]);
+                _plants.Add(new Plant(originalCoordinateX, originalCoordinateY, this, i < 250, i > 50 && i < 400));
+                _land[originalCoordinateX, originalCoordinateY].SetPlant(_plants[i]);
             }
-
 
             _fruitingPlants = new List<FruitingPlant>();
             for (int i = 0; i < countPlant; i++)
@@ -144,7 +139,7 @@ namespace WindowsFormsApp1
                 _land[originalCoordinateX, originalCoordinateY].SetPlant(_fruitingPlants[i]);
             }
 
-            fruits = new List<Fruit>();
+            _fruits = new List<Fruit>();
         }
 
         public void BuildFactory(Random x)
@@ -170,14 +165,14 @@ namespace WindowsFormsApp1
             _elves.Clear();
         }
 
-        public Animal IsAnimal(Point coords)
+        public Animal GetAnimal(Point coordinate)
         {
-            return _land[coords.X, coords.Y].IsAnimalHere();
+            return _land[coordinate.X, coordinate.Y].GetAnimal();
         }
 
-        public Plant IsPlant(Point coords)
+        public Plant GetPlant(Point coordinate)
         {
-            return _land[coords.X, coords.Y].IsPlantHere();
+            return _land[coordinate.X, coordinate.Y].GetPlant();
         }
 
 
@@ -187,11 +182,11 @@ namespace WindowsFormsApp1
             _land[position.X, position.Y].SetPlant(plant);
             if (plant is FruitingPlant)
             {
-                sproutsFruitingPlants.Add((FruitingPlant) plant);
+                _sproutsFruitingPlants.Add((FruitingPlant) plant);
             }
             else
             {
-                sproutsPlants.Add(plant);
+                _sproutsPlants.Add(plant);
             }
         }
 
@@ -199,31 +194,31 @@ namespace WindowsFormsApp1
         {
             var position = human.GetPoint();
             _land[position.X, position.Y].SetAnimal(human);
-            animals.Add(human);
+            _animals.Add(human);
         }
 
         public void AddHouse(House house)
         {
             var position = house.GetPoint();
             _land[position.X, position.Y].SetHouse();
-            houses.Add(house);
+            _houses.Add(house);
         }
 
-        public int countPlant()
+        public int CountPlant()
         {
-            return plants.Count;
+            return _plants.Count;
         }
 
         public void AddFruit(Fruit fruit)
         {
             var position = fruit.GetPoint();
             _land[position.X, position.Y].SetFruit(fruit);
-            sproutsFruits.Add(fruit);
+            _sproutsFruits.Add(fruit);
         }
 
         public List<Animal> GetAnimal()
         {
-            return animals;
+            return _animals;
         }
 
         public List<Factory> GetFactory()
@@ -238,17 +233,17 @@ namespace WindowsFormsApp1
 
         public List<House> GetHouse()
         {
-            return houses;
+            return _houses;
         }
 
         public List<Plant> GetPlant()
         {
-            return plants;
+            return _plants;
         }
 
         public List<Fruit> GetFruits()
         {
-            return fruits;
+            return _fruits;
         }
 
         public List<Human> GetHumans()
@@ -271,7 +266,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                plants.Remove(plant);
+                _plants.Remove(plant);
             }
         }
 
@@ -279,15 +274,14 @@ namespace WindowsFormsApp1
         {
             var position = animal.GetPoint();
             _land[position.X, position.Y].DeleteAnimal();
-            animals.Remove(animal);
+            _animals.Remove(animal);
         }
-
 
         public void DeleteFruit(Fruit fruit)
         {
             var position = fruit.GetPoint();
             _land[position.X, position.Y].DeletePlant();
-            fruits.Remove(fruit);
+            _fruits.Remove(fruit);
         }
 
         public List<Point> FindNearbyLand(Point position)
@@ -308,7 +302,8 @@ namespace WindowsFormsApp1
 
         private bool GoOutside(int i, int j, int x, int y)
         {
-            if (x + i >= MinimumCoordinate && x + i < MaximumCoordinate && y + j >= MinimumCoordinate && y + j < MaximumCoordinate)
+            if (x + i >= MinimumCoordinate && x + i < MaximumCoordinate && y + j >= MinimumCoordinate &&
+                y + j < MaximumCoordinate)
                 return true;
             return false;
         }
@@ -316,29 +311,29 @@ namespace WindowsFormsApp1
 
         public void AddSprouts()
         {
-            plants.AddRange(sproutsPlants);
-            _fruitingPlants.AddRange(sproutsFruitingPlants);
-            fruits.AddRange(sproutsFruits);
-            sproutsFruits.Clear();
-            sproutsFruitingPlants.Clear();
-            sproutsPlants.Clear();
+            _plants.AddRange(_sproutsPlants);
+            _fruitingPlants.AddRange(_sproutsFruitingPlants);
+            _fruits.AddRange(_sproutsFruits);
+            _sproutsFruits.Clear();
+            _sproutsFruitingPlants.Clear();
+            _sproutsPlants.Clear();
         }
 
-        public Plant FindPlant(Point coor)
+        public Plant FindPlant(Point coordinate)
         {
             var distance = 1;
             while (true)
             {
-                for (var i = coor.X - distance; i <= coor.X + distance; i++)
-                for (var j = coor.Y - distance; j <= coor.Y + distance; j++)
+                for (var i = coordinate.X - distance; i <= coordinate.X + distance; i++)
+                for (var j = coordinate.Y - distance; j <= coordinate.Y + distance; j++)
                     if (i > 0 && i <= 999 && j > 0 && j <= 999)
-                        if (Math.Abs(coor.X - i) + Math.Abs(coor.Y - j) == distance)
+                        if (Math.Abs(coordinate.X - i) + Math.Abs(coordinate.Y - j) == distance)
                             if (_land[i, j].GetIsHere() == IsHere.Plant)
-                                if (_land[i, j].IsPlantHere().IsEat())
+                                if (_land[i, j].GetPlant()._isEat)
                                 {
-                                    var temp = _land[i, j].IsPlantHere();
+                                    var temp = _land[i, j].GetPlant();
                                     if (temp.IsIncrease())
-                                        return _land[i, j].IsPlantHere();
+                                        return _land[i, j].GetPlant();
                                 }
 
 
@@ -346,23 +341,23 @@ namespace WindowsFormsApp1
             }
         }
 
-        public Animal FindAnimal(Point coor)
+        public Animal FindAnimal(Point coordinate)
         {
             var radius = 1;
-            if (coor.X < 0 || coor.X > 999 || coor.Y < 0 || coor.Y > 999)
+            if (coordinate.X < 0 || coordinate.X > 999 || coordinate.Y < 0 || coordinate.Y > 999)
             {
                 return null;
             }
 
             while (true)
             {
-                for (var i = coor.X - radius; i <= coor.X + radius; i++)
-                for (var j = coor.Y - radius; j <= coor.Y + radius; j++)
+                for (var i = coordinate.X - radius; i <= coordinate.X + radius; i++)
+                for (var j = coordinate.Y - radius; j <= coordinate.Y + radius; j++)
                     if (i > 0 && i <= 999 && j > 0 && j <= 999)
-                        if (Math.Abs(coor.X - i) + Math.Abs(coor.Y - j) == radius)
+                        if (Math.Abs(coordinate.X - i) + Math.Abs(coordinate.Y - j) == radius)
                             if (_land[i, j].GetIsHere() == IsHere.Animal)
                             {
-                                return _land[i, j].IsAnimalHere();
+                                return _land[i, j].GetAnimal();
                             }
 
 
@@ -372,15 +367,15 @@ namespace WindowsFormsApp1
 
         public Human FindHuman(Point coords)
         {
-            int min = Int32.MaxValue;
+            int minDistance = Int32.MaxValue;
             Human ward = null;
-            foreach (var animal in animals)
+            foreach (var animal in _animals)
             {
                 var position = animal.GetPoint();
 
-                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < min && animal is Human)
+                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < minDistance && animal is Human)
                 {
-                    min = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
+                    minDistance = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
                     ward = (Human) animal;
                 }
             }
@@ -390,15 +385,15 @@ namespace WindowsFormsApp1
 
         public Factory FindFactory(Point coords)
         {
-            int min = Int32.MaxValue;
+            int minDistance = Int32.MaxValue;
             Factory factoryNear = null;
             foreach (var factory in _factories)
             {
                 var position = factory.GetPoint();
 
-                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < min)
+                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < minDistance)
                 {
-                    min = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
+                    minDistance = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
                     factoryNear = factory;
                 }
             }
@@ -408,15 +403,15 @@ namespace WindowsFormsApp1
 
         public Animal FindCouple(Animal animalAlone)
         {
-            var coor = animalAlone.GetPoint();
-            if (coor.X < 0 || coor.X > 999 || coor.Y < 0 || coor.Y > 999)
+            var coordinate = animalAlone.GetPoint();
+            if (coordinate.X < 0 || coordinate.X > 999 || coordinate.Y < 0 || coordinate.Y > 999)
             {
                 return null;
             }
 
             int min = Int32.MaxValue;
             Animal animalCouple = null;
-            foreach (var animal in animals)
+            foreach (var animal in _animals)
             {
                 var position = animal.GetPoint();
                 if (animalAlone.IsMaleGender() == animal.IsMaleGender())
@@ -425,11 +420,11 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    if (Math.Abs(coor.X - position.X) + Math.Abs(coor.Y - position.Y) < min &&
+                    if (Math.Abs(coordinate.X - position.X) + Math.Abs(coordinate.Y - position.Y) < min &&
                         animal.GetCouple() == null && ((animal is Human && animalAlone is Human) ||
                                                        animal.GetType() == animalAlone.GetType()))
                     {
-                        min = Math.Abs(coor.X - position.X) + Math.Abs(coor.Y - position.Y);
+                        min = Math.Abs(coordinate.X - position.X) + Math.Abs(coordinate.Y - position.Y);
                         animalCouple = animal;
                     }
                 }
@@ -455,11 +450,11 @@ namespace WindowsFormsApp1
         }
 
 
-        public Plant IsFood(Point position)
+        public Plant GetEdiblePlant(Point position)
         {
             var tempPlant = _land[position.X, position.Y].GetPlant();
             if (tempPlant == null) return null;
-            if (tempPlant.IsEat() && tempPlant.IsIncrease())
+            if (tempPlant._isEat && tempPlant.IsIncrease())
                 return tempPlant;
             return null;
         }

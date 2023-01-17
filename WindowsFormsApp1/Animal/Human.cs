@@ -7,11 +7,11 @@ namespace WindowsFormsApp1
     public abstract class Human : HerbivoresAnimal
     {
         public int capacity;
-        public List<Tool> _tools;
-        public Human(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public List<Tool> Tools;
+        public Human(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
             capacity = 10;
-            _tools = new List<Tool>();
+            Tools = new List<Tool>();
         }
     }
 }

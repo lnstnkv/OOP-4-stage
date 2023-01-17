@@ -9,9 +9,9 @@ namespace WindowsFormsApp1
         private const int MaximumHealth = 5;
         private const int AdditionSatiety = 5;
 
-        protected abstract CarnivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land);
+        protected abstract CarnivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land);
 
-        protected override void FindDifferentEat(Random x)
+        protected override void FindFood(Random x)
         {
             if (_animal == null)
             {
@@ -24,20 +24,20 @@ namespace WindowsFormsApp1
 
             if (_animal != null)
             {
-                FindWay(_animal.GetPoint());
+                EatAnimal(_animal.GetPoint());
             }
         }
 
         protected override void Propagate(Random x)
         {
-            _map.AddAnimal(NewAnimal(coordinat.X, coordinat.Y, _map, x, _land));
+            _map.AddAnimal(NewAnimal(Coordinate.X, Coordinate.Y, _map, x, _land));
         }
 
-        private void FindWay(Point coords)
+        private void EatAnimal(Point coords)
         {
-            coordinat = _targetMover.TargetMove(coordinat, _animal.GetPoint());
+            Coordinate = TargetMover.TargetMove(Coordinate, _animal.GetPoint());
 
-            if (coords.X == coordinat.X && coords.Y == coordinat.Y)
+            if (coords.X == Coordinate.X && coords.Y == Coordinate.Y)
             {
                 Eat();
             }
@@ -57,16 +57,16 @@ namespace WindowsFormsApp1
             }
             else
             {
-                satietly += AdditionSatiety;
+                Satiety += AdditionSatiety;
                 _animal.Die();
                 _animal = null;
             }
         }
 
 
-        public CarnivoresAnimal(int x, int y, Map map, Random rnd, Land[,] land) : base(x, y, map, rnd, land)
+        public CarnivoresAnimal(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
         {
-            health = MaximumHealth;
+            Health = MaximumHealth;
         }
     }
 }

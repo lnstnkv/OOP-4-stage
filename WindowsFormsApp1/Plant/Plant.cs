@@ -7,13 +7,13 @@ namespace WindowsFormsApp1
 {
     public class Plant
     {
-        protected Point coordinatPlant;
-        private int age;
-        protected bool _isVirulence;
-        protected bool _isEat;
+        protected Point CoordinatPlant;
+        private int _age;
+        public bool _isVirulence { get; }
+        public bool _isEat { get; }
         protected Map _map;
         protected bool isDied;
-        protected Stage _stage;
+        protected Stage Stage;
         private const int MinimumAge = 0;
         private const int MaxAge = 15;
         private const int MediumAge = 10;
@@ -23,25 +23,25 @@ namespace WindowsFormsApp1
 
         public Plant(int x, int y, Map map, bool isVirulence, bool isEat)
         {
-            coordinatPlant = new Point(x, y);
+            CoordinatPlant = new Point(x, y);
             _isVirulence = isVirulence;
             _isEat = isEat;
             isDied = false;
             _map = map;
-            age = MinimumAge;
-            _stage = Stage.Seed;
+            _age = MinimumAge;
+            Stage = Stage.Seed;
         }
 
-        public String InfoCoordinate()
+        public string GetCoordinateInformation()
         {
-            return coordinatPlant.ToString();
+            return CoordinatPlant.ToString();
         }
 
-        public String ClassPlant()
+        public string GetClassInformation()
         {
             if (this is FruitingPlant)
             {
-                if (this.IsVirulence())
+                if (_isVirulence)
                     return "Virulence Fruiting Plant";
                 else
                 {
@@ -50,23 +50,13 @@ namespace WindowsFormsApp1
             }
             else
             {
-                if (IsVirulence())
+                if (_isVirulence)
                     return "Virulence Plant";
                 else
                 {
                     return "Plant";
                 }
             }
-        }
-
-        public bool IsEat()
-        {
-            return _isEat;
-        }
-
-        public bool IsVirulence()
-        {
-            return _isVirulence;
         }
 
         public bool IsDied()
@@ -76,7 +66,7 @@ namespace WindowsFormsApp1
 
         public Point GetPoint()
         {
-            return coordinatPlant;
+            return CoordinatPlant;
         }
 
         public void Die()
@@ -87,27 +77,27 @@ namespace WindowsFormsApp1
 
         public virtual void Start(Random x)
         {
-            if (_stage == Stage.Increase)
+            if (Stage == Stage.Increase)
             {
                 Grow(x);
             }
 
-            IsStage();
+            SetStage();
         }
 
-        public void Grow(Random x)
+        public void Grow(Random random)
         {
             if (!_map.isWinter) return;
-            if (_map.countPlant() > MaxCountPlant) return;
-            var probability = x.Next(MaxValueProbability);
+            if (_map.CountPlant() > MaxCountPlant) return;
+            var probability = random.Next(MaxValueProbability);
             if (probability > 0) return;
-            var land = _map.FindNearbyLand(coordinatPlant);
+            var land = _map.FindNearbyLand(CoordinatPlant);
             var positionX = 0;
             var positionY = 0;
             if (land.Count > 0)
             {
-                positionX = land[x.Next(land.Count)].X;
-                positionY = land[x.Next(land.Count)].Y;
+                positionX = land[random.Next(land.Count)].X;
+                positionY = land[random.Next(land.Count)].Y;
             }
 
             if (isDied == false)
@@ -123,31 +113,31 @@ namespace WindowsFormsApp1
 
         public bool IsIncrease()
         {
-            if (_stage == Stage.Increase)
+            if (Stage == Stage.Increase)
                 return true;
             return false;
         }
 
-        private Stage IsStage()
+        private Stage SetStage()
         {
-            if (age > MaxAge)
+            if (_age > MaxAge)
             {
-                _stage = Stage.Died;
+                Stage = Stage.Died;
                 isDied = true;
             }
 
-            if (age > LandingAge)
+            if (_age > LandingAge)
             {
-                _stage = Stage.Sprout;
+                Stage = Stage.Sprout;
             }
 
-            if (age > MediumAge)
+            if (_age > MediumAge)
             {
-                _stage = Stage.Increase;
+                Stage = Stage.Increase;
             }
 
-            age++;
-            return _stage;
+            _age++;
+            return Stage;
         }
     }
 

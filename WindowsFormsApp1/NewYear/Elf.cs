@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             coordinat = new Point(x, y);
         }
 
-        public virtual void Loop(Random x)
+        public virtual void Update(Random x)
         {
             index++;
             if (index > MinimumIndexForGivePresent && index < MaximumIndexForGivePresent)
@@ -78,33 +78,33 @@ namespace WindowsFormsApp1
         private void GiveGift(Human human, Random x)
         {
             var rnd = x.Next(LeftRangePercentage, _presents.Count);
-            var giftHiman = _presents[rnd];
-            if (giftHiman.IsGift() == Gift.Sweet)
+            var giftHuman = _presents[rnd];
+            if (giftHuman.GetGift() == Gift.Sweet)
             {
-                human.satietly = human.max_satietly;
+                human.Satiety = human.MaxSatiety;
             }
 
-            if (giftHiman.IsGift() == Gift.Cap)
+            if (giftHuman.GetGift() == Gift.Cap)
             {
-                human.satietly += AdditionSatiety;
+                human.Satiety += AdditionSatiety;
             }
 
-            if (giftHiman.IsGift() == Gift.Bag)
+            if (giftHuman.GetGift() == Gift.Bag)
             {
                 human.capacity += AdditionParameter;
             }
 
-            if (giftHiman.IsGift() == Gift.Tool)
+            if (giftHuman.GetGift() == Gift.Tool)
             {
-                human._tools.Add(new Tool());
+                human.Tools.Add(new Tool());
             }
 
-            if (giftHiman.IsGift() == Gift.Eat)
+            if (giftHuman.GetGift() == Gift.Eat)
             {
                 human._plant = new Plant(coordinat.X + Shift, coordinat.Y + Shift, _map, false, true);
             }
 
-            if (giftHiman.IsGift() == Gift.Empty)
+            if (giftHuman.GetGift() == Gift.Empty)
             {
                 GiveGift(human, x);
                 countGift++;

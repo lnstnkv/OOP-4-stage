@@ -14,7 +14,7 @@ namespace TestProject1
         private Map _map;
         private Random random;
         private Land[,] _land;
-        private StartSimulation _startSimulation;
+        private Simulation _simulation;
 
         [SetUp]
         public void Setup()

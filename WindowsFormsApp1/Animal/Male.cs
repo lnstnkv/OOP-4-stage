@@ -11,22 +11,22 @@ namespace WindowsFormsApp1
         private const int MinimumHouseNearby = 5;
         private const int MinimumHouse = 1;
 
-        public Male(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public Male(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
         {
             _houses = new List<House>();
-            max_satietly = 300;
-            satietly = 300;
+            MaxSatiety = 300;
+            Satiety = 300;
             _village = isVillage.No;
         }
 
-        protected override void isGender(Random x)
+        protected override void SetGender(Random random)
         {
-            _gender = Gender.Male;
+            Gender = Gender.Male;
         }
 
-        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Male(x, y, _map, rnd, land);
+            return new Male(x, y, _map, random, land);
         }
 
         public List<House> SetHouses()
@@ -37,15 +37,16 @@ namespace WindowsFormsApp1
         public void FindVillage()
         {
             List<Point> land;
-            land=_map.FindNearHouse(coordinat);
+            land = _map.FindNearHouse(Coordinate);
             if (land.Count > MinimumHouseNearby)
             {
                 _village = isVillage.Yes;
             }
         }
+
         public void BuildHouse()
         {
-            var house = new House(coordinat.X, coordinat.Y);
+            var house = new House(Coordinate.X, Coordinate.Y);
             _houses.Add(house);
             _map.AddHouse(house);
         }
@@ -55,19 +56,19 @@ namespace WindowsFormsApp1
             base.SetCouple(animal);
             if (_houses.Count < MinimumHouse)
             {
-               BuildHouse();
-               FindVillage();
+                BuildHouse();
+                FindVillage();
             }
         }
 
-        protected override void FindAnimalCouple()
+        protected override void FindCoupleForAnimal()
         {
-         base.FindAnimalCouple();
-         if (_houses.Count < MinimumHouse)
-         {
-            BuildHouse();
-            FindVillage();
-         }
+            base.FindCoupleForAnimal();
+            if (_houses.Count < MinimumHouse)
+            {
+                BuildHouse();
+                FindVillage();
+            }
         }
     }
 

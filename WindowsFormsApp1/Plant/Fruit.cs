@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
             return coordinatFruit;
         }
 
-        public Kind IsKind()
+        public Kind GetKindPlant()
         {
             if (age > FloweringAge)
             {
