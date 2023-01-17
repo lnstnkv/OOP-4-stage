@@ -9,7 +9,7 @@ namespace WindowsFormsApp1
         private const int RightRangeShift = 2;
         public override Point Move(Point coordinate, Random x)
         {
-            var shift = x.Next(LeftRangeShift, RightRangeShift); // рандомное движение с 
+            var shift = x.Next(LeftRangeShift, RightRangeShift);
             if (GoOutside(coordinate.X + shift))
                 coordinate.X += shift;
  

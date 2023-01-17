@@ -134,7 +134,6 @@ namespace WindowsFormsApp1
             {
                 _stage = Stage.Died;
                 isDied = true;
-                //Die();
             }
 
             if (age > LandingAge)

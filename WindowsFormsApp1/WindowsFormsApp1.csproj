@@ -88,7 +88,6 @@
         <Compile Include="NewYear\Gift.cs" />
         <Compile Include="NewYear\Present.cs" />
         <Compile Include="Plant\EdibleFood.cs" />
-        <Compile Include="Plant\EdiblePlant.cs" />
         <Compile Include="Plant\Fruit.cs" />
         <Compile Include="Plant\FruitingPlant.cs" />
         <Compile Include="Plant\Plant.cs" />

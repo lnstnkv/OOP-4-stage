@@ -175,7 +175,6 @@ namespace WindowsFormsApp1
 
                 if (coordinat == couple?.GetPoint())
                 {
-                    //Propagate(x);
                     satietly -= ReductionSatiety;
                 }
             }
