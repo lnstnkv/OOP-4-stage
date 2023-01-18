@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 
 namespace WindowsFormsApp1
 {
@@ -20,6 +21,7 @@ namespace WindowsFormsApp1
         private List<Factory> _factories;
         private List<Elf> _elves;
         public bool isWinter;
+        private int _index = 0;
         private const int CountAnimal = 1500;
         private const int CountKindPlant = 700;
         private const int Size = 1000;
@@ -313,6 +315,44 @@ namespace WindowsFormsApp1
             _sproutsFruits.Clear();
             _sproutsFruitingPlants.Clear();
             _sproutsPlants.Clear();
+        }
+
+        public void Update(Random random)
+        {
+          
+            List<Elf> elves = null;
+            _index++;
+            if (_index < 250)
+            {
+                isWinter = false;
+                if (_index == 1)
+                {
+                    BuildFactory(random);
+                }
+                elves = GetElf();
+            }
+            else
+            {
+                isWinter = true;
+                DeleteFactory();
+            }
+
+            if (elves != null)
+                foreach (var elf in elves.ToList())
+                {
+                    elf.Update(random);
+                }
+
+            if (_index > 500)
+            {
+                _index = 0;
+            }
+
+            foreach (var animal in _animals.ToList().Where(animal => !animal.IsDied()))
+            {
+                animal.Update(random);
+            }
+            
         }
 
         public Plant FindPlant(Point coordinate)
