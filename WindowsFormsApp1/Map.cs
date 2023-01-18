@@ -21,11 +21,66 @@ namespace WindowsFormsApp1
         private List<Elf> _elves;
         public bool isWinter;
         private const int CountAnimal = 1500;
+        private const int CountKindPlant = 700;
         private const int Size = 1000;
         private const int MinimumCoordinate = 0;
         private const int MaximumCoordinate = 1000;
+        private const int CountKindOfAnimal = 9;
 
-        public Map(Random x)
+        private void AddAnimalForMap(Random random)
+        {
+            var result = CountAnimal / CountKindOfAnimal;
+            Animal animal;
+            for (var i = 0; i < CountKindOfAnimal; i++)
+            {
+                for (var j = 0; j < result; j++)
+                {
+                    var originalCoordinateX = random.Next(0, Size);
+                    var originalCoordinateY = random.Next(0, Size);
+                    animal = MakeKindOfAnimal(i, random, new Point(originalCoordinateX, originalCoordinateY));
+                    _animals.Add(animal);
+                    _land[originalCoordinateX, originalCoordinateY].SetAnimal(_animals[i]);
+                }
+            }
+        }
+
+        private Animal MakeKindOfAnimal(int index, Random random, Point coordinate)
+        {
+            switch (index)
+            {
+                case 0:
+                    return new Eagle(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 1:
+                    return new Mouse(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 2:
+                    return new Rabbit(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 3:
+                    return new Elephant(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 4:
+                    return new Lynx(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 5:
+                    return new Pig(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 6:
+                    return new Squirrel(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 7:
+                    return new Owl(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+                case 8:
+                    return new Horse(coordinate.X, coordinate.Y, this, random, _land);
+                    break;
+            }
+
+            throw new Exception("Unknown animal");
+        }
+
+        public Map(Random random)
         {
             _houses = new List<House>();
             _sproutsFruits = new List<Fruit>();
@@ -43,98 +98,39 @@ namespace WindowsFormsApp1
                 _land[i, j] = new Land();
             }
 
-            for (int i = 0; i < CountAnimal; i++)
+            AddAnimalForMap(random);
+            for (int i = 1200; i < CountAnimal; i++)
             {
-                var originalCoordinateX = x.Next(0, Size);
-                var originalCoordinateY = x.Next(0, Size);
-
-                if (i < 1200)
-                {
-                    if (i <= 400)
-                    {
-                        if (i <= 130)
-                        {
-                            _animals.Add(new Horse(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-
-                        if (i > 130 && i <= 263)
-                        {
-                            _animals.Add(new Elephant(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-
-                        if (i > 263 && i <= 400)
-                        {
-                            _animals.Add(new Rabbit(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-                    }
-
-                    if (i > 400)
-                    {
-                        if (i <= 530)
-                        {
-                            _animals.Add(new Eagle(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-
-                        if (i > 530 && i <= 633)
-                        {
-                            _animals.Add(new Lynx(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-
-                        if (i > 633 && i <= 800)
-                        {
-                            _animals.Add(new Owl(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-                    }
-
-                    if (i > 800)
-                    {
-                        if (i <= 930)
-                        {
-                            _animals.Add(new Squirrel(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-
-                        if (i > 930 && i <= 1065)
-                        {
-                            _animals.Add(new Pig(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-
-                        if (i > 1065 && i <= 1200)
-                        {
-                            _animals.Add(new Mouse(originalCoordinateX, originalCoordinateY, this, x, _land));
-                        }
-                    }
-
-                    _land[originalCoordinateX, originalCoordinateY].SetAnimal(_animals[i]);
-                }
+                var originalCoordinateX = random.Next(0, Size);
+                var originalCoordinateY = random.Next(0, Size);
 
                 if (i >= 1200 && i <= 1350)
                 {
-                    _animals.Add(new Male(originalCoordinateX, originalCoordinateY, this, x, _land));
+                    _animals.Add(new Male(originalCoordinateX, originalCoordinateY, this, random, _land));
                     _land[originalCoordinateX, originalCoordinateY].SetMale(_animals[i]);
                 }
 
                 if (i > 1350)
                 {
-                    _animals.Add(new Female(originalCoordinateX, originalCoordinateY, this, x, _land));
+                    _animals.Add(new Female(originalCoordinateX, originalCoordinateY, this, random, _land));
                     _land[originalCoordinateX, originalCoordinateY].SetFemale(_animals[i]);
                 }
             }
-
-            int countPlant = 700;
+            
             _plants = new List<Plant>();
-            for (int i = 0; i < countPlant; i++)
+            for (int i = 0; i < CountKindPlant; i++)
             {
-                var originalCoordinateX = x.Next(0, Size);
-                var originalCoordinateY = x.Next(0, Size);
+                var originalCoordinateX = random.Next(0, Size);
+                var originalCoordinateY = random.Next(0, Size);
                 _plants.Add(new Plant(originalCoordinateX, originalCoordinateY, this, i < 250, i > 50 && i < 400));
                 _land[originalCoordinateX, originalCoordinateY].SetPlant(_plants[i]);
             }
 
             _fruitingPlants = new List<FruitingPlant>();
-            for (int i = 0; i < countPlant; i++)
+            for (int i = 0; i < CountKindPlant; i++)
             {
-                var originalCoordinateX = x.Next(0, Size);
-                var originalCoordinateY = x.Next(0, Size);
+                var originalCoordinateX = random.Next(0, Size);
+                var originalCoordinateY = random.Next(0, Size);
                 _fruitingPlants.Add(new FruitingPlant(originalCoordinateX, originalCoordinateY, this, i < 100, i > 0));
                 _land[originalCoordinateX, originalCoordinateY].SetPlant(_fruitingPlants[i]);
             }

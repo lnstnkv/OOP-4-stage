@@ -6,6 +6,7 @@ namespace WindowsFormsApp1
     public class TargetMoverEuclidean : TargetMover
     {
         private const int Shift = 1;
+
         public override Point TargetMove(Point startCoordinate, Point endCoordinate)
         {
             var differenceBetweenAxesX = endCoordinate.X - startCoordinate.X;
@@ -21,8 +22,7 @@ namespace WindowsFormsApp1
                 if (differenceBetweenAxesY > 0)
                 {
                     var yShift = startCoordinate.Y + Shift;
-                    if (Math.Sqrt(Math.Pow(endCoordinate.X - xShift, 2) + Math.Pow(endCoordinate.Y - startCoordinate.Y, 2)) <
-                        Math.Sqrt(Math.Pow(endCoordinate.Y - yShift, 2) + Math.Pow(endCoordinate.X - startCoordinate.X, 2)))
+                    if(CalculateClosestDistance(startCoordinate,endCoordinate,xShift,yShift))
                     {
                         return Move(new Point(1, 0), startCoordinate);
                     }
@@ -34,8 +34,7 @@ namespace WindowsFormsApp1
                 else
                 {
                     var yShift = startCoordinate.Y - Shift;
-                    if (Math.Sqrt(Math.Pow(endCoordinate.X - xShift, 2) + Math.Pow(endCoordinate.Y - startCoordinate.Y, 2)) <
-                        Math.Sqrt(Math.Pow(endCoordinate.Y - yShift, 2) + Math.Pow(endCoordinate.X - startCoordinate.X, 2)))
+                    if (CalculateClosestDistance(startCoordinate,endCoordinate,xShift,yShift))
                     {
                         return Move(new Point(1, 0), startCoordinate);
                     }
@@ -50,9 +49,8 @@ namespace WindowsFormsApp1
                 var xShift = startCoordinate.X - Shift;
                 if (differenceBetweenAxesY > 0)
                 {
-                    var y = startCoordinate.Y + Shift;
-                    if (Math.Sqrt(Math.Pow(endCoordinate.X - xShift, 2) + Math.Pow(endCoordinate.Y - startCoordinate.Y, 2)) <
-                        Math.Sqrt(Math.Pow(endCoordinate.Y - y, 2) + Math.Pow(endCoordinate.X - startCoordinate.X, 2)))
+                    var yShift = startCoordinate.Y + Shift;
+                    if (CalculateClosestDistance(startCoordinate,endCoordinate,xShift,yShift))
                     {
                         return Move(new Point(-1, 0), startCoordinate);
                     }
@@ -64,8 +62,7 @@ namespace WindowsFormsApp1
                 else
                 {
                     var yShift = startCoordinate.Y - Shift;
-                    if (Math.Sqrt(Math.Pow(endCoordinate.X - xShift, 2) + Math.Pow(endCoordinate.Y - startCoordinate.Y, 2)) <
-                        Math.Sqrt(Math.Pow(endCoordinate.Y - yShift, 2) + Math.Pow(endCoordinate.X - startCoordinate.X, 2)))
+                    if (CalculateClosestDistance(startCoordinate,endCoordinate,xShift,yShift))
                     {
                         return Move(new Point(-1, 0), startCoordinate);
                     }
@@ -75,6 +72,17 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+        }
+
+        private bool CalculateClosestDistance(Point startCoordinate, Point endCoordinate, int xShift, int yShift)
+        {
+            return Math.Sqrt(CalculateDistanceBetweenPoint(startCoordinate, endCoordinate, xShift)) <
+                   Math.Sqrt(CalculateDistanceBetweenPoint(startCoordinate, endCoordinate, yShift));
+        }
+
+        private double CalculateDistanceBetweenPoint(Point startCoordinate, Point endCoordinate, int valueShift)
+        {
+            return Math.Pow(endCoordinate.X - valueShift, 2) + Math.Pow(endCoordinate.Y - startCoordinate.Y, 2);
         }
     }
 }
