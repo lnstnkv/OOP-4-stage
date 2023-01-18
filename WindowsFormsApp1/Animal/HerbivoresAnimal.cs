@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
 
         protected override void FindFood(Random x)
         {
+            
             if (_plant == null)
             {
                 _plant = _map.FindPlant(this.GetPoint());
