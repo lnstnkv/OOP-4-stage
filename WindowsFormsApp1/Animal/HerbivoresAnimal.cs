@@ -8,15 +8,15 @@ namespace WindowsFormsApp1
         public HerbivoresAnimalForm _herbAnimalForm;
         private const int MaximumHealth = 10;
         private const int AdditionSatiety = 5;
-        public HerbivoresAnimal(int x, int y, Map map, Random rnd, Land[,] land) : base(x, y, map, rnd, land)
+
+        public HerbivoresAnimal(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
         {
-            health = MaximumHealth;
-         
+            Health = MaximumHealth;
         }
 
-        protected abstract HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land);
-        
-        protected override void FindDifferentEat(Random x)
+        protected abstract HerbivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land);
+
+        protected override void FindFood(Random x)
         {
             if (_plant == null)
             {
@@ -25,21 +25,20 @@ namespace WindowsFormsApp1
 
             if (_plant != null)
             {
-                FindWay(_plant.GetPoint());
+                EatPlant(_plant.GetPoint());
             }
         }
 
         protected override void Propagate(Random x)
         {
-            _map.AddAnimal(NewAnimal(coordinat.X, coordinat.Y, _map, x, _land));
+            _map.AddAnimal(NewAnimal(Coordinate.X, Coordinate.Y, _map, x, _land));
         }
 
-     
-        protected void FindWay(Point coords)
+        protected void EatPlant(Point coordinate)
         {
-            coordinat = _targetMover.TargetMove(coordinat, _plant.GetPoint());
+            Coordinate = TargetMover.TargetMove(Coordinate, _plant.GetPoint());
             FindEat();
-            if (coords.X == coordinat.X && coords.Y == coordinat.Y)
+            if (coordinate.X == Coordinate.X && coordinate.Y == Coordinate.Y)
             {
                 Eat();
             }
@@ -52,8 +51,8 @@ namespace WindowsFormsApp1
 
         protected void FindEat()
         {
-            var coordinate = new Point(coordinat.X, coordinat.Y);
-            var eat = _map.IsFood(coordinate);
+            var coordinate = new Point(Coordinate.X, Coordinate.Y);
+            var eat = _map.GetEdiblePlant(coordinate);
             if (eat != null)
             {
                 Eat();
@@ -62,14 +61,14 @@ namespace WindowsFormsApp1
 
         protected void Eat()
         {
-            if (_plant.IsVirulence())
+            if (_plant._isVirulence)
             {
                 Die();
                 _plant.Die();
             }
             else
             {
-                satietly += AdditionSatiety;
+                Satiety += AdditionSatiety;
                 _plant.Die();
             }
         }

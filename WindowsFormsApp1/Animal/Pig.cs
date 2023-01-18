@@ -4,29 +4,29 @@ namespace WindowsFormsApp1
 {
     public class Pig:OmnivoresAnimal
     {
-        public Pig(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public Pig(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
-            satietly = 245;
-            max_satietly = 245;
-            _freeMover = new RandomFreeMover();
-            _targetMover = new TargetMoverSavingDirection();
+            Satiety = 245;
+            MaxSatiety = 245;
+            FreeMover = new RandomFreeMover();
+            TargetMover = new TargetMoverSavingDirection();
         }
-        public override void Loop(Random x)
+        public override void Update(Random random)
         {
             if (_map.isWinter)
             {
-                Walk(x);
+                SetLifecycle(random);
             }
             else
             {
-                satietly = 245;
-                _hibernationForm = HibernationForm.Sleep;
+                Satiety = 245;
+                HibernationForm = HibernationForm.Sleep;
             }
         }
 
-        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Pig(x, y, _map, rnd, land);
+            return new Pig(x, y, _map, random, land);
         }
     }
 }

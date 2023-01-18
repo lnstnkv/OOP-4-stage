@@ -4,17 +4,17 @@ namespace WindowsFormsApp1
 {
     public class Squirrel:OmnivoresAnimal
     {
-        public Squirrel(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public Squirrel(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
-            satietly = 250;
-            max_satietly = 250;
-            _freeMover = new NearBirthFreeMover(_birthPoint);
-            _targetMover = new TargetMoverEucliden();
+            Satiety = 250;
+            MaxSatiety = 250;
+            FreeMover = new NearBirthFreeMover(BirthPoint);
+            TargetMover = new TargetMoverEuclidean();
         }
 
-        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Squirrel(x, y, _map, rnd, land);
+            return new Squirrel(x, y, _map, random, land);
         }
     }
 }

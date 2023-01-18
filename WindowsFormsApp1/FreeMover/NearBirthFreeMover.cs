@@ -15,26 +15,26 @@ namespace WindowsFormsApp1
             _birthPoint = birthPoint;
         }
 
-        public override Point Move(Point coordinate, Random x)
+        public override Point Move(Point coordinate, Random random)
         {
-            var shift = x.Next(LeftRangeShift, RightRangeShift);
+            var shift = random.Next(LeftRangeShift, RightRangeShift);
             if (GoOutside(coordinate.X + shift) && MoveAwayFromX((coordinate.X + shift), _birthPoint))
                 coordinate.X += shift;
 
-            shift = x.Next(LeftRangeShift, RightRangeShift);
+            shift = random.Next(LeftRangeShift, RightRangeShift);
             if (GoOutside(coordinate.Y + shift) && MoveAwayFromY((coordinate.Y + shift), _birthPoint))
                 coordinate.Y += shift;
             return coordinate;
         }
 
-        private bool MoveAwayFromX(int x, Point birthPoint)
+        private bool MoveAwayFromX(int shiftCoordinate, Point birthPoint)
         {
-            return (x >= birthPoint.X - CellsNearBirthPoint && x <= birthPoint.X + CellsNearBirthPoint);
+            return (shiftCoordinate >= birthPoint.X - CellsNearBirthPoint && shiftCoordinate <= birthPoint.X + CellsNearBirthPoint);
         }
 
-        private bool MoveAwayFromY(int y, Point birthPoint)
+        private bool MoveAwayFromY(int shiftCoordinate, Point birthPoint)
         {
-            return (y >= birthPoint.Y - CellsNearBirthPoint && y <= birthPoint.Y + CellsNearBirthPoint);
+            return (shiftCoordinate >= birthPoint.Y - CellsNearBirthPoint && shiftCoordinate <= birthPoint.Y + CellsNearBirthPoint);
         }
     }
 }

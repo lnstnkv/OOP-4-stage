@@ -4,17 +4,17 @@ namespace WindowsFormsApp1
 {
     public class Eagle:CarnivoresAnimal
     {
-        public Eagle(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public Eagle(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
-            satietly = 140;
-            max_satietly = 140;
-            _freeMover = new ProbabilityFreeMover();
-            _targetMover = new TargetMoverSavingDirection();
+            Satiety = 140;
+            MaxSatiety = 140;
+            FreeMover = new ProbabilityFreeMover();
+            TargetMover = new TargetMoverSavingDirection();
         }
 
-        protected override CarnivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override CarnivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Eagle(x, y, _map, rnd, land);
+            return new Eagle(x, y, _map, random, land);
         }
     }
 }

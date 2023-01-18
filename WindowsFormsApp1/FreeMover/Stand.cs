@@ -5,7 +5,7 @@ namespace WindowsFormsApp1
 {
     public class Stand:FreeMover
     {
-        public override Point Move(Point coordinate, Random x)
+        public override Point Move(Point coordinate, Random random)
         {
             return coordinate;
         }

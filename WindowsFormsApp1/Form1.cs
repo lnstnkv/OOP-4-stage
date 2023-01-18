@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        private StartSimulation startSimulation;
+        private Simulation _simulation;
         private Random x;
         private Animal animal;
         private Plant _plant;
@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            startSimulation = new StartSimulation(pictureBox, this);
+            _simulation = new Simulation(pictureBox, this);
             x = new Random();
             pictureBox.MouseClick += OnPictureBoxClicked;
         }
@@ -45,15 +45,15 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            startSimulation.Start();
-            startSimulation.Loop(x);
+            _simulation.Start();
+            _simulation.Update(x);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (pictureBox.Width + Approximation >= MaxSizeBitmap && pictureBox.Height + Approximation >= MaxSizeBitmap) return;
             var size = new Size(pictureBox.Width + Approximation, pictureBox.Height + Approximation);
-            startSimulation.Resize();
+            _simulation.Resize();
             pictureBox.Size = size;
         }
 
@@ -61,18 +61,18 @@ namespace WindowsFormsApp1
         {
             if (pictureBox.Width - Distancing <= MinSizeBitmap && pictureBox.Height - Distancing <= MinSizeBitmap) return;
             var size = new Size(pictureBox.Width - Distancing, pictureBox.Height - Distancing);
-            startSimulation.UnResize();
+            _simulation.UnResize();
             pictureBox.Size = size;
         }
 
         void OnPictureBoxClicked(object sender, MouseEventArgs args)
         {
             var location = args.Location;
-            var map = startSimulation.GetMap();
-            location = new Point(location.X / startSimulation._mastingSize, location.Y / startSimulation._mastingSize);
+            var map = _simulation.GetMap();
+            location = new Point(location.X / _simulation.MaskingSize, location.Y / _simulation.MaskingSize);
             label1.Text = "";
-            animal = map.IsAnimal(location);
-            _plant = map.IsPlant(location);
+            animal = map.GetAnimal(location);
+            _plant = map.GetPlant(location);
         }
 
         public void TrackObject()
@@ -80,20 +80,20 @@ namespace WindowsFormsApp1
             label1.Text = "";
             if (animal != null)
             {
-                label1.Text += animal.InfoCoordinate();
+                label1.Text += animal.GetCoordinateInformation();
                 label1.Text += "\nЗдоровье: \n";
-                label1.Text += animal.InfoHealth();
+                label1.Text += animal.GetHealthInformation();
                 label1.Text += "\nСытость: \n";
-                label1.Text += animal.InfoSatietly();
+                label1.Text += animal.GetSatietyInformation();
                 label1.Text += "\nКласс: \n";
-                label1.Text += animal.ClassAnimal();
+                label1.Text += animal.GetClassInformation();
             }
 
             if (_plant != null)
             {
-                label1.Text += _plant.InfoCoordinate();
+                label1.Text += _plant.GetCoordinateInformation();
                 label1.Text += "\nКласс: \n";
-                label1.Text += _plant.ClassPlant();
+                label1.Text += _plant.GetClassInformation();
             }
         }
     }

@@ -8,22 +8,22 @@ namespace WindowsFormsApp1
 {
     public abstract class Animal
     {
-        public int satietly;
-        protected int age;
-        protected int health;
+        public int Satiety;
+        protected int _age;
+        protected int Health;
         protected Land[,] _land;
-        protected Point coordinat;
+        protected Point Coordinate;
         protected Map _map;
         protected Animal _animal;
         public Plant _plant;
-        private bool isDied;
-        protected Gender _gender;
-        public int max_satietly;
-        protected Point _birthPoint;
-        protected FreeMover _freeMover;
-        protected Animal couple;
-        protected TargetMover _targetMover;
-        protected HibernationForm _hibernationForm;
+        private bool _isDied;
+        protected Gender Gender;
+        public int MaxSatiety;
+        protected Point BirthPoint;
+        protected FreeMover FreeMover;
+        protected Animal CoupleFoAnimal;
+        protected TargetMover TargetMover;
+        protected HibernationForm HibernationForm;
         private const int ProbabilityMaleGender = 200;
         private const int AdditionParameter = 1;
         private const int ReductionParameter = 1;
@@ -44,68 +44,68 @@ namespace WindowsFormsApp1
         private const int RightRangePercentage = 500;
 
 
-        public Animal(int x, int y, Map map, Random rnd, Land[,] land)
+        public Animal(int x, int y, Map map, Random random, Land[,] land)
         {
-            coordinat = new Point(x, y);
+            Coordinate = new Point(x, y);
             _map = map;
-            couple = null;
-            isDied = false;
+            CoupleFoAnimal = null;
+            _isDied = false;
             _plant = null;
-            _hibernationForm = HibernationForm.Life;
-            _birthPoint.X = coordinat.X;
-            _birthPoint.Y = coordinat.Y;
+            HibernationForm = HibernationForm.Life;
+            BirthPoint.X = Coordinate.X;
+            BirthPoint.Y = Coordinate.Y;
             _land = land;
-            _freeMover = new RandomFreeMover();
-            _targetMover = new TargetMoverSavingDirection();
-            isGender(rnd);
+            FreeMover = new RandomFreeMover();
+            TargetMover = new TargetMoverSavingDirection();
+            SetGender(random);
         }
 
-        protected virtual void isGender(Random x)
+        protected virtual void SetGender(Random random)
         {
-            var probability = x.Next(LeftRangePercentage, RightRangePercentage);
+            var probability = random.Next(LeftRangePercentage, RightRangePercentage);
             if (probability > ProbabilityMaleGender)
             {
-                _gender = Gender.Male;
+                Gender = Gender.Male;
             }
 
             else
             {
-                _gender = Gender.Female;
+                Gender = Gender.Female;
             }
         }
 
         public Point GetPoint()
         {
-            return coordinat;
+            return Coordinate;
         }
 
 
-        public virtual void Loop(Random x)
+        public virtual void Update(Random random)
         {
-            Walk(x);
+            SetLifecycle(random);
         }
 
         public bool IsSleep()
         {
-            return _hibernationForm == HibernationForm.Sleep;
+            return HibernationForm == HibernationForm.Sleep;
         }
 
-        public String InfoCoordinate()
+        public string GetCoordinateInformation()
         {
-            return coordinat.ToString();
+            return Coordinate.ToString();
         }
 
-        public String InfoHealth()
+        public string GetHealthInformation()
         {
-            return health.ToString();
+            return Health.ToString();
         }
 
-        public String InfoSatietly()
+        public string GetSatietyInformation()
         {
-            return satietly.ToString();
+            return Satiety.ToString();
         }
 
-        public String ClassAnimal()
+        public string GetClassInformation()
         {
             switch (this)
             {
@@ -134,120 +134,121 @@ namespace WindowsFormsApp1
             }
         }
 
-        protected abstract void FindDifferentEat(Random x);
+        protected abstract void FindFood(Random x);
         protected abstract void Propagate(Random x);
         protected abstract void ChangeEat(Point coords);
 
-        public void Walk(Random x)
+        public void SetLifecycle(Random x)
         {
             if (_map.isWinter)
             {
-                IsSummer(x);
+                WalkInSummer(x);
             }
             else
             {
-                IsWinter(x);
+                WalkInWinter(x);
             }
         }
 
-        public void IsSummer(Random x)
+        public void WalkInSummer(Random x)
         {
-            satietly -= ReductionSatietyForSummer;
-            if (satietly == max_satietly)
+            Satiety -= ReductionSatietyForSummer;
+            if (Satiety == MaxSatiety)
             {
-                coordinat = _freeMover.Move(coordinat, x);
-                age += AdditionParameter;
+                Coordinate = FreeMover.Move(Coordinate, x);
+                _age += AdditionParameter;
             }
 
-            if (satietly > max_satietly * MaxSatietyPercentageForSummer)
+            if (Satiety > MaxSatiety * MaxSatietyPercentageForSummer)
             {
-                if (couple == null)
+                if (CoupleFoAnimal == null)
                 {
-                    FindAnimalCouple();
+                    FindCoupleForAnimal();
                 }
 
-                if (couple != null)
+                if (CoupleFoAnimal != null)
                 {
-                    couple.SetCouple(this);
-                    coordinat = _targetMover.TargetMove(coordinat, couple.GetPoint());
+                    CoupleFoAnimal.SetCouple(this);
+                    Coordinate = TargetMover.TargetMove(Coordinate, CoupleFoAnimal.GetPoint());
                 }
 
 
-                if (coordinat == couple?.GetPoint())
+                if (Coordinate == CoupleFoAnimal?.GetPoint())
                 {
-                    satietly -= ReductionSatiety;
+                    Satiety -= ReductionSatiety;
                 }
             }
 
 
-            if (satietly > max_satietly * AboveAverageSatietyPercentageForSummer&& satietly < max_satietly * MaxSatietyPercentageForSummer)
+            if (Satiety > MaxSatiety * AboveAverageSatietyPercentageForSummer &&
+                Satiety < MaxSatiety * MaxSatietyPercentageForSummer)
             {
-                coordinat = _freeMover.Move(coordinat, x);
+                Coordinate = FreeMover.Move(Coordinate, x);
             }
 
-            if (health < MinimalHealth || age > MaximumAgeForSummer)
+            if (Health < MinimalHealth || _age > MaximumAgeForSummer)
             {
                 Die();
             }
 
-            if (satietly < max_satietly * LowSatietyPercentageForSummer)
+            if (Satiety < MaxSatiety * LowSatietyPercentageForSummer)
             {
-                health -= ReductionParameter;
+                Health -= ReductionParameter;
             }
 
-            if (satietly < max_satietly * MediumSatietyPercentageForSummer)
+            if (Satiety < MaxSatiety * MediumSatietyPercentageForSummer)
             {
-                FindDifferentEat(x);
+                FindFood(x);
             }
         }
 
-        protected virtual void FindAnimalCouple()
+        protected virtual void FindCoupleForAnimal()
         {
-            couple = _map.FindCouple(this);
+            CoupleFoAnimal = _map.FindCouple(this);
         }
 
         protected virtual void SetCouple(Animal animal)
         {
-            couple = animal;
+            CoupleFoAnimal = animal;
         }
 
         public Animal GetCouple()
         {
-            return couple;
+            return CoupleFoAnimal;
         }
 
-        public void IsWinter(Random x)
+        public void WalkInWinter(Random x)
         {
-            satietly -= ReductionSatietyForWinter;
-            if (satietly == max_satietly)
+            Satiety -= ReductionSatietyForWinter;
+            if (Satiety == MaxSatiety)
             {
-                coordinat = _freeMover.Move(coordinat, x);
+                Coordinate = FreeMover.Move(Coordinate, x);
             }
 
-            if (satietly > max_satietly * MediumSatietyPercentageForWinter)
+            if (Satiety > MaxSatiety * MediumSatietyPercentageForWinter)
             {
-                coordinat = _freeMover.Move(coordinat, x);
+                Coordinate = FreeMover.Move(Coordinate, x);
             }
 
-            if (health < MinimalHealth || age > MaximumAgeForWinter)
+            if (Health < MinimalHealth || _age > MaximumAgeForWinter)
             {
                 Die();
             }
 
-            if (satietly < max_satietly * LowSatietyPercentageForWinter)
+            if (Satiety < MaxSatiety * LowSatietyPercentageForWinter)
             {
-                health -= ReductionParameter;
+                Health -= ReductionParameter;
             }
 
-            if (satietly < max_satietly * MaxSatietyPercentageForWinter)
+            if (Satiety < MaxSatiety * MaxSatietyPercentageForWinter)
             {
-                FindDifferentEat(x);
+                FindFood(x);
             }
         }
 
         public Gender IsGender()
         {
-            if (_gender == Gender.Female)
+            if (Gender == Gender.Female)
                 return Gender.Female;
             return Gender.Male;
         }
@@ -255,7 +256,7 @@ namespace WindowsFormsApp1
 
         public bool IsMaleGender()
         {
-            return _gender == Gender.Male;
+            return Gender == Gender.Male;
         }
 
         public bool GoOutside(int x)
@@ -265,13 +266,13 @@ namespace WindowsFormsApp1
 
         public void Die()
         {
-            isDied = true;
+            _isDied = true;
             _map.DeleteAnimal(this);
         }
 
         public bool IsDied()
         {
-            return isDied;
+            return _isDied;
         }
     }
 

@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
     public override void Start(Random x)
     {
         base.Start(x);
-        if(_stage!= Stage.Increase) return;
+        if(Stage!= Stage.Increase) return;
     }
     public override Plant NewSproutsPlant(int x, int y, Map map, bool isVirulence, bool isEat)
         {

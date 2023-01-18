@@ -5,7 +5,7 @@ namespace WindowsFormsApp1
 {
     public abstract class FreeMover
     {
-        public abstract Point Move(Point coordinate, Random x);
+        public abstract Point Move(Point coordinate, Random random);
 
 
         protected bool GoOutside(int x)

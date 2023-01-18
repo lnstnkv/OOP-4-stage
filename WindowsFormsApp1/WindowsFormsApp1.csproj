@@ -96,10 +96,10 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Rendering.cs" />
         <Compile Include="Season.cs" />
-        <Compile Include="StartSimulation.cs" />
+        <Compile Include="Simulation.cs" />
         <Compile Include="Summer.cs" />
         <Compile Include="TargetMover\TargetMover.cs" />
-        <Compile Include="TargetMover\TargetMoverEucliden.cs" />
+        <Compile Include="TargetMover\TargetMoverEuclidean.cs" />
         <Compile Include="TargetMover\TargetMoverSavingDirection.cs" />
         <Compile Include="Test.cs" />
         <Compile Include="Winter.cs" />

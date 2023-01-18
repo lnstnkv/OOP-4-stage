@@ -8,28 +8,28 @@ namespace WindowsFormsApp1
         private const int MaximumHealth = 5;
         private const int AdditionSatiety = 5;
         
-        protected override void FindDifferentEat(Random x)
+        protected override void FindFood(Random x)
         {
-            base.FindDifferentEat(x);
+            base.FindFood(x);
             
             
             if (_animal == null)
             {
                 _animal = _map.FindAnimal(this.GetPoint());
-                FindWay();
+                FindAnimal();
             }
         }
 
         protected override void Propagate(Random x)
         {
-            _map.AddAnimal(NewAnimal(coordinat.X, coordinat.Y, _map, x, _land));
+            _map.AddAnimal(NewAnimal(Coordinate.X, Coordinate.Y, _map, x, _land));
 
         }
         
 
-        protected void FindWay()
+        protected void FindAnimal()
         {
-            coordinat = _targetMover.TargetMove(coordinat, _animal.GetPoint());
+            Coordinate = TargetMover.TargetMove(Coordinate, _animal.GetPoint());
             FindEat();
         }
 
@@ -38,19 +38,19 @@ namespace WindowsFormsApp1
         {
             if (eat is OmnivoresAnimal)
             {
-                FindDifferentEat(x);
+                FindFood(x);
             }
             else
             {
-                satietly += AdditionSatiety;
+                Satiety += AdditionSatiety;
                 eat.Die();
             }
         }
 
 
-        public OmnivoresAnimal(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public OmnivoresAnimal(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
-            health = MaximumHealth;
+            Health = MaximumHealth;
             
         }
     }

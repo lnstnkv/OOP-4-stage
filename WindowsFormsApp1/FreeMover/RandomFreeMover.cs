@@ -7,13 +7,13 @@ namespace WindowsFormsApp1
     {
         private const int LeftRangeShift = -1;
         private const int RightRangeShift = 2;
-        public override Point Move(Point coordinate, Random x)
+        public override Point Move(Point coordinate, Random random)
         {
-            var shift = x.Next(LeftRangeShift, RightRangeShift);
+            var shift = random.Next(LeftRangeShift, RightRangeShift);
             if (GoOutside(coordinate.X + shift))
                 coordinate.X += shift;
  
-            shift = x.Next(LeftRangeShift, RightRangeShift);
+            shift = random.Next(LeftRangeShift, RightRangeShift);
             if (GoOutside(coordinate.Y + shift))
                 coordinate.Y += shift;
             return coordinate;

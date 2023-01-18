@@ -9,13 +9,13 @@ namespace WindowsFormsApp1
         private const int RightRangePercentage = 5;
         public Present(Random x)
         {
-            isGifts(x);
+            SetGift(x);
         }
 
-        private void isGifts(Random random)
+        private void SetGift(Random random)
         {
-            var x = random.Next(LeftRangePercentage, RightRangePercentage);
-            switch (x)
+            var randomNumber = random.Next(LeftRangePercentage, RightRangePercentage);
+            switch (randomNumber)
             {
                 case 0:
                     _gift = Gift.Bag;
@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public Gift IsGift()
+        public Gift GetGift()
         {
             if (_gift == Gift.Bag)
             {

@@ -4,17 +4,17 @@ namespace WindowsFormsApp1
 {
     public class Mouse:OmnivoresAnimal
     {
-        public Mouse(int x, int y, Map map, Random rnd,Land[,] land) : base(x, y, map, rnd,land)
+        public Mouse(int x, int y, Map map, Random random,Land[,] land) : base(x, y, map, random,land)
         {
-            satietly = 300;
-            max_satietly =300;
-            _freeMover = new ProbabilityFreeMover();
-            _targetMover = new TargetMoverEucliden();
+            Satiety = 300;
+            MaxSatiety =300;
+            FreeMover = new ProbabilityFreeMover();
+            TargetMover = new TargetMoverEuclidean();
         }
 
-        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Mouse(x, y, _map, rnd, land);
+            return new Mouse(x, y, _map, random, land);
         }
     }
 }

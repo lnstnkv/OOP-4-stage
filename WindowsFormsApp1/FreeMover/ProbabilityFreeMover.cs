@@ -11,9 +11,9 @@ namespace WindowsFormsApp1
         private const int IntRightRangePercentage = 100;
         private const double DoubleRightRangePercentage = 100.0;
         
-        public override Point Move(Point coordinate, Random x)
+        public override Point Move(Point coordinate, Random random)
         {
-            var probability = Convert.ToDouble(x.Next(LeftRangePercentage, IntRightRangePercentage) / DoubleRightRangePercentage);
+            var probability = Convert.ToDouble(random.Next(LeftRangePercentage, IntRightRangePercentage) / DoubleRightRangePercentage);
             if (probability >SatietyPercentage)
             {
                 if (GoOutside(coordinate.X + Shift))

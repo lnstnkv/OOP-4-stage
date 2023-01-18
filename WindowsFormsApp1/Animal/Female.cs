@@ -5,19 +5,19 @@ namespace WindowsFormsApp1
 {
     public class Female : Human
     {
-        public Female(int x, int y, Map map, Random rnd, Land[,] land) : base(x, y, map, rnd, land)
+        public Female(int x, int y, Map map, Random random, Land[,] land) : base(x, y, map, random, land)
         {
-            max_satietly = 300;
-            satietly = 300;
+            MaxSatiety = 300;
+            Satiety = 300;
         }
-        protected override void isGender(Random x)
+        protected override void SetGender(Random random)
         {
-            _gender = Gender.Female;
+            Gender = Gender.Female;
         }
 
-        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random rnd, Land[,] land)
+        protected override HerbivoresAnimal NewAnimal(int x, int y, Map map, Random random, Land[,] land)
         {
-            return new Female(x, y, _map, rnd, land);
+            return new Female(x, y, _map, random, land);
         }
         
         
