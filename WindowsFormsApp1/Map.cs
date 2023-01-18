@@ -37,11 +37,10 @@ namespace WindowsFormsApp1
             {
                 for (var j = 0; j < result; j++)
                 {
-                    var originalCoordinateX = random.Next(0, Size);
-                    var originalCoordinateY = random.Next(0, Size);
-                    animal = MakeKindOfAnimal(i, random, new Point(originalCoordinateX, originalCoordinateY));
+                    var position = GetRandomPoint(random);
+                    animal = MakeKindOfAnimal(i, random, new Point(position.X, position.Y));
                     _animals.Add(animal);
-                    _land[originalCoordinateX, originalCoordinateY].SetAnimal(_animals[i]);
+                    _land[position.X, position.Y].SetAnimal(_animals[i]);
                 }
             }
         }
@@ -94,56 +93,59 @@ namespace WindowsFormsApp1
             AddAnimalForMap(random);
             for (int i = 1200; i < CountAnimal; i++)
             {
-                var originalCoordinateX = random.Next(0, Size);
-                var originalCoordinateY = random.Next(0, Size);
+                var position = GetRandomPoint(random);
 
                 if (i >= 1200 && i <= 1350)
                 {
-                    _animals.Add(new Male(originalCoordinateX, originalCoordinateY, this, random, _land));
-                    _land[originalCoordinateX, originalCoordinateY].SetMale(_animals[i]);
+                    _animals.Add(new Male(position.X, position.Y, this, random, _land));
+                    _land[position.X, position.Y].SetMale(_animals[i]);
                 }
 
                 if (i > 1350)
                 {
-                    _animals.Add(new Female(originalCoordinateX, originalCoordinateY, this, random, _land));
-                    _land[originalCoordinateX, originalCoordinateY].SetFemale(_animals[i]);
+                    _animals.Add(new Female(position.X, position.Y, this, random, _land));
+                    _land[position.X, position.Y].SetFemale(_animals[i]);
                 }
             }
 
             _plants = new List<Plant>();
             for (int i = 0; i < CountKindPlant; i++)
             {
-                var originalCoordinateX = random.Next(0, Size);
-                var originalCoordinateY = random.Next(0, Size);
-                _plants.Add(new Plant(originalCoordinateX, originalCoordinateY, this, i < 250, i > 50 && i < 400));
-                _land[originalCoordinateX, originalCoordinateY].SetPlant(_plants[i]);
+                var position = GetRandomPoint(random);
+                _plants.Add(new Plant(position.X, position.Y, this, i < 250, i > 50 && i < 400));
+                _land[position.X, position.Y].SetPlant(_plants[i]);
             }
 
             _fruitingPlants = new List<FruitingPlant>();
             for (int i = 0; i < CountKindPlant; i++)
             {
-                var originalCoordinateX = random.Next(0, Size);
-                var originalCoordinateY = random.Next(0, Size);
-                _fruitingPlants.Add(new FruitingPlant(originalCoordinateX, originalCoordinateY, this, i < 100, i > 0));
-                _land[originalCoordinateX, originalCoordinateY].SetPlant(_fruitingPlants[i]);
+                var position = GetRandomPoint(random);
+                _fruitingPlants.Add(new FruitingPlant(position.X, position.Y, this, i < 100, i > 0));
+                _land[position.X, position.Y].SetPlant(_fruitingPlants[i]);
             }
 
             _fruits = new List<Fruit>();
         }
 
-        public void BuildFactory(Random x)
+        private Point GetRandomPoint(Random random)
+        {
+            var originalCoordinateX = random.Next(0, Size);
+            var originalCoordinateY = random.Next(0, Size);
+            return new Point(originalCoordinateX, originalCoordinateY);
+        }
+
+        public void BuildFactory(Random random)
         {
             for (int i = 0; i < 50; i++)
             {
-                var originalCoordinateX = x.Next(0, Size);
-                var originalCoordinateY = x.Next(0, Size);
-                _factories.Add(new Factory(originalCoordinateX, originalCoordinateY, this));
-                _elves.Add(new Elf(originalCoordinateX + 1, originalCoordinateY + 1, x, this));
-                _land[originalCoordinateX, originalCoordinateY].SetFactory(_factories[i]);
+                var position = GetRandomPoint(random);
+                _factories.Add(new Factory(position.X, position.Y, this));
+                _elves.Add(new Elf(position.X + 1, position.Y + 1, random, this));
+                _land[position.X, position.Y].SetFactory(_factories[i]);
             }
         }
 
-        public void DeleteFactory()
+        private void DeleteFactory()
         {
             _factories.Clear();
             DeleteElf();
@@ -353,7 +355,7 @@ namespace WindowsFormsApp1
                 for (var i = coordinate.X - distance; i <= coordinate.X + distance; i++)
                 for (var j = coordinate.Y - distance; j <= coordinate.Y + distance; j++)
                     if (i > 0 && i <= 999 && j > 0 && j <= 999)
-                        if (Math.Abs(coordinate.X - i) + Math.Abs(coordinate.Y - j) == distance)
+                        if (CheckForBeingWithinRadius(coordinate, i, j, distance))
                             if (_land[i, j].GetIsHere() == IsHere.Plant)
                                 if (_land[i, j].GetPlant()._isEat)
                                 {
@@ -367,10 +369,15 @@ namespace WindowsFormsApp1
             }
         }
 
+        private bool GoOutsideFromMap(Point coordinate)
+        {
+            return coordinate.X < 0 || coordinate.X > 999 || coordinate.Y < 0 || coordinate.Y > 999;
+        }
+
         public Animal FindAnimal(Point coordinate)
         {
             var radius = 1;
-            if (coordinate.X < 0 || coordinate.X > 999 || coordinate.Y < 0 || coordinate.Y > 999)
+            if (GoOutsideFromMap(coordinate))
             {
                 return null;
             }
@@ -380,7 +387,7 @@ namespace WindowsFormsApp1
                 for (var i = coordinate.X - radius; i <= coordinate.X + radius; i++)
                 for (var j = coordinate.Y - radius; j <= coordinate.Y + radius; j++)
                     if (i > 0 && i <= 999 && j > 0 && j <= 999)
-                        if (Math.Abs(coordinate.X - i) + Math.Abs(coordinate.Y - j) == radius)
+                        if (CheckForBeingWithinRadius(coordinate, i, j, radius))
                             if (_land[i, j].GetIsHere() == IsHere.Animal)
                             {
                                 return _land[i, j].GetAnimal();
@@ -391,7 +398,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        public Human FindHuman(Point coords)
+        private bool CheckForBeingWithinRadius(Point coordinate, int i, int j, int radius)
+        {
+            return Math.Abs(coordinate.X - i) + Math.Abs(coordinate.Y - j) == radius;
+        }
+
+        public Human FindHuman(Point coordinate)
         {
             int minDistance = Int32.MaxValue;
             Human ward = null;
@@ -399,9 +411,9 @@ namespace WindowsFormsApp1
             {
                 var position = animal.GetPoint();
 
-                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < minDistance && animal is Human)
+                if (GetMinDistance(coordinate, position, minDistance) && animal is Human)
                 {
-                    minDistance = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
+                    minDistance = SetMinDistance(coordinate, position);
                     ward = (Human) animal;
                 }
             }
@@ -409,19 +421,21 @@ namespace WindowsFormsApp1
             return ward;
         }
 
-        public Factory FindFactory(Point coords)
+        private bool GetMinDistance(Point coordinate, Point position, int minDistance)
+        {
+            return Math.Abs(coordinate.X - position.X) + Math.Abs(coordinate.Y - position.Y) < minDistance;
+        }
+
+        public Factory FindFactory(Point coordinate)
         {
             int minDistance = Int32.MaxValue;
             Factory factoryNear = null;
             foreach (var factory in _factories)
             {
                 var position = factory.GetPoint();
-
-                if (Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y) < minDistance)
-                {
-                    minDistance = Math.Abs(coords.X - position.X) + Math.Abs(coords.Y - position.Y);
-                    factoryNear = factory;
-                }
+                if (!GetMinDistance(coordinate, position, minDistance)) continue;
+                minDistance = SetMinDistance(coordinate, position);
+                factoryNear = factory;
             }
 
             return factoryNear;
@@ -430,7 +444,7 @@ namespace WindowsFormsApp1
         public Animal FindCouple(Animal animalAlone)
         {
             var coordinate = animalAlone.GetPoint();
-            if (coordinate.X < 0 || coordinate.X > 999 || coordinate.Y < 0 || coordinate.Y > 999)
+            if (GoOutsideFromMap(coordinate))
             {
                 return null;
             }
@@ -446,17 +460,25 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    if (Math.Abs(coordinate.X - position.X) + Math.Abs(coordinate.Y - position.Y) < min &&
-                        animal.GetCouple() == null && ((animal is Human && animalAlone is Human) ||
-                                                       animal.GetType() == animalAlone.GetType()))
-                    {
-                        min = Math.Abs(coordinate.X - position.X) + Math.Abs(coordinate.Y - position.Y);
-                        animalCouple = animal;
-                    }
+                    if (!GetMinDistance(coordinate, position, min) || animal.GetCouple() != null ||
+                        !CheckSimilarity(animal, animalAlone)) continue;
+                    min = SetMinDistance(coordinate, position);
+                    animalCouple = animal;
                 }
             }
 
             return animalCouple;
+        }
+
+        private int SetMinDistance(Point coordinate, Point position)
+        {
+            return Math.Abs(coordinate.X - position.X) + Math.Abs(coordinate.Y - position.Y);
+        }
+
+        private bool CheckSimilarity(Animal animal, Animal animalAlone)
+        {
+            return ((animal is Human && animalAlone is Human) ||
+                    animal.GetType() == animalAlone.GetType());
         }
 
         public List<Point> FindNearHouse(Point position)
