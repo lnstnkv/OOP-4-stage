@@ -47,6 +47,13 @@ namespace WindowsFormsApp1
         Image diedPlant = Image.FromFile("..\\..\\died.png");
         Image _factory = Image.FromFile("..\\..\\factory.png");
 
+        private void DrawEntity(Image image, Graphics graph, int maskingSize, Point position)
+        {
+            graph.DrawImage(image,
+                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
+                    maskingSize));
+        }
+
         public void DrawSimulation(PictureBox pictureSimulation, List<Animal> animals, List<Plant> plants,
             List<Fruit> fruits, List<FruitingPlant> fruitingPlants, List<Human> humans, bool isSeason, int maskingSize,
             List<House> houses, List<Factory> factories, List<Elf> elves)
@@ -66,105 +73,15 @@ namespace WindowsFormsApp1
                 }
 
                 var position = animal.GetPoint();
-                if (animal is HerbivoresAnimal)
-                {
-                    switch (animal)
-                    {
-                        case Rabbit _:
-                            graph.DrawImage(_rabbit,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                        case Horse _:
-                            graph.DrawImage(_horse,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                        case Elephant _:
-                            graph.DrawImage(_elephant,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                    }
-                }
-
-                if (animal is OmnivoresAnimal)
-                {
-                    switch (animal)
-                    {
-                        case Mouse _:
-                            graph.DrawImage(_mouse,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                        case Squirrel _:
-                            graph.DrawImage(_squirrel,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                        case Pig _:
-                            graph.DrawImage(_pig,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                    }
-                }
-
-                if (animal is CarnivoresAnimal)
-                {
-                    switch (animal)
-                    {
-                        case Owl _:
-                            graph.DrawImage(_owl,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                        case Lynx _:
-                            graph.DrawImage(_lynx,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                        case Eagle _:
-                            graph.DrawImage(_eagle,
-                                new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                                    maskingSize));
-                            break;
-                    }
-                }
-
-                if (animal is Male)
-                {
-                    graph.DrawImage(_human,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize, maskingSize));
-                }
-
-                if (animal is Female)
-                {
-                    graph.DrawImage(_female,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize, maskingSize));
-                }
+                var animalImage = GetImageAnimal(animal);
+                DrawEntity(animalImage, graph, maskingSize, position);
             }
 
             foreach (var plant in plants)
             {
                 var position = plant.GetPoint();
-                
-                if (plant._isVirulence && plant._isEat)
-                    graph.DrawImage(_poisonousEdiblePlant,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                            maskingSize));
-                if (!plant._isVirulence && plant._isEat) 
-                    graph.DrawImage(_nonPoisonousEdiblePlant,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                            maskingSize));
-                if (plant._isVirulence && !plant._isEat)
-                    graph.DrawImage(_poisonousNonEdiblePlant,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                            maskingSize));
-                if (!plant._isVirulence && !plant._isEat)
-                    graph.DrawImage(_nonPoisonousNonEdiblePlant,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize,
-                            maskingSize));
+                var plantImage = GetImagePlant(plant);
+                DrawEntity(plantImage, graph, maskingSize, position);
             }
 
             foreach (var fruit in fruits)
@@ -177,15 +94,13 @@ namespace WindowsFormsApp1
             foreach (var factory in factories)
             {
                 var position = factory.GetPoint();
-                graph.DrawImage(_factory,
-                    new Rectangle(position.X + 1 * maskingSize, position.Y + 1 * maskingSize, maskingSize, maskingSize));
+                DrawEntity(_factory, graph, maskingSize, new Point(position.X + 1, position.Y + 1));
             }
 
             foreach (var elf in elves)
             {
                 var position = elf.GetPoint();
-                graph.DrawImage(_elf,
-                    new Rectangle(position.X + 1 * maskingSize, position.Y + 1 * maskingSize, maskingSize, maskingSize));
+                DrawEntity(_elf, graph, maskingSize, new Point(position.X + 1, position.Y + 1));
             }
 
 
@@ -201,18 +116,88 @@ namespace WindowsFormsApp1
                 var position = fruitingPlant.GetPoint();
 
                 if (fruitingPlant._isVirulence)
-                    graph.DrawImage(_poisonousBerry,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize, maskingSize));
+                    DrawEntity(_poisonousBerry, graph, maskingSize, new Point(position.X + 1, position.Y + 1));
                 else
                 {
-                    graph.DrawImage(_berry,
-                        new Rectangle(position.X * maskingSize, position.Y * maskingSize, maskingSize, maskingSize));
+                    DrawEntity(_berry, graph, maskingSize, new Point(position.X + 1, position.Y + 1));
                 }
             }
 
             pictureSimulation.Image = _bitmap;
             pictureSimulation.Refresh();
         }
+
+        private Image GetImageAnimal(Animal animal)
+        {
+            if (animal is HerbivoresAnimal)
+            {
+                switch (animal)
+                {
+                    case Rabbit _:
+                        return _rabbit;
+
+                    case Horse _:
+                        return _horse;
+
+                    case Elephant _:
+                        return _elephant;
+                }
+            }
+
+            switch (animal)
+            {
+                case OmnivoresAnimal _:
+                    switch (animal)
+                    {
+                        case Mouse _:
+                            return _mouse;
+
+                        case Squirrel _:
+                            return _squirrel;
+
+                        case Pig _:
+                            return _pig;
+                    }
+
+                    break;
+                case CarnivoresAnimal _:
+                    switch (animal)
+                    {
+                        case Owl _:
+                            return _owl;
+                        case Lynx _:
+                            return _lynx;
+                        case Eagle _:
+                            return _eagle;
+                    }
+
+                    break;
+                case Male _:
+                    return _human;
+                case Female _:
+                    return _female;
+            }
+
+            return null;
+        }
+
+        private Image GetImagePlant(Plant plant)
+        {
+            switch (plant._isVirulence)
+            {
+                case true when plant._isEat:
+                    return _poisonousEdiblePlant;
+                case false when plant._isEat:
+                    return _nonPoisonousEdiblePlant;
+                case true when !plant._isEat:
+                    return _poisonousNonEdiblePlant;
+                case false when !plant._isEat:
+                    return _nonPoisonousNonEdiblePlant;
+            }
+
+            return null;
+        }
+
 
         public void ResizePictureBox(int height, int width)
         {
