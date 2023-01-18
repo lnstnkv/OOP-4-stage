@@ -150,12 +150,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void WalkInSummer(Random x)
+        private void WalkInSummer(Random random)
         {
             Satiety -= ReductionSatietyForSummer;
             if (Satiety == MaxSatiety)
             {
-                Coordinate = FreeMover.Move(Coordinate, x);
+                Coordinate = FreeMover.Move(Coordinate, random);
                 _age += AdditionParameter;
             }
 
@@ -179,26 +179,31 @@ namespace WindowsFormsApp1
                 }
             }
 
-
             if (Satiety > MaxSatiety * AboveAverageSatietyPercentageForSummer &&
                 Satiety < MaxSatiety * MaxSatietyPercentageForSummer)
             {
-                Coordinate = FreeMover.Move(Coordinate, x);
+                Coordinate = FreeMover.Move(Coordinate, random);
             }
 
-            if (Health < MinimalHealth || _age > MaximumAgeForSummer)
+            MoveToNextLiveAction(MaximumAgeForSummer, LowSatietyPercentageForSummer, MediumSatietyPercentageForSummer,
+                random);
+        }
+
+        private void MoveToNextLiveAction(int maximumAge, double lowSatietyPercentage, double percentage, Random random)
+        {
+            if (Health < MinimalHealth || _age > maximumAge)
             {
                 Die();
             }
 
-            if (Satiety < MaxSatiety * LowSatietyPercentageForSummer)
+            if (Satiety < MaxSatiety * lowSatietyPercentage)
             {
                 Health -= ReductionParameter;
             }
 
-            if (Satiety < MaxSatiety * MediumSatietyPercentageForSummer)
+            if (Satiety < MaxSatiety * percentage)
             {
-                FindFood(x);
+                FindFood(random);
             }
         }
 
@@ -217,34 +222,23 @@ namespace WindowsFormsApp1
             return CoupleFoAnimal;
         }
 
-        public void WalkInWinter(Random x)
+        private void WalkInWinter(Random random)
         {
             Satiety -= ReductionSatietyForWinter;
             if (Satiety == MaxSatiety)
             {
-                Coordinate = FreeMover.Move(Coordinate, x);
+                Coordinate = FreeMover.Move(Coordinate, random);
             }
 
             if (Satiety > MaxSatiety * MediumSatietyPercentageForWinter)
             {
-                Coordinate = FreeMover.Move(Coordinate, x);
+                Coordinate = FreeMover.Move(Coordinate, random);
             }
 
-            if (Health < MinimalHealth || _age > MaximumAgeForWinter)
-            {
-                Die();
-            }
-
-            if (Satiety < MaxSatiety * LowSatietyPercentageForWinter)
-            {
-                Health -= ReductionParameter;
-            }
-
-            if (Satiety < MaxSatiety * MaxSatietyPercentageForWinter)
-            {
-                FindFood(x);
-            }
+            MoveToNextLiveAction(MaximumAgeForWinter, LowSatietyPercentageForWinter, MaxSatietyPercentageForWinter,
+                random);
         }
+
 
         public Gender IsGender()
         {
