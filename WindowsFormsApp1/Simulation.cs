@@ -69,46 +69,8 @@ namespace WindowsFormsApp1
 
         public void Update(Random random)
         {
+            _map.Update(random);
             var animals = _map.GetAnimal();
-            List<Elf> elves = null;
-            _index++;
-            if (_index < 250)
-            {
-                _map.isWinter = false;
-                if (_index == 1)
-                {
-                    _map.BuildFactory(random);
-                }
-
-                elves = _map.GetElf();
-            }
-            else
-            {
-                _map.isWinter = true;
-                _map.DeleteFactory();
-            }
-
-            if (elves != null)
-                foreach (var elf in elves.ToList())
-                {
-                    elf.Update(random);
-                }
-
-            if (_index > 500)
-            {
-                _index = 0;
-            }
-
-            foreach (var animal in animals.ToList())
-            {
-                if (animal.IsDied())
-                {
-                    continue;
-                }
-
-                animal.Update(random);
-            }
-
             _form.TrackObject();
             _rendering.DrawSimulation(_pictureBox, animals, plants, fruits, _fruitingPlants, _humans,
                 _map.isWinter, MaskingSize, _houses, _factories, _factoriesElves);

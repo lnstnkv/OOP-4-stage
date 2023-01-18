@@ -138,7 +138,7 @@ namespace WindowsFormsApp1
         protected abstract void Propagate(Random x);
         protected abstract void ChangeEat(Point coords);
 
-        public void SetLifecycle(Random x)
+        protected void SetLifecycle(Random x)
         {
             if (_map.isWinter)
             {
