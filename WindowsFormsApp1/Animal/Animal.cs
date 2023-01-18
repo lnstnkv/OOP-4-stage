@@ -107,31 +107,8 @@ namespace WindowsFormsApp1
 
         public string GetClassInformation()
         {
-            switch (this)
-            {
-                case Horse _:
-                    return "Horse";
-                case Eagle _:
-                    return "Eagle";
-                case Rabbit _:
-                    return "Rabbit";
-                case Pig _:
-                    return "Pig";
-                case Squirrel _:
-                    return "Squirrel";
-                case Lynx _:
-                    return "Lynx";
-                case Elephant _:
-                    return "Elephant";
-                case Owl _:
-                    return "Owl";
-                case Mouse _:
-                    return "Mouse";
-                case Human _:
-                    return "Human";
-                default:
-                    return "Привет!";
-            }
+           return GetType().Name;
+          
         }
 
         protected abstract void FindFood(Random x);

@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
         protected Map _map;
         private bool isDied;
         protected Stage Stage;
+        protected string NameClass { get; set; }
         private const int MinimumAge = 0;
         private const int MaxAge = 15;
         private const int MediumAge = 10;
@@ -30,6 +31,7 @@ namespace WindowsFormsApp1
             _map = map;
             _age = MinimumAge;
             Stage = Stage.Seed;
+            NameClass = "Plant";
         }
 
         public string GetCoordinateInformation()
@@ -39,24 +41,7 @@ namespace WindowsFormsApp1
 
         public string GetClassInformation()
         {
-            if (this is FruitingPlant)
-            {
-                if (_isVirulence)
-                    return "Virulence Fruiting Plant";
-                else
-                {
-                    return "Fruiting Plant";
-                }
-            }
-            else
-            {
-                if (_isVirulence)
-                    return "Virulence Plant";
-                else
-                {
-                    return "Plant";
-                }
-            }
+            return _isVirulence ? "Virulence" + NameClass : NameClass;
         }
 
         public bool IsDied()

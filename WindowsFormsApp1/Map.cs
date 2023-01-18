@@ -52,31 +52,22 @@ namespace WindowsFormsApp1
             {
                 case 0:
                     return new Eagle(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 1:
                     return new Mouse(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 2:
                     return new Rabbit(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 3:
                     return new Elephant(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 4:
                     return new Lynx(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 5:
                     return new Pig(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 6:
                     return new Squirrel(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 7:
                     return new Owl(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
                 case 8:
                     return new Horse(coordinate.X, coordinate.Y, this, random, _land);
-                    break;
             }
 
             throw new Exception("Unknown animal");
@@ -118,7 +109,7 @@ namespace WindowsFormsApp1
                     _land[originalCoordinateX, originalCoordinateY].SetFemale(_animals[i]);
                 }
             }
-            
+
             _plants = new List<Plant>();
             for (int i = 0; i < CountKindPlant; i++)
             {
@@ -319,7 +310,6 @@ namespace WindowsFormsApp1
 
         public void Update(Random random)
         {
-          
             List<Elf> elves = null;
             _index++;
             if (_index < 250)
@@ -329,6 +319,7 @@ namespace WindowsFormsApp1
                 {
                     BuildFactory(random);
                 }
+
                 elves = GetElf();
             }
             else
@@ -352,7 +343,6 @@ namespace WindowsFormsApp1
             {
                 animal.Update(random);
             }
-            
         }
 
         public Plant FindPlant(Point coordinate)
