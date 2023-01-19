@@ -215,26 +215,12 @@ namespace WindowsFormsApp1
             MoveToNextLiveAction(MaximumAgeForWinter, LowSatietyPercentageForWinter, MaxSatietyPercentageForWinter,
                 random);
         }
-
-
-        public Gender IsGender()
-        {
-            if (Gender == Gender.Female)
-                return Gender.Female;
-            return Gender.Male;
-        }
-
-
+        
         public bool IsMaleGender()
         {
             return Gender == Gender.Male;
         }
-
-        public bool GoOutside(int x)
-        {
-            return x >= 0 && x < 1000;
-        }
-
+        
         public void Die()
         {
             _isDied = true;

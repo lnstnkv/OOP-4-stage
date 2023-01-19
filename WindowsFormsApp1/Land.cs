@@ -42,12 +42,7 @@ namespace WindowsFormsApp1
             _isHouse = true;
             IsHere = IsHere.House;
         }
-
-        public Animal IsHumanHere()
-        {
-            return _isHumanHere;
-        }
-
+        
         public Plant GetPlant()
         {
             return _isPlantHere;
@@ -99,28 +94,13 @@ namespace WindowsFormsApp1
         {
             return IsHere;
         }
-
-        public void DeleteFruit()
-        {
-            _isFruitHere = null;
-            IsHere = IsHere.Empty;
-        }
-
         public void DeleteAnimal()
         {
             _isAnimalHere = null;
             IsHere = IsHere.Empty;
         }
 
-        public void DeleteFactory()
-        {
-            _isFactoryHere = null;
-            IsHere = IsHere.Empty;
-        }
-        public Fruit GetFruit()
-        {
-            return _isFruitHere;
-        }
+       
     }
 
     public enum IsHere

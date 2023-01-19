@@ -47,24 +47,19 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Animal\Animal.cs" />
-        <Compile Include="Animal\AnimalEdibleFood.cs" />
         <Compile Include="Animal\CarnivoresAnimal.cs" />
-        <Compile Include="Animal\CarnivoresAnimalForm.cs" />
         <Compile Include="Animal\Eagle.cs" />
         <Compile Include="Animal\Elephant.cs" />
         <Compile Include="Animal\Female.cs" />
         <Compile Include="Animal\HerbivoresAnimal.cs" />
-        <Compile Include="Animal\HerbivoresAnimalForm.cs" />
         <Compile Include="Animal\HibernationForm.cs" />
         <Compile Include="Animal\Horse.cs" />
         <Compile Include="Animal\House.cs" />
         <Compile Include="Animal\Human.cs" />
-        <Compile Include="Animal\AnimalGender.cs" />
         <Compile Include="Animal\Lynx.cs" />
         <Compile Include="Animal\Male.cs" />
         <Compile Include="Animal\Mouse.cs" />
         <Compile Include="Animal\OmnivoresAnimal.cs" />
-        <Compile Include="Animal\OmnivoresAnimalForm.cs" />
         <Compile Include="Animal\Owl.cs" />
         <Compile Include="Animal\Pig.cs" />
         <Compile Include="Animal\Rabbit.cs" />
@@ -87,11 +82,9 @@
         <Compile Include="NewYear\Factory.cs" />
         <Compile Include="NewYear\Gift.cs" />
         <Compile Include="NewYear\Present.cs" />
-        <Compile Include="Plant\EdibleFood.cs" />
         <Compile Include="Plant\Fruit.cs" />
         <Compile Include="Plant\FruitingPlant.cs" />
         <Compile Include="Plant\Plant.cs" />
-        <Compile Include="Plant\PlantEdibleFood.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Rendering.cs" />
@@ -101,7 +94,6 @@
         <Compile Include="TargetMover\TargetMover.cs" />
         <Compile Include="TargetMover\TargetMoverEuclidean.cs" />
         <Compile Include="TargetMover\TargetMoverSavingDirection.cs" />
-        <Compile Include="Test.cs" />
         <Compile Include="Winter.cs" />
         <EmbeddedResource Include="Form1.resx">
           <DependentUpon>Form1.cs</DependentUpon>

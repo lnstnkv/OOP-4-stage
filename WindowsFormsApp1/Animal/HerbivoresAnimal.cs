@@ -5,7 +5,6 @@ namespace WindowsFormsApp1
 {
     public abstract class HerbivoresAnimal : Animal
     {
-        public HerbivoresAnimalForm _herbAnimalForm;
         private const int MaximumHealth = 10;
         private const int AdditionSatiety = 5;
 
